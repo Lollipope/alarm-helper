@@ -75,5 +75,13 @@
     "flv-extend": "^0.3.0",
     "mitt": "^3.0.1",
     "mpegts.js": "1.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lollipope/alarm-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lollipope/alarm-helper/issues"
+  },
+  "homepage": "https://github.com/Lollipope/alarm-helper/blob/main/README.md"
 }
