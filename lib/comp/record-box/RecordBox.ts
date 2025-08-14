@@ -1,4 +1,3 @@
-
 import RecordBox from './RecordBox.vue'
 
 export interface RecordVideo {

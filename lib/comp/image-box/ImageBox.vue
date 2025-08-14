@@ -1,7 +1,7 @@
 <template>
   <el-image :src="li" fit="cover" v-if="isImgShow" @dblclick="onPreview(li)">
     <template #error>
-      <ErrorImage/>
+      <ErrorImage />
     </template>
   </el-image>
   <EmptyImage v-else />

@@ -6,7 +6,7 @@
  * @FilePath: \leatop-cdp-alarm\packages\alarm-helper\lib\tool\index.ts
  * @Description: Tool入口文件
  */
-import AlarmSocket from "./AlarmSocket"
-import AlarmSpeech from "./Speech"
+import AlarmSocket from './AlarmSocket'
+import AlarmSpeech from './Speech'
 
 export { AlarmSocket, AlarmSpeech }

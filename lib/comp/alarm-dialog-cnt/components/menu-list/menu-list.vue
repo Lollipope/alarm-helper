@@ -19,6 +19,7 @@
 <script lang="ts"></script>
 
 <script setup lang="ts">
+import { SortAlarmBigType } from '@ah/api/types'
 import { type MenuItem, AlarmTypeList, mergeWithImage, getLatestInterval } from '@ah/utils'
 import { AlarmRobotApi } from '@ah/api'
 import ExpandButton from './components/expand-btn.vue'
@@ -27,14 +28,14 @@ import ConstantList from './components/constant-list.vue'
 defineExpose({
   initMenu,
 })
-const emits = defineEmits(['update:id-select'])
+defineEmits(['update:id-select'])
 
 const isOpen = ref(false)
 // 选中的大类ID
 const idSelect = defineModel('idSelect', { type: String })
 
 // 所有大类类型
-const menuTypeList = ref()
+const menuTypeList = ref<Array<MenuItem>>()
 // 常显列表
 const cList = ref<Array<MenuItem>>([])
 // 展开列表
@@ -67,7 +68,7 @@ function initMenu() {
 
     // 常显列表
     // console.log('常显列表: ', menuTypeList.value)
-    const constList = menuTypeList.value.filter((item: any) => item.isShow === 1)
+    const constList = menuTypeList.value.filter((item) => item.isShow === 1)
     const constLen = constList.length > 11 ? 11 : constList.length
     cList.value = JSON.parse(JSON.stringify(menuTypeList.value.slice(0, constLen)))
     // 展开列表
@@ -77,7 +78,7 @@ function initMenu() {
   })
 }
 // 排序
-function onSort(params: any) {
+function onSort(params: SortAlarmBigType) {
   AlarmRobotApi.updateAlarmConfigMsgKindSort(params).then((res) => {
     const isSuc = res.code === 200
     if (isSuc) {

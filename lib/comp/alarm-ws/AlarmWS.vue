@@ -13,9 +13,13 @@ defineOptions({
 const props = defineProps<AlarmWSProps>()
 const emits = defineEmits<AlarmWSEmits>()
 
-watch(() => props.tokenId, (val) => {
-  updateTokenId(val)
-},{ immediate:true })
+watch(
+  () => props.tokenId,
+  (val) => {
+    updateTokenId(val)
+  },
+  { immediate: true },
+)
 
 let alarmSocket: AlarmSocket
 

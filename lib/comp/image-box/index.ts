@@ -4,5 +4,3 @@ export const AlarmHelperImageBox = withInstall(ImageBox)
 export default AlarmHelperImageBox
 
 export * from './ImageBox'
-
-

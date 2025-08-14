@@ -44,10 +44,11 @@ export function formatTime(seconds: number): string {
   let remainingSeconds: number = seconds % 60 // 计算剩余秒数
 
   // 格式化为两位数的字符串
-  hours = hours < 10 ? Number('0' + hours) : hours
-  minutes = minutes < 10 ? Number('0' + minutes) : minutes
-  remainingSeconds = remainingSeconds < 10 ? Number('0' + remainingSeconds) : remainingSeconds
+  const hoursStr = hours < 10 ? String('0' + hours) : hours
+  const minutesStr = minutes < 10 ? String('0' + minutes) : minutes
+  const remainingSecondsStr =
+    remainingSeconds < 10 ? String('0' + remainingSeconds) : remainingSeconds
 
   // 返回格式化后的字符串
-  return `${hours}:${minutes}:${remainingSeconds}`
+  return `${hoursStr}:${minutesStr}:${remainingSecondsStr}`
 }

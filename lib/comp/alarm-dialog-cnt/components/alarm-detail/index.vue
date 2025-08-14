@@ -43,8 +43,8 @@ import Remark from './Remark.vue'
 import Attachment from './Attachment.vue'
 import { ElMessage } from 'element-plus'
 // import { getLocalStorageToken } from '@ah/api/auth'
-import { getTokenId } from "@ah/utils/tokenId"
-import noImg from "./noImg.vue"
+import { getTokenId } from '@ah/utils/tokenId'
+import noImg from './noImg.vue'
 const emits = defineEmits(['onRead'])
 const props = defineProps({
   alarmSelect: {

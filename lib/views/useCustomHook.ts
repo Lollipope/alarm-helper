@@ -5,7 +5,7 @@ import {
   nextTick,
   ModelRef,
   Ref,
-  ShallowRef,
+  type ShallowRef,
   onMounted,
   onBeforeUnmount,
 } from 'vue'
@@ -25,7 +25,7 @@ export function useAlarmDialogDragState(visible: ModelRef<boolean>) {
   // 缩放比例
   const scaleVal = ref(initScale())
   // 弹窗元素
-  const customModal = shallowRef()
+  const customModal = shallowRef() as ShallowRef<HTMLElement>
   // 弹窗位置,弹窗拖拽开始和结束事件
   const { position, startDrag, updatePos } = useMouseMove(customModal, scaleVal)
   // 关闭弹窗
@@ -67,7 +67,7 @@ function useMouseMove(customModal: ShallowRef<HTMLElement>, scaleVal: Ref<number
   const startPos = { x: 0, y: 0 }
 
   let isDragging = false
-  const startDrag = (e: any) => {
+  const startDrag = (e: MouseEvent) => {
     isDragging = true
     startPos.x = e.clientX - position.value.left
     startPos.y = e.clientY - position.value.top
@@ -75,7 +75,7 @@ function useMouseMove(customModal: ShallowRef<HTMLElement>, scaleVal: Ref<number
     document.addEventListener('mouseup', stopDrag)
   }
   // 开始拖拽
-  const onDrag = (e: any) => {
+  const onDrag = (e: MouseEvent) => {
     if (isDragging) {
       const bodyWidth = document.body.clientWidth
       const bodyHeight = document.body.clientHeight

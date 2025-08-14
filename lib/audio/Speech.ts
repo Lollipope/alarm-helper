@@ -6,33 +6,33 @@
  * @FilePath: \leatop-cdp-alarm\packages\alarm-helper\lib\tool\Speech.ts
  * @Description: 语音相关函数类
  */
-import audioUrl from "./ring.mp3"
+import audioUrl from './ring.mp3'
 const audio = new Audio()
 audio.src = audioUrl // './ring.mp3'
 
 function startSpeakAudio() {
-	cancelSpeakAudio()
-	audio.play()
+  cancelSpeakAudio()
+  audio.play()
 }
 function cancelSpeakAudio() {
-	audio.currentTime = 0
-	audio.pause()
+  audio.currentTime = 0
+  audio.pause()
 }
 
 const ss = window.speechSynthesis
 function startSpeakText(text: string) {
-	cancelSpeakText()
-	// 把文字念出来
-	ss?.speak(new SpeechSynthesisUtterance(text))
+  cancelSpeakText()
+  // 把文字念出来
+  ss?.speak(new SpeechSynthesisUtterance(text))
 }
 
 function cancelSpeakText() {
-	ss?.cancel()
+  ss?.cancel()
 }
 
 export default {
-	startSpeakAudio, // 播放音频
-	cancelSpeakAudio, // 取消音频播放
-	startSpeakText, //
-	cancelSpeakText //
+  startSpeakAudio, // 播放音频
+  cancelSpeakAudio, // 取消音频播放
+  startSpeakText, //
+  cancelSpeakText, //
 }

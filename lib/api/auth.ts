@@ -6,35 +6,33 @@
  * @FilePath: \leatop-cdp-alarm\packages\alarm-helper\lib\api\auth.ts
  * @Description: 鉴权相关函数
  */
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie'
 
-const TokenKey = "x-auth-token"
+const TokenKey = 'x-auth-token'
 // const LocalStorageTokenKey = "Authorization";
-const LocalStorageTokenKey = "cdp-token"
+const LocalStorageTokenKey = 'cdp-token'
 
 export function getToken() {
-	return (
-		Cookies.get(TokenKey) || window.localStorage.getItem(LocalStorageTokenKey)
-	)
+  return Cookies.get(TokenKey) || window.localStorage.getItem(LocalStorageTokenKey)
 }
 
 export function setToken(token: string) {
-	return Cookies.set(TokenKey, token)
+  return Cookies.set(TokenKey, token)
 }
 
 export function removeToken() {
-	return Cookies.remove(TokenKey)
+  return Cookies.remove(TokenKey)
 }
 
 // 将cookie存储到localStorage
 export function setLocalStorageToken(token: string) {
-	window.localStorage.setItem(LocalStorageTokenKey, token)
+  window.localStorage.setItem(LocalStorageTokenKey, token)
 }
 
 export function getLocalStorageToken(name = LocalStorageTokenKey) {
-	return window.localStorage.getItem(name)
+  return window.localStorage.getItem(name)
 }
 
 export function removeLocalStorageToken() {
-	return window.localStorage.removeItem(LocalStorageTokenKey)
+  return window.localStorage.removeItem(LocalStorageTokenKey)
 }

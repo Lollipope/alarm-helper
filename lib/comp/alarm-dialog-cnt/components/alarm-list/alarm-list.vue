@@ -128,7 +128,7 @@ function initOptions() {
 }
 // 初始化列表
 function initMsgList({ page = 1, size = listStatus.size, msgId = void 0 }) {
-  let { gradeVal = 0, importVal, ipt, isRead, intervalType } = filter.value
+  const { gradeVal = 0, importVal, ipt, isRead, intervalType } = filter.value
   const typeVal = filter.value.typeVal
 
   const params = {

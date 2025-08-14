@@ -1,6 +1,6 @@
 let tokenId = ''
 
-function updateTokenId(val:string) {
+function updateTokenId(val: string) {
   tokenId = val
 }
 

@@ -3,7 +3,7 @@ import type { AlarmApiError } from '@ah/api'
 
 export interface AlarmWSProps {
   userInfo: UserInfo
-  tokenId:string // 传token
+  tokenId: string // 传token
 }
 export interface UserInfo {
   userId: string

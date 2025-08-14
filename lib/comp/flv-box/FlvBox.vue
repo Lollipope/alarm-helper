@@ -67,15 +67,14 @@ async function init() {
 function destroyPlayer() {
   // 没有获取到播放地址
   if (!playUrl.value || playUrl.value === '') return
+  flv?.destroy()
+  flv = void 0
   const params = {
     deviceId: props.deviceId, // 此处????
     videoUrl: playUrl.value,
   }
 
-  return AlarmRobotApi.stopDevicePlay(params).finally(() => {
-    flv?.destroy()
-    flv = void 0
-  })
+  return AlarmRobotApi.stopDevicePlay(params)
 }
 async function initPlayer() {
   hitError.value = false
