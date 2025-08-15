@@ -76,7 +76,6 @@ export default class AlarmSocket {
   }
   // 通道关闭
   private onClose() {
-    console.log(11111111)
     this.notifyClose()
     this.retryCount++
     this.isRetry && this.reconnect()
