@@ -21,7 +21,7 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
     AutoImport({
-      imports: ['vue', '@vueuse/core'],
+      imports: ['vue', '@vueuse/core', 'vitest'],
       resolvers: [ElementPlusResolver()],
       eslintrc: {
         enabled: false,
