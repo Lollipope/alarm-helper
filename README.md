@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/node-%3E%3D18.16-47c219" />
   </a>
   <a href="https://codecov.io/gh/Lollipope/alarm-helper">
-    <img src="https://codecov.io/gh/Lollipope/alarm-helper/branch/dev/graph/badge.svg?token=BKSBO2GLZI"/>
+    <img src="https://img.shields.io/codecov/c/github/lollipope/alarm-helper/main?logo=codecov&color=47c219"/>
   </a>
   <br>
 </p>
