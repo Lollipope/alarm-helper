@@ -1,4 +1,4 @@
-<p align="center"><img src='./alarm-helper.png' style='width:300px;height:100px;object-fit:cover;margin:0 auto;display:block'></img></p>
+<p align="center"><img src='./logo.png' style='width:300px;height:100px;margin:0 auto;display:block'></img></p>
 <p align="center">
   <a href="https://github.com/Lollipope/alarm-helper">
     <img src="https://img.shields.io/badge/vue-3.x-green?color=47c219" />
