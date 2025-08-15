@@ -134,10 +134,11 @@ describe('AlarmSocket', () => {
   const mockOnOpen = vi.fn()
   const mockOnClose = vi.fn()
   const mockOnMessage = vi.fn()
+  // 模拟 WebSocket 类
+  let WebSocketMock: any
 
   beforeEach(() => {
-    // 模拟 WebSocket 类
-    global.WebSocket = vi.fn().mockImplementation(() => ({
+    WebSocketMock = vi.fn(() => ({
       onopen: vi.fn(),
       onerror: vi.fn(),
       onclose: vi.fn(),
@@ -150,9 +151,11 @@ describe('AlarmSocket', () => {
       onClose: mockOnClose,
       onMessage: mockOnMessage,
     })
+    vi.stubGlobal('WebSocket', WebSocketMock)
     vi.useFakeTimers()
   })
   afterEach(() => {
+    vi.unstubAllGlobals()
     // 每次测试运行后恢复日期
     vi.useRealTimers()
   })
@@ -175,14 +178,14 @@ describe('AlarmSocket', () => {
   it('should handle onOpen event', () => {
     socket.connect()
     // https://cn.vitest.dev/api/mock.html#mock-instances
-    const onOpenCallback = WebSocket.mock.results[0].value.onopen
+    const onOpenCallback = WebSocketMock.mock.results[0].value.onopen
     onOpenCallback() // 调用 onOpen 回调
     expect(mockOnOpen).toHaveBeenCalled()
   })
 
   it('should handle onClose event and retry if isRetry is true', () => {
     socket.connect()
-    const onCloseCallback = WebSocket.mock.results[0].value.onclose
+    const onCloseCallback = WebSocketMock.mock.results[0].value.onclose
     onCloseCallback() // 调用 onClose 回调
     expect(mockOnClose).toHaveBeenCalled()
     expect(socket['retryCount']).toBe(1) // 重试次数增加
@@ -196,7 +199,7 @@ describe('AlarmSocket', () => {
       onMessage: mockOnMessage,
     })
     socketNoRetry.connect()
-    const onCloseCallback = WebSocket.mock.results[0].value.onclose
+    const onCloseCallback = WebSocketMock.mock.results[0].value.onclose
     onCloseCallback() // 调用 onClose 回调
     expect(socketNoRetry['retryCount']).toBe(1) // 不会继续重试
   })
@@ -207,7 +210,7 @@ describe('AlarmSocket', () => {
     const isOpenSpy = vi.spyOn(socket, 'isOpen').mockReturnValue(true)
     socket.send(sendData)
     expect(isOpenSpy).toHaveBeenCalled()
-    expect(WebSocket.mock.results[0].value.send).toHaveBeenCalledWith(sendData)
+    expect(WebSocketMock.mock.results[0].value.send).toHaveBeenCalledWith(sendData)
   })
 
   it('should not send data if the socket is not open and isRetry is true', () => {
@@ -215,17 +218,17 @@ describe('AlarmSocket', () => {
     const sendData = 'Hello World'
     const isOpenSpy = vi.spyOn(socket, 'isOpen').mockReturnValue(false)
     socket.send(sendData)
-    expect(WebSocket.mock.results[0].value.send).not.toHaveBeenCalled()
+    expect(WebSocketMock.mock.results[0].value.send).not.toHaveBeenCalled()
     // 确保重试机制被触发
     expect(socket['retryCount']).toBe(0)
     vi.advanceTimersToNextTimer()
-    expect(WebSocket.mock.results.length).toBe(2)
+    expect(WebSocketMock.mock.results.length).toBe(2)
   })
 
   it('should close the socket connection', () => {
     socket.connect()
     socket.closeSocket()
     expect(socket['isRetry']).toBe(false)
-    expect(WebSocket.mock.results[0].value.close).toHaveBeenCalled()
+    expect(WebSocketMock.mock.results[0].value.close).toHaveBeenCalled()
   })
 })
