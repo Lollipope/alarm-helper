@@ -1,5 +1,5 @@
-import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios'
-import { getLocalStorageToken, getToken, setToken } from './auth'
+import axios, { InternalAxiosRequestConfig } from 'axios'
+import { getToken } from './auth'
 import qs from 'qs'
 import { emitter, EmitEventApi } from '@ah/utils'
 import { getTokenId } from '../utils'
@@ -15,7 +15,6 @@ const service = axios.create({
   timeout: 20000,
   headers: { 'Content-Type': 'application/json;charset=utf-8' },
 })
-
 // 请求拦截器
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
@@ -42,7 +41,7 @@ service.interceptors.response.use(
     return response.data
   },
   (error) => {
-    const { status, data } = error?.response
+    const { status, data } = error?.response || {}
     emitter.emit(EmitEventApi, { status, data })
     return Promise.reject(error)
   },

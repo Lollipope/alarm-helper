@@ -11,11 +11,13 @@ const audio = new Audio()
 audio.src = audioUrl // './ring.mp3'
 
 function startSpeakAudio() {
+  console.log('startSpeakAudio')
   cancelSpeakAudio()
   audio.play()
 }
-function cancelSpeakAudio() {
+export function cancelSpeakAudio() {
   audio.currentTime = 0
+  console.log('cancelSpeakAudio')
   audio.pause()
 }
 
@@ -30,9 +32,10 @@ function cancelSpeakText() {
   ss?.cancel()
 }
 
-export default {
+const Speech = {
   startSpeakAudio, // 播放音频
   cancelSpeakAudio, // 取消音频播放
   startSpeakText, //
   cancelSpeakText, //
 }
+export default Speech
