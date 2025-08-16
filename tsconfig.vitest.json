@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.app.json",
-  "include": ["test/**/*.test.ts", "env.d.ts", "types/global.d.ts"],
+  "include": ["test/**/*.test.ts", "env.d.ts", "types/global.d.ts", "test/comp/AlarmClose.test.ts"],
   "exclude": [],
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",

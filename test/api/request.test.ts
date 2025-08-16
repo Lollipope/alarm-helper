@@ -1,15 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 // import axios from 'axios'
-import service, { getBaseUrl, getRealUrl } from '@ah/api/request'
-import { emitter, EmitEventApi } from '@ah/utils/bus'
-import { getTokenId } from '@ah/utils/tokenId'
+import { getBaseUrl, getRealUrl } from '@ah/api/request'
+// import { emitter, EmitEventApi } from '@ah/utils/bus'
+// import { getTokenId } from '@ah/utils/tokenId'
 
-// 模拟全局配置
-vi.mock('window', {
-  globalConfig: {
-    AlarmRobotApiContext: '/api',
-  },
-})
+// // 模拟全局配置
+// vi.mock('window', {
+//   globalConfig: {
+//     AlarmRobotApiContext: '/api',
+//   },
+// })
 
 // 模拟依赖项
 vi.mock('@ah/api/auth', () => ({

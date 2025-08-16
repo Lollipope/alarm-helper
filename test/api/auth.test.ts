@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, Mock } from 'vitest'
 import * as auth from '@ah/api/auth' // 引入你的工具函数
 import Cookies from 'js-cookie'
 
@@ -7,6 +7,9 @@ global.localStorage = {
   getItem: vi.fn(),
   setItem: vi.fn(),
   removeItem: vi.fn(),
+  length: 0,
+  clear: vi.fn(),
+  key: vi.fn(),
 }
 
 // Mock js-cookie
@@ -25,23 +28,23 @@ vi.mock('js-cookie', async (importOriginal) => {
 describe('auth utils', () => {
   describe('getToken', () => {
     it('should return token from Cookies if available', () => {
-      Cookies.get.mockReturnValue('cookie-token') // Mock返回cookie的token
+      ;(Cookies.get as Mock).mockReturnValue('cookie-token') // Mock返回cookie的token
       const token = auth.getToken()
       expect(token).toBe('cookie-token')
       expect(Cookies.get).toHaveBeenCalledWith('x-auth-token')
     })
 
     it('should return token from localStorage if cookie is not available', () => {
-      Cookies.get.mockReturnValue(null) // Mock返回cookie为空
-      global.localStorage.getItem.mockReturnValue('local-storage-token') // Mock返回localStorage的token
+      ;(Cookies.get as Mock).mockReturnValue(null) // Mock返回cookie为空
+      ;(global.localStorage.getItem as Mock).mockReturnValue('local-storage-token') // Mock返回localStorage的token
       const token = auth.getToken()
       expect(token).toBe('local-storage-token')
       expect(global.localStorage.getItem).toHaveBeenCalledWith('cdp-token')
     })
 
     it('should return null if no token is found', () => {
-      Cookies.get.mockReturnValue(null)
-      global.localStorage.getItem.mockReturnValue(null)
+      ;(Cookies.get as Mock).mockReturnValue(null)
+      ;(global.localStorage.getItem as Mock).mockReturnValue(null)
       const token = auth.getToken()
       expect(token).toBeNull()
     })
@@ -70,14 +73,14 @@ describe('auth utils', () => {
 
   describe('getLocalStorageToken', () => {
     it('should return token from localStorage by default', () => {
-      global.localStorage.getItem.mockReturnValue('local-storage-token')
+      ;(global.localStorage.getItem as Mock).mockReturnValue('local-storage-token')
       const token = auth.getLocalStorageToken()
       expect(token).toBe('local-storage-token')
       expect(global.localStorage.getItem).toHaveBeenCalledWith('cdp-token')
     })
 
     it('should return token from localStorage with custom name', () => {
-      global.localStorage.getItem.mockReturnValue('custom-local-storage-token')
+      ;(global.localStorage.getItem as Mock).mockReturnValue('custom-local-storage-token')
       const token = auth.getLocalStorageToken('custom-token-key')
       expect(token).toBe('custom-local-storage-token')
       expect(global.localStorage.getItem).toHaveBeenCalledWith('custom-token-key')

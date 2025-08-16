@@ -11,13 +11,12 @@ const audio = new Audio()
 audio.src = audioUrl // './ring.mp3'
 
 function startSpeakAudio() {
-  console.log('startSpeakAudio')
   cancelSpeakAudio()
   audio.play()
 }
 export function cancelSpeakAudio() {
+  // console.log('cancelSpeakAudio')
   audio.currentTime = 0
-  console.log('cancelSpeakAudio')
   audio.pause()
 }
 

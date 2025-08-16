@@ -13,14 +13,32 @@
         <!-- 设备反馈结果 -->
         <FallBackList :alarmSelect="alarmDetialInfo" v-if="PermConf.fallback.perm" />
         <!-- 视频抓拍 -->
-        <PicCapture :alarmSelect="alarmDetialInfo" v-if="PermConf.pic.perm && picShowFn(alarmDetialInfo)" />
-        <noImg v-else-if="PermConf.pic.perm && !picShowFn(alarmDetialInfo)" :head-type="'视频抓拍'"></noImg>
+        <PicCapture
+          :alarmSelect="alarmDetialInfo"
+          v-if="PermConf.pic.perm && picShowFn(alarmDetialInfo)"
+        />
+        <noImg
+          v-else-if="PermConf.pic.perm && !picShowFn(alarmDetialInfo)"
+          :head-type="'视频抓拍'"
+        ></noImg>
         <!-- 录像回放 -->
-        <RecordPlay :alarmSelect="alarmDetialInfo" v-if="PermConf.record.perm && recordShowFn(alarmDetialInfo)" />
-        <noImg v-else-if="PermConf.record.perm && !recordShowFn(alarmDetialInfo)" :head-type="'录像回放'"></noImg>
+        <RecordPlay
+          :alarmSelect="alarmDetialInfo"
+          v-if="PermConf.record.perm && recordShowFn(alarmDetialInfo)"
+        />
+        <noImg
+          v-else-if="PermConf.record.perm && !recordShowFn(alarmDetialInfo)"
+          :head-type="'录像回放'"
+        ></noImg>
         <!-- 视频实况 -->
-        <LivePlay :alarmSelect="alarmDetialInfo" v-if="PermConf.live.perm && liveShowFn(alarmDetialInfo)" />
-        <noImg v-else-if="PermConf.live.perm && !liveShowFn(alarmDetialInfo)" :head-type="'视频实况'"></noImg>
+        <LivePlay
+          :alarmSelect="alarmDetialInfo"
+          v-if="PermConf.live.perm && liveShowFn(alarmDetialInfo)"
+        />
+        <noImg
+          v-else-if="PermConf.live.perm && !liveShowFn(alarmDetialInfo)"
+          :head-type="'视频实况'"
+        ></noImg>
       </div>
     </div>
     <!-- 告警弹窗 -->
@@ -57,7 +75,7 @@ const PermConf = ref(defaultPerm)
 const isNew = ref(true)
 
 function picShowFn(data: any) {
-  if (!data || !data.info || data.info === "") {
+  if (!data || !data.info || data.info === '') {
     return false
   }
   const infoObj = data?.infoObj
@@ -68,7 +86,7 @@ function picShowFn(data: any) {
 }
 
 function recordShowFn(data: any) {
-  if (!data || !data.info || data.info === "") {
+  if (!data || !data.info || data.info === '') {
     return false
   }
   const infoObj = data?.infoObj
@@ -79,7 +97,7 @@ function recordShowFn(data: any) {
 }
 
 function liveShowFn(data: any) {
-  if (!data || !data.info || data.info === "") {
+  if (!data || !data.info || data.info === '') {
     return false
   }
   const infoObj = data?.infoObj

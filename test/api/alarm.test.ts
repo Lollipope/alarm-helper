@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, Mock } from 'vitest'
 import * as request from '@ah/api/request'
 import {
   getAlarmMsgPage,
@@ -21,7 +21,7 @@ global.fetch = vi.fn()
 describe('Alarm API Functions', () => {
   it('should fetch alarm history page successfully', async () => {
     const mockResponse = { data: [] }
-    request.get.mockResolvedValue(mockResponse) // Mocking a resolved response
+    ;(request.get as Mock).mockResolvedValue(mockResponse) // Mocking a resolved response
 
     const params = { page: 1, limit: 20 }
     const result = await getAlarmMsgPage(params)
@@ -32,7 +32,7 @@ describe('Alarm API Functions', () => {
 
   it('should fetch alarm configuration by kindId', async () => {
     const mockResponse = { data: [{ kindId: 1, name: 'Test' }] }
-    request.get.mockResolvedValue(mockResponse)
+    ;(request.get as Mock).mockResolvedValue(mockResponse)
 
     const alarmKindId = 1
     const result = await getAlarmConfigListByKindId(alarmKindId)
@@ -45,7 +45,7 @@ describe('Alarm API Functions', () => {
 
   it('should fetch user config by alarmId', async () => {
     const mockResponse = { data: { userId: 123, alarmId: 456 } }
-    request.get.mockResolvedValue(mockResponse)
+    ;(request.get as Mock).mockResolvedValue(mockResponse)
 
     const alarmId = 456
     const result = await getUserConfigByAlarmId(alarmId)
@@ -58,7 +58,7 @@ describe('Alarm API Functions', () => {
 
   it('should handle an alarm', async () => {
     const mockResponse = { data: null }
-    request.put_form.mockResolvedValue(mockResponse)
+    ;(request.put_form as Mock).mockResolvedValue(mockResponse)
 
     const params = { alarmId: 1, status: 'handled' }
     const result = await doHandle(params)
@@ -69,7 +69,7 @@ describe('Alarm API Functions', () => {
 
   it('should handle fetch stream URL', async () => {
     const mockResponse = { url: 'http://example.com' }
-    ;(global.fetch as any).mockResolvedValue({
+    ;(global.fetch as Mock).mockResolvedValue({
       json: () => mockResponse,
     })
 
@@ -89,7 +89,7 @@ describe('Alarm API Functions', () => {
 
   it('should handle stop stream device', async () => {
     const mockResponse = { status: 'success' }
-    ;(global.fetch as any).mockResolvedValue({
+    ;(global.fetch as Mock).mockResolvedValue({
       json: () => mockResponse,
     })
 

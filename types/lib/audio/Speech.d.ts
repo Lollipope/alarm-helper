@@ -1,11 +1,11 @@
 declare function startSpeakAudio(): void;
-declare function cancelSpeakAudio(): void;
+export declare function cancelSpeakAudio(): void;
 declare function startSpeakText(text: string): void;
 declare function cancelSpeakText(): void;
-declare const _default: {
+declare const Speech: {
     startSpeakAudio: typeof startSpeakAudio;
     cancelSpeakAudio: typeof cancelSpeakAudio;
     startSpeakText: typeof startSpeakText;
     cancelSpeakText: typeof cancelSpeakText;
 };
-export default _default;
+export default Speech;

@@ -12,6 +12,7 @@ describe('Audio Module', () => {
   describe('startSpeakAudio', () => {
     it('should play the audio and reset the current time', () => {
       audioModule.startSpeakAudio() // 调用函数
+
       // 验证 cancelSpeakAudio 被调用
       expect(audioMock.pause).toHaveBeenCalled() // 应该先暂停
       expect(audioMock.currentTime).toBe(0) // 应该重置 currentTime
