@@ -36,7 +36,7 @@ npm install pnpm -g
 # 安装依赖
 pnpm i @lollipope/alarm-helper
 
-#另 pnpm v10+版本需要执行以下命令
+#另 pnpm v10+版本需要执行以下命令 //(此步骤将在v0.2.20+后弃用❗)
 pnpm approve-builds
 ```
 
@@ -73,7 +73,7 @@ pnpm approve-builds
 
 #### 3.组件引入:
 
-- 根目录index.html中引入以下资源
+- 根目录index.html中引入以下资源 (**_此步骤将在v0.2.20+后弃用❗_**)
 
 ```html
 <!-- 引入播放依赖项  -->
