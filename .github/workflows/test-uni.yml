@@ -2,7 +2,11 @@ name: Run tests and upload coverage
 
 on:
   workflow_dispatch: # 手动触发
-
+    inputs:
+      branch:
+        description: 'Branch to run tests on'
+        required: true
+        default: 'main'
 jobs:
   test:
     name: Run tests and collect coverage
@@ -12,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          ref: ${{ github.event.inputs.branch }}
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -33,3 +37,5 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/vitest/coverage-final.json
+          branch: ${{ github.event.inputs.branch }}
