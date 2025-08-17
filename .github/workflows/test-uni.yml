@@ -37,5 +37,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/vitest/coverage-final.json
-          branch: ${{ github.event.inputs.branch }}
+          files: ./coverage/coverage-final.json
