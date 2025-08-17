@@ -1,5 +1,5 @@
 <template>
-  <div id="Video-VideoBare" class="vb">
+  <div class="vb">
     <template v-if="isUserClick">
       <video
         v-if="!hitError"

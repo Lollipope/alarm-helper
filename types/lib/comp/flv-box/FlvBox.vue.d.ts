@@ -4,6 +4,6 @@ declare const _default: import('vue').DefineComponent<FlvBoxProps, {}, {}, {}, {
     systemCode: string | number;
     userName: string;
     protocol: string;
-    rate: string;
+    rate: "master" | "slaver";
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 export default _default;

@@ -12,7 +12,7 @@ export interface FlvBoxProps {
   systemCode?: string | number
   userName?: string
   protocol?: string
-  rate?: string
+  rate?: 'master' | 'slaver'
 }
 
 export type FlvBoxEmits = {}
