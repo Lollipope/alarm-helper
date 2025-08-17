@@ -2,11 +2,7 @@ name: Run tests and upload coverage
 
 on:
   workflow_dispatch: # 手动触发
-    inputs:
-      branch:
-        description: 'Branch to run tests on'
-        required: true
-        default: 'main'
+
 jobs:
   test:
     name: Run tests and collect coverage
