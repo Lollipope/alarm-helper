@@ -104,6 +104,5 @@ describe('Alarm API Functions', () => {
         headers: expect.objectContaining({ 'Content-Type': 'application/json' }),
       }),
     )
-    console.log(expect)
   })
 })

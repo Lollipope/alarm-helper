@@ -44,8 +44,8 @@ export default mergeConfig(
       root: fileURLToPath(new URL('./', import.meta.url)),
       // setupFiles: ['./vitest.setup.ts'],
       coverage: {
-        reporter: ['text', 'json', 'html'],
-        include: ['lib/**/*.ts'],
+        // reporter: ['text', 'json', 'html'],
+        include: ['lib/**/*.{ts,js}'],
         exclude: [
           'lib/**/index.ts',
           'lib/**/types.ts',
