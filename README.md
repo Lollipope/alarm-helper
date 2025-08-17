@@ -35,9 +35,6 @@ npm install pnpm -g
 
 # 安装依赖
 pnpm i @lollipope/alarm-helper
-
-#另 pnpm v10+版本需要执行以下命令 //v0.2.20+ 后可忽略
-pnpm approve-builds
 ```
 
 #### 2.添加配置文件
