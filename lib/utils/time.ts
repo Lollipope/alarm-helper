@@ -39,9 +39,9 @@ export function uuid() {
 
 export function formatTime(seconds: number): string {
   // 计算小时、分钟和秒
-  let hours: number = Math.floor(seconds / 3600) // 计算小时
-  let minutes: number = Math.floor((seconds % 3600) / 60) // 计算分钟
-  let remainingSeconds: number = seconds % 60 // 计算剩余秒数
+  const hours: number = Math.floor(seconds / 3600) // 计算小时
+  const minutes: number = Math.floor((seconds % 3600) / 60) // 计算分钟
+  const remainingSeconds: number = seconds % 60 // 计算剩余秒数
 
   // 格式化为两位数的字符串
   const hoursStr = hours < 10 ? String('0' + hours) : hours

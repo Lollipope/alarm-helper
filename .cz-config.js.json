@@ -1,0 +1,33 @@
+{
+  "types": [
+    { "value": "feat", "name": "feat:     新功能" },
+    { "value": "fix", "name": "fix:      Bug修复" },
+    { "value": "docs", "name": "docs:     文档更新" },
+    { "value": "style", "name": "style:    代码格式调整（不影响功能）" },
+    { "value": "refactor", "name": "refactor: 代码重构（非功能/非Bug）" },
+    { "value": "perf", "name": "perf:     性能优化" },
+    { "value": "test", "name": "test:     测试相关" },
+    { "value": "chore", "name": "chore:    构建流程或工具链变更" },
+    { "value": "revert", "name": "revert:   代码回退" },
+    { "value": "init", "name": "init:     项目初始化" },
+    { "value": "build", "name": "build:    构建系统或依赖变更" },
+    { "value": "wip", "name": "wip:     进行中的工作" }
+  ],
+  "scopes": [],
+  "allowCustomScopes": true,
+  "messages": {
+    "type": "请选择提交类型（必填）:",
+    "scope": "请输入影响范围（可选）:",
+    "customScope": "请输入自定义影响范围:",
+    "subject": "请填写简短描述（必填/40字内）:",
+    "body": "长说明（可选/使用\"|\"换行）:\n",
+    "breaking": "非兼容性变更说明（可选）:\n",
+    "footer": "关联关闭的Issue（如 #123）:\n",
+    "confirmCommit": "确认提交？"
+  },
+  "allowBreakingChanges": ["feat", "fix"],
+
+  "skipQuestions": ["scope", "body", "breaking"],
+
+  "subjectLimit": 40
+}
