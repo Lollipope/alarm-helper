@@ -34,3 +34,12 @@ jobs:
         run: pnpm publish --provenance --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }} # 使用标签名称作为 Release 标签
+          release_name: ${{ github.ref_name }} # 使用标签名称作为 Release 名称
+          body: 'Release notes for ${{ github.ref_name }}' # 发布说明
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
