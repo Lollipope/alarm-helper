@@ -13,8 +13,9 @@
     { "value": "build", "name": "build:    构建系统或依赖变更" },
     { "value": "wip", "name": "wip:     进行中的工作" }
   ],
-  "scopes": [],
+  "scopes": [{ "name": "ui" }, { "name": "api" }],
   "allowCustomScopes": true,
+  "allowEmptyScopes": true,
   "messages": {
     "type": "请选择提交类型（必填）:",
     "scope": "请输入影响范围（可选）:",
@@ -29,5 +30,5 @@
 
   "skipQuestions": ["scope", "body", "breaking"],
 
-  "subjectLimit": 40
+  "subjectLimit": 60
 }

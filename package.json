@@ -14,12 +14,13 @@
     "postpublish": "node build/post.mjs",
     "test:unit": "vitest",
     "coverage": "vitest run --coverage",
-    "commit": "cz",
+    "commit": "node ./node_modules/cz-customizable/standalone.js",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-conventional": "^17.8.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cz-commitlint": "^19.8.1",
     "@tsconfig/node22": "^22.0.0",
     "@types/js-cookie": "^3.0.6",
     "@types/jsdom": "^21.1.7",
@@ -36,12 +37,15 @@
     "@vueuse/core": "^10.7.1",
     "axios": "^1.6.5",
     "commitizen": "^4.3.1",
+    "cz-conventional-changelog-zh-cn": "^0.0.7",
+    "cz-custom": "^0.0.2",
     "cz-customizable": "^7.5.0",
     "dayjs": "^1.11.11",
     "element-plus": "2.8.0",
     "eslint": "^9.21.0",
     "eslint-plugin-vue": "~10.0.0",
     "husky": "^8.0.3",
+    "inquirer": "^12.9.3",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
     "npm-run-all2": "^7.0.2",
@@ -105,7 +109,7 @@
   "homepage": "https://github.com/Lollipope/alarm-helper/blob/main/README.md",
   "config": {
     "commitizen": {
-      "path": "node_modules/cz-customizable"
+      "path": "cz-custom"
     }
   }
 }
