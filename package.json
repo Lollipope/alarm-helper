@@ -1,6 +1,6 @@
 {
   "name": "@lollipope/alarm-helper",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,9 +11,7 @@
     "lint": "eslint . --fix",
     "format": "prettier --write lib/",
     "prepublishOnly": "node build/pre.mjs",
-    "postpublish": "node build/post.mjs",
-    "test:unit": "vitest",
-    "coverage": "vitest run --coverage"
+    "postpublish": "node build/post.mjs"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
