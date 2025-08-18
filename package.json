@@ -110,6 +110,9 @@
   "config": {
     "commitizen": {
       "path": "cz-custom"
+    },
+    "cz-customizable": {
+      "config": "./.cz-config.js.json"
     }
   }
 }

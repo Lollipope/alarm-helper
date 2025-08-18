@@ -1,17 +1,15 @@
 {
   "types": [
-    { "value": "feat", "name": "feat:     新功能" },
-    { "value": "fix", "name": "fix:      Bug修复" },
-    { "value": "docs", "name": "docs:     文档更新" },
-    { "value": "style", "name": "style:    代码格式调整（不影响功能）" },
-    { "value": "refactor", "name": "refactor: 代码重构（非功能/非Bug）" },
-    { "value": "perf", "name": "perf:     性能优化" },
-    { "value": "test", "name": "test:     测试相关" },
-    { "value": "chore", "name": "chore:    构建流程或工具链变更" },
-    { "value": "revert", "name": "revert:   代码回退" },
-    { "value": "init", "name": "init:     项目初始化" },
-    { "value": "build", "name": "build:    构建系统或依赖变更" },
-    { "value": "wip", "name": "wip:     进行中的工作" }
+    { "value": "feat", "name": "✨ feat: 新功能" },
+    { "value": "fix", "name": "🔧 fix: 修复" },
+    { "value": "docs", "name": "📑 docs: 文档变更" },
+    { "value": "style", "name": "🎨 style: 代码格式(不影响代码运行的变动)" },
+    { "value": "refactor", "name": "♻️  refactor: 重构" },
+    { "value": "perf", "name": "⚡ perf: 性能优化" },
+    { "value": "test", "name": "✅ test: 增加测试" },
+    { "value": "chore", "name": "🔗 chore: 构建过程或辅助工具的变动" },
+    { "value": "revert", "name": "⏪ revert: 回退" },
+    { "value": "build", "name": "📂 build: 打包" }
   ],
   "scopes": [{ "name": "ui" }, { "name": "api" }],
   "allowCustomScopes": true,
