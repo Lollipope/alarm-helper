@@ -3,7 +3,7 @@ export declare const AlarmHelperFlvBox: import('../../utils').SFCWithInstall<imp
     systemCode: string | number;
     userName: string;
     protocol: string;
-    rate: string;
+    rate: "master" | "slaver";
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>> & Record<string, any>;
 export default AlarmHelperFlvBox;
 export * from './FlvBox';

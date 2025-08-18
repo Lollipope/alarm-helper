@@ -1,11 +1,22 @@
 <template>
-  <div :id="playerId" class="player-con" v-if="isUserClick">
-    <ErrorVideo v-if="hitError" @click="reset" />
+  <div class="vb">
+    <template v-if="isUserClick">
+      <video
+        v-if="!hitError"
+        :id="playerId"
+        class="video-player"
+        controls
+        controlslist="nodownload noremoteplayback noplaybackrate notimeline"
+        disablepictureinpicture
+      ></video>
+      <ErrorVideo v-else @click="reset" />
+    </template>
+    <HolderOnlive v-else @trigger="onUserPlay" />
   </div>
-  <HolderOnlive v-else @trigger="onUserPlay" />
 </template>
 
 <script setup lang="ts">
+import FlvExtend from 'flv-extend'
 import { ErrorVideo, HolderOnlive } from '../holder'
 import { uuid } from '../../utils'
 import type { LiveBoxProps } from './LiveBox'
@@ -17,9 +28,13 @@ const props = withDefaults(defineProps<LiveBoxProps>(), {
   pid: '037b697d-e921-4922-9126-f0dd867f259a',
 })
 
-const playerId = ref<string | undefined>()
+const delay = window.globalConfig.videoDelay || 1000
+
+const playerId = ref<string>('player')
 const hitError = ref(false)
-let player: Aliplayer | null = null
+
+let flv: FlvExtend | undefined
+
 const isUserClick = ref(false)
 function onUserPlay() {
   isUserClick.value = true
@@ -40,6 +55,7 @@ watch(
 )
 
 async function init() {
+  hitError.value = false
   if (props.pid === '') {
     hitError.value = true
     return
@@ -50,13 +66,15 @@ async function init() {
     hitError.value = true
     return
   }
-  hitError.value = false
-  player = initPlayer(playerId.value, flv)
+
+  nextTick(() => {
+    initPlayer(playerId.value, flv)
+  })
 }
 
 function destory() {
-  player?.dispose()
-  player = null
+  flv?.destroy()
+  flv = void 0
 }
 
 // 获取播放地址
@@ -84,51 +102,50 @@ function getStreamUrl(pid: string) {
 }
 
 // 初始化播放器
-function initPlayer(domId: string, url: string): Aliplayer {
-  const player = new Aliplayer(
-    {
-      id: domId,
-      source: url,
-      width: '100%',
-      height: '100%',
-      autoplay: true,
-      isLive: true,
-      rePlay: false,
-      preload: true,
-      autoPlayDelay: 0,
-      controlBarVisibility: 'hover',
-      useH5Prism: true,
-      liveRetry: 0,
-      skinLayout: [
-        { name: 'H5Loading', align: 'cc' },
-        { name: 'errorDisplay', align: 'tlabs', x: 0, y: 0 },
-        { name: 'infoDisplay' },
-        { name: 'tooltip', align: 'blabs', x: 0, y: 56 },
-        { name: 'thumbnail' },
-        {
-          name: 'controlBar',
-          align: 'blabs',
-          x: 0,
-          y: 0,
-          children: [
-            { name: 'liveDisplay', align: 'tlabs', x: 15, y: 6 },
-            { name: 'fullScreenButton', align: 'tr', x: 10, y: 12 },
-            { name: 'volume', align: 'tr', x: 5, y: 10 },
-          ],
-        },
-      ],
-    },
-    function () {
-      // console.log('The player is created')
-    },
-  )
-  player.on('error', (err: Error) => {
-    console.log('player is error', err)
-    reset()
-  })
-  return player
+function initPlayer(domId: string, url: string) {
+  const videoElement = document.getElementById(domId) as HTMLElement
+  if (videoElement) {
+    console.log(domId, props.pid)
+    const flvInstance = new FlvExtend({
+      element: videoElement, // *必传
+      frameTracking: true, // 开启追帧设置
+      updateOnStart: true, // 点击播放后更新视频
+      updateOnFocus: true, // 获得焦点后更新视频
+      reconnect: true, // 开启断流重连
+      reconnectInterval: 3000, // 断流重连间隔
+    })
+    // 调用 init 方法初始化视频
+    // init 方法的参数与 flvjs.createPlayer 相同，并返回 flvjs.player 实例
+    const flvPlayer = flvInstance.init(
+      {
+        type: 'flv',
+        url: url,
+        isLive: true,
+      },
+      {
+        enableStashBuffer: false, // 如果您需要实时（最小延迟）来进行实时流播放，则设置为false
+        autoCleanupSourceBuffer: true, // 对SourceBuffer进行自动清理
+        stashInitialSize: 128, // 减少首帧显示等待时长
+        enableWorker: true, // 启用分离的线程进行转换
+      },
+    )
+    flvPlayer.on('error', (e) => {
+      console.error('播放器错误', e)
+      onError()
+    })
+    flvPlayer.play()
+    // 赋值全局变量
+    flv = flvInstance
+  }
 }
-
+// 播放异常
+function onError() {
+  hitError.value = true
+  setTimeout(() => {
+    // 重新初始化
+    reset()
+  }, delay)
+}
 function reset() {
   destory()
   init()
@@ -136,8 +153,27 @@ function reset() {
 </script>
 
 <style scoped lang="scss">
-.player-con {
+.vb {
   width: 100%;
   height: 100%;
+  z-index: 99;
+}
+.video-player {
+  position: unset !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill;
+  &::-webkit-media-controls-timeline {
+    display: none;
+  }
+  &::-webkit-media-controls-play-button {
+    display: none;
+  }
+  &::-webkit-media-controls-current-time-display {
+    display: none;
+  }
+  &::-webkit-media-controls-time-remaining-display {
+    display: none;
+  }
 }
 </style>

@@ -126,9 +126,8 @@
 // })
 
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
-// import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import AlarmSocket from '../../lib/audio/AlarmSocket'
-
+// 创建 Mock 类型，继承 WebSocket 的静态常量
 describe('AlarmSocket', () => {
   let socket: AlarmSocket
   const url = 'ws://localhost:8080'

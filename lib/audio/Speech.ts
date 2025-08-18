@@ -14,7 +14,8 @@ function startSpeakAudio() {
   cancelSpeakAudio()
   audio.play()
 }
-function cancelSpeakAudio() {
+export function cancelSpeakAudio() {
+  // console.log('cancelSpeakAudio')
   audio.currentTime = 0
   audio.pause()
 }
@@ -30,9 +31,10 @@ function cancelSpeakText() {
   ss?.cancel()
 }
 
-export default {
+const Speech = {
   startSpeakAudio, // 播放音频
   cancelSpeakAudio, // 取消音频播放
   startSpeakText, //
   cancelSpeakText, //
 }
+export default Speech

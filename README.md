@@ -35,9 +35,6 @@ npm install pnpm -g
 
 # 安装依赖
 pnpm i @lollipope/alarm-helper
-
-#另 pnpm v10+版本需要执行以下命令
-pnpm approve-builds
 ```
 
 #### 2.添加配置文件
@@ -72,14 +69,6 @@ pnpm approve-builds
 | AlarmStreamMode`(v0.2.13+)` | 流媒体码流取流方式, `1:视频一体机 0:流媒体` | String | 否 | - |
 
 #### 3.组件引入:
-
-- 根目录index.html中引入以下资源
-
-```html
-<!-- 引入播放依赖项  -->
-<link rel="stylesheet" href="/alarm-helper/player/aliplayer-min.css" />
-<script type="text/javascript" charset="utf-8" src="/alarm-helper/player/aliplayer-min.js" />
-```
 
 - 使用组件的地方
 

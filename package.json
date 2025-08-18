@@ -77,9 +77,7 @@
   },
   "files": [
     "dist",
-    "lib/assets/player",
-    "types",
-    "scripts"
+    "types"
   ],
   "license": "MIT",
   "description": "A Vue 3 component library for alarm management.",
