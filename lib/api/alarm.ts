@@ -13,6 +13,7 @@ import qs from 'qs'
 import type {
   AlarmHistoryParams,
   ResponseResult,
+  AlarmMsg,
   PageList,
   AlarmSmallType,
   AlarmUserConf,
@@ -22,11 +23,12 @@ import type {
   AlarmConfigMsgUser,
   StreamPlayApiParams,
   StreamStopApiParams,
+  ConfigMsgKindListApiParams,
 } from './types'
 // 告警历史列表
 export function getAlarmMsgPage(
   params: AlarmHistoryParams,
-): Promise<ResponseResult<PageList<any>>> {
+): Promise<ResponseResult<PageList<AlarmMsg>>> {
   return request.get('/alarm/alarmMg/getAlarmMsgPage', params)
 }
 
@@ -71,7 +73,9 @@ export function getUnReadAlarmMsgInfo(): Promise<ResponseResult<UnreadBean>> {
 }
 
 // 查看所有菜单项
-export function getConfigMsgKindList(params: any): Promise<ResponseResult<Array<AlarmBigType>>> {
+export function getConfigMsgKindList(
+  params: ConfigMsgKindListApiParams,
+): Promise<ResponseResult<Array<AlarmBigType>>> {
   return request.get(`/alarm/alarmConfigMsgKind/getConfigMsgKindList`, params)
 }
 

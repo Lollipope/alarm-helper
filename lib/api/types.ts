@@ -27,6 +27,48 @@ export interface ResponseResult<T> {
   data: T
   msg?: string
 }
+// 告警列表类型
+export interface AlarmMsg {
+  msgId: string
+  msg: string
+  msgVoice: string
+  createTime: string
+  updateTime: string
+  handleStatus: number
+  handleDetail?: string
+  handleTime?: string
+  handler?: string
+  sourceId: string
+  alarmId: number
+  businessId: string
+  alarmMajor: number
+  alarmLevel: number
+  isUp: number
+  infoShow?: string
+  alarmTime: string
+  readTime?: string
+  alarmSource?: string
+  remark?: string
+  alarmKindId: string
+  alarmKindName: string
+  isRead?: boolean | number | string
+  info: string
+  infoObj: unknown
+  alarmName: string
+  useVoice?: string | number
+  isSupportReport: number
+  intervalType?: string
+  managementSectionId?: string
+  managementSectionName?: string
+  readStatus?: string
+  handleUrl?: string
+  $type: string // 当前告警消息类型 前端自定义: DIVIDER分割线
+  isNew: boolean // 当前告警消息是否是新消息  前端自定义
+  alarmTitle: string //告警标题
+  alarmDesc: string //描述
+  iconUrl: string //图标地址
+}
+
 //列表类型
 export interface PageList<T> {
   result: Array<T>
@@ -149,4 +191,11 @@ export interface StreamPlayApiParams {
 export interface StreamStopApiParams {
   deviceId?: string
   videoUrl?: string
+}
+
+// 告警大类 消息列表请求参数
+export interface ConfigMsgKindListApiParams {
+  startTime: string
+  endTime: string
+  handleStatus: string
 }

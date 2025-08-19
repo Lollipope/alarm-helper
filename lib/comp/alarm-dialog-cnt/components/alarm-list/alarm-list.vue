@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { AlarmRobotApi, CommonApi } from '@ah/api'
+import { AlarmRobotApi, CommonApi, type AlarmMsg } from '@ah/api'
 import { getAlarmSmallTypeImgUrl, AlarmTypeIds, getLatestInterval } from '@ah/utils'
 import FilterBox from './filter-box.vue'
 import AlarmMsgList from './alarm-msg-list.vue'
@@ -57,7 +57,7 @@ const filter = ref({
   isRead: '', //消息状态
   intervalType: '', //区间类型 1-管理中心，2-西人工岛
 })
-const msgList = ref<Array<any>>([])
+const msgList = ref<Array<AlarmMsg>>([])
 watch(
   msgList,
   (val) => {
@@ -143,7 +143,7 @@ function initMsgList({ page = 1, size = listStatus.size, msgId = void 0 }) {
     managementSectionId: intervalType, // 区间类型
   }
   return queryMsgList(params).then((res) => {
-    const list = (res.result || []).map((item: any) => {
+    const list = (res.result || []).map((item) => {
       return {
         ...item,
         alarmTitle: item.alarmName,
@@ -156,7 +156,7 @@ function initMsgList({ page = 1, size = listStatus.size, msgId = void 0 }) {
       }
     })
     // 添加置顶分割线
-    const normalFirst = list.findIndex((item: any) => item.isUp == 0)
+    const normalFirst = list.findIndex((item) => item.isUp == 0)
     if (normalFirst > 0) {
       list[normalFirst - 1].$type = 'DIVIDER'
     }
@@ -194,7 +194,7 @@ function loadMoreMsgList({ size = listStatus.size }) {
   scrollStatus.value.isLoading = true
   return queryMsgList(params)
     .then((res) => {
-      const moreList: Array<any> = (res.result || []).map((item: any) => {
+      const moreList = (res.result || []).map((item) => {
         return {
           ...item,
           alarmTitle: item.alarmName,
@@ -253,7 +253,7 @@ function onFilterReset() {
 }
 
 // 选中的告警信息
-function onSelectAlarm(item: any) {
+function onSelectAlarm(item: AlarmMsg | null) {
   // console.log('设置已读消息: ', item)
   if (!item) {
     alarmMsgSelect.value = null
@@ -273,13 +273,13 @@ function onSelectAlarm(item: any) {
       item.isNew = false
       alarmMsgSelect.value = item
     }
-    const isAllRead = msgList.value.every((msg: any) => msg.isRead)
+    const isAllRead = msgList.value.every((msg) => msg.isRead)
     // 该类下所有消息已全部已读,刷新大类菜单
     isAllRead && emits('refreshMenu')
   })
 }
 //插入消息到消息列表
-function insertMsgList(row: any) {
+function insertMsgList(row: AlarmMsg) {
   msgList.value.unshift(row)
 }
 

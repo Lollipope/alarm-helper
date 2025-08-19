@@ -23,7 +23,7 @@ const props = defineProps({
 })
 
 const mode = window?.globalConfig?.AlarmStreamMode
-const liveList = ref<Array<Array<string | undefined>>>()
+const liveList = ref<Array<Array<string | undefined>>>([[,]])
 
 watch(() => props.alarmSelect, initAlarmInfo)
 

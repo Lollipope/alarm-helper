@@ -18,12 +18,12 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
-import type { SwiperBoxProps, SwiperBoxEmits } from './SwiperBox'
+import type { SwiperBoxProps, SwiperBoxEmits, SwiperInstance } from './SwiperBox'
 
 defineOptions({
   name: 'AlarmHelperSwiperBox',
 })
-const props = withDefaults(defineProps<SwiperBoxProps>(), {
+const props = withDefaults(defineProps<SwiperBoxProps<unknown>>(), {
   spaceBetween: 15,
   slidesPerView: 1,
 })
@@ -53,10 +53,10 @@ watch(
 )
 
 const emits = defineEmits<SwiperBoxEmits>()
-function onSwiper(swiper: any) {
+function onSwiper(swiper: SwiperInstance) {
   emits('swiper', swiper)
 }
-function onSlideChange(slides: any) {
+function onSlideChange(slides: SwiperInstance) {
   emits('slide-change', slides)
 }
 </script>

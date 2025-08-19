@@ -8,37 +8,30 @@
       <div class="other-box">
         <!-- 20250328 这一版不实现 -->
         <ControlStra v-if="false" />
+
         <!-- 附件 -->
         <Attachment :alarmSelect="alarmDetialInfo" v-if="PermConf.audio.perm" />
+
         <!-- 设备反馈结果 -->
         <FallBackList :alarmSelect="alarmDetialInfo" v-if="PermConf.fallback.perm" />
+
         <!-- 视频抓拍 -->
-        <PicCapture
-          :alarmSelect="alarmDetialInfo"
-          v-if="PermConf.pic.perm && picShowFn(alarmDetialInfo)"
-        />
-        <noImg
-          v-else-if="PermConf.pic.perm && !picShowFn(alarmDetialInfo)"
-          :head-type="'视频抓拍'"
-        ></noImg>
+        <template v-if="PermConf.pic.perm">
+          <PicCapture :alarmSelect="alarmDetialInfo" v-if="picShowFn(alarmDetialInfo)" />
+          <NoImg v-else :head-type="'视频抓拍'"></NoImg>
+        </template>
+
         <!-- 录像回放 -->
-        <RecordPlay
-          :alarmSelect="alarmDetialInfo"
-          v-if="PermConf.record.perm && recordShowFn(alarmDetialInfo)"
-        />
-        <noImg
-          v-else-if="PermConf.record.perm && !recordShowFn(alarmDetialInfo)"
-          :head-type="'录像回放'"
-        ></noImg>
+        <template v-if="PermConf.record.perm">
+          <RecordPlay :alarmSelect="alarmDetialInfo" v-if="recordShowFn(alarmDetialInfo)" />
+          <NoImg v-else :head-type="'录像回放'"></NoImg>
+        </template>
+
         <!-- 视频实况 -->
-        <LivePlay
-          :alarmSelect="alarmDetialInfo"
-          v-if="PermConf.live.perm && liveShowFn(alarmDetialInfo)"
-        />
-        <noImg
-          v-else-if="PermConf.live.perm && !liveShowFn(alarmDetialInfo)"
-          :head-type="'视频实况'"
-        ></noImg>
+        <template v-if="PermConf.live.perm">
+          <LivePlay :alarmSelect="alarmDetialInfo" v-if="liveShowFn(alarmDetialInfo)" />
+          <NoImg v-else :head-type="'视频实况'"></NoImg>
+        </template>
       </div>
     </div>
     <!-- 告警弹窗 -->
@@ -47,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { AlarmRobotApi } from '@ah/api'
+import { AlarmRobotApi, type AlarmMsg } from '@ah/api'
 import { defaultPerm, syncUserPermConfig } from '@ah/utils'
 import DetailCommon from './DeatilCommon.vue'
 import ControlStra from './ControlStra.vue'
@@ -62,11 +55,11 @@ import Attachment from './Attachment.vue'
 import { ElMessage } from 'element-plus'
 // import { getLocalStorageToken } from '@ah/api/auth'
 import { getTokenId } from '@ah/utils/tokenId'
-import noImg from './noImg.vue'
+import NoImg from './NoImg.vue'
 const emits = defineEmits(['onRead'])
 const props = defineProps({
   alarmSelect: {
-    type: Object,
+    type: Object as PropType<AlarmMsg>,
     default: () => ({}),
   },
 })
@@ -74,34 +67,34 @@ const dialogVisible = ref(false)
 const PermConf = ref(defaultPerm)
 const isNew = ref(true)
 
-function picShowFn(data: { info?: string; infoObj?: { picUrl: Array<string> } }) {
+function picShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
+  const infoObj = data?.infoObj as { picUrl: Array<string> }
   if (!infoObj?.picUrl || infoObj.picUrl.length === 0) {
     return false
   }
   return true
 }
 
-function recordShowFn(data: { info?: string; infoObj?: { videoUrl: Array<string> } }) {
+function recordShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
+  const infoObj = data?.infoObj as { videoUrl: Array<string> }
   if (!infoObj?.videoUrl || infoObj.videoUrl.length === 0) {
     return false
   }
   return true
 }
 
-function liveShowFn(data: any) {
+function liveShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
-  if (!infoObj.deviceId) {
+  const infoObj = data?.infoObj as { deviceId?: string }
+  if (!infoObj?.deviceId) {
     return false
   }
   return true
@@ -125,7 +118,7 @@ watch(
 )
 // 详情信息
 const alarmDetialInfo = ref(props.alarmSelect)
-function parseAlarmSelect(alarmSelect: { info: string; infoObj: unknown }) {
+function parseAlarmSelect(alarmSelect: AlarmMsg) {
   try {
     alarmSelect.infoObj = JSON.parse(alarmSelect.info)
     alarmDetialInfo.value = alarmSelect
