@@ -6,7 +6,7 @@ export type SwiperBoxProps<T = any> = SwiperOptions & {
 }
 
 export type SwiperBoxEmits = {
-  swiper: [value: Swiper]
-  'slide-change': [value: Swiper]
+  swiper: [value: typeof Swiper]
+  'slide-change': [value: typeof Swiper]
 }
 export type SwiperBoxInstance = InstanceType<typeof SwiperBox>

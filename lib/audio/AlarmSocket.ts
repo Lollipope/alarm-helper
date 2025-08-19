@@ -6,16 +6,16 @@
  * @FilePath: \leatop-cdp-alarm\packages\alarm-helper\lib\tool\AlarmSocket.ts
  * @Description: 告警Socket类
  */
-
+const NOOP = () => {}
 export default class AlarmSocket {
   private url: string
   private webSocket: WebSocket | null
   private isRetry: boolean
   private retryCount: number
   private timerId: number
-  private onOpenCb: Function
-  private onCloseCb: Function
-  private onMessageCb: (data: any) => void
+  private onOpenCb: () => void
+  private onCloseCb: () => void
+  private onMessageCb: (data: string) => void
   /**
    * @param url - WebSocket 连接地址
    * @param options - 可选参数
@@ -28,9 +28,9 @@ export default class AlarmSocket {
     url: string,
     {
       isRetry = true,
-      onClose: onCloseCb = () => {},
-      onOpen: onOpenCb = () => {},
-      onMessage: onMessageCb = (data: any) => {},
+      onClose: onCloseCb = NOOP,
+      onOpen: onOpenCb = NOOP,
+      onMessage: onMessageCb = (data: string) => console.log(data),
     },
   ) {
     this.url = url
@@ -81,7 +81,7 @@ export default class AlarmSocket {
     this.isRetry && this.reconnect()
   }
   // 接收消息
-  private onMessage({ data }: MessageEvent) {
+  private onMessage({ data }: MessageEvent<string>) {
     console.log(`respone::receive raw data:`, data)
     this.onMessageCb(data)
   }
@@ -100,7 +100,8 @@ export default class AlarmSocket {
         // 监听socket消息
         this.webSocket.onmessage = this.onMessage
       }
-    } catch (error) {
+    } catch (err: unknown) {
+      console.log(err) //为了 通过eslint检查
       this.reconnect()
     }
   }

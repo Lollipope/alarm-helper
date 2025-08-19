@@ -74,23 +74,23 @@ const dialogVisible = ref(false)
 const PermConf = ref(defaultPerm)
 const isNew = ref(true)
 
-function picShowFn(data: any) {
+function picShowFn(data: { info?: string; infoObj?: { picUrl: Array<string> } }) {
   if (!data || !data.info || data.info === '') {
     return false
   }
   const infoObj = data?.infoObj
-  if (!infoObj.picUrl || infoObj.picUrl.length === 0) {
+  if (!infoObj?.picUrl || infoObj.picUrl.length === 0) {
     return false
   }
   return true
 }
 
-function recordShowFn(data: any) {
+function recordShowFn(data: { info?: string; infoObj?: { videoUrl: Array<string> } }) {
   if (!data || !data.info || data.info === '') {
     return false
   }
   const infoObj = data?.infoObj
-  if (!infoObj.videoUrl || infoObj.videoUrl.length === 0) {
+  if (!infoObj?.videoUrl || infoObj.videoUrl.length === 0) {
     return false
   }
   return true
@@ -125,7 +125,7 @@ watch(
 )
 // 详情信息
 const alarmDetialInfo = ref(props.alarmSelect)
-function parseAlarmSelect(alarmSelect: any) {
+function parseAlarmSelect(alarmSelect: { info: string; infoObj: unknown }) {
   try {
     alarmSelect.infoObj = JSON.parse(alarmSelect.info)
     alarmDetialInfo.value = alarmSelect
@@ -174,7 +174,7 @@ function onRead() {
   dialogVisible.value = true
 }
 function onConfirmed() {
-  AlarmRobotApi.readAllMsg({}).then((res: any) => {
+  AlarmRobotApi.readAllMsg({}).then((res) => {
     const isSuc = res.code === 200
     if (isSuc) {
       dialogVisible.value = false

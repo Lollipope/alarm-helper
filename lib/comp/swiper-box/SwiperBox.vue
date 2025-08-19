@@ -30,15 +30,15 @@ const props = withDefaults(defineProps<SwiperBoxProps>(), {
 
 // TODO: 此处有点问题
 // Remove props with value null (e.g., width: null) to satisfy Swiper's type requirements
-const filteredProps = computed(() => {
-  const result: Record<string, unknown> = {}
-  Object.entries(props).forEach(([key, value]) => {
-    if (value !== null) {
-      result[key] = value
-    }
-  })
-  return result
-})
+// const filteredProps = computed(() => {
+//   const result: Record<string, unknown> = {}
+//   Object.entries(props).forEach(([key, value]) => {
+//     if (value !== null) {
+//       result[key] = value
+//     }
+//   })
+//   return result
+// })
 
 const modules = [Pagination]
 const pagination = ref()

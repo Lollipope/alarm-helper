@@ -28,17 +28,17 @@ onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
-function initAlarmInfo(alarmSelect: any) {
+function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { videoUrl: Array<string> } }) {
   if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
     videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
     return
   }
   const infoObj = alarmSelect.infoObj
-  if (!infoObj.videoUrl || infoObj.videoUrl.length === 0) {
+  if (!infoObj?.videoUrl || infoObj?.videoUrl.length === 0) {
     videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
     return
   }
-  const list = (infoObj.videoUrl || [,]).map((url: string) => ({ url, canplay: true }))
+  const list = (infoObj.videoUrl || [,]).map((url) => ({ url, canplay: true }))
   videoList.value = chunkArray(list, 2)
 }
 </script>

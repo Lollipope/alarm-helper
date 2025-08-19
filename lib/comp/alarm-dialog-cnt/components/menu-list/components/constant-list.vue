@@ -30,8 +30,8 @@ watch(itemList, (val) => {
   idx !== -1 && upPos(idx as number)
 })
 // 选中某大类
-function onSelect(item: any, idx: number) {
-  idSelect.value = item.id
+function onSelect(item: MenuItem, idx: number) {
+  idSelect.value = item.id as string
   upPos(idx)
 }
 // 更新选中位置

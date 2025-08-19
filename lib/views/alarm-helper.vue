@@ -23,6 +23,7 @@ import { useApiError, useRefresh } from './useCustomHook'
 import type { AlarmHelperProps, AlarmHelperEmits } from './alarm-helper'
 import type { AlarmWSMessage } from '@ah/comp/alarm-ws/AlarmWS'
 import { updateTokenId } from '../utils'
+import type { AlarmDialogCntInstance } from '@ah/comp/alarm-dialog-cnt/alarm-dialog-cnt'
 
 const props = withDefaults(defineProps<AlarmHelperProps>(), {
   showAlarmRule: false,
@@ -64,7 +65,7 @@ const unRead = ref<UnreadBean>({
   num: 0,
 })
 
-const alarmDialogRef = shallowRef<HTMLElement & { alarmRobotRef: any }>()
+const alarmDialogRef = shallowRef<HTMLElement & { alarmRobotRef: AlarmDialogCntInstance }>()
 
 onMounted(() => {})
 onBeforeUnmount(() => {})
@@ -138,7 +139,7 @@ async function onReceiveMessage(message: AlarmWSMessage) {
     //如果是同类型,更新列表
     const isInsertMsgList =
       String(alarmRobotRef?.alarmTypeIdSelect) === String(data.alarmKindId) ||
-      alarmRobotRef.alarmTypeIdSelect === AlarmTypeIds.ALL
+      alarmRobotRef?.alarmTypeIdSelect === AlarmTypeIds.ALL
 
     // 将新消息插入列表
     if (isInsertMsgList) {

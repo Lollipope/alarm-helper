@@ -49,7 +49,7 @@ function initSocket() {
     onClose: () => {
       console.log('socket:close')
     },
-    onMessage: (data: any) => {
+    onMessage: (data: string) => {
       console.log('socket:onmessage', data)
       handleMessage(data)
     },
@@ -80,7 +80,7 @@ async function handleMessage(cnt: string) {
     console.log('解析socket 包异常', error)
   }
 }
-function getAlarmConf(data: any) {
+function getAlarmConf(data: { alarmId: string | number }) {
   return AlarmRobotApi.getUserConfigByAlarmId(data.alarmId).then(
     (res) => res.data.alarmConfigMsgUser,
   )

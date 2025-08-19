@@ -44,7 +44,7 @@ const alarmMsgSelect = defineModel('alarmSelect', {
 })
 watch(
   () => props.alarmTypeIdSelect,
-  (newVal) => {
+  () => {
     filter.value.typeVal = [] // 清空告警类型
   },
 )
@@ -106,7 +106,7 @@ function initOptions() {
 
   // 告警级别
   CommonApi.getDictionaryListByKey('alarm_level_type').then((data) => {
-    const options = (data || []).map((item, idx) => ({
+    const options = (data || []).map((item) => ({
       label: `${item.kindName}`,
       value: item.kindId,
     }))
@@ -213,7 +213,7 @@ function loadMoreMsgList({ size = listStatus.size }) {
     })
 }
 // 查询列表数据
-function queryMsgList(queryParams: any) {
+function queryMsgList(queryParams: { alarmKindId: string; keyWord?: string }) {
   let alarmKindId = queryParams.alarmKindId === AlarmTypeIds.ALL ? '' : queryParams.alarmKindId
   // 有过滤条件,就查询所有大类的消息
   alarmKindId = queryParams.keyWord && queryParams.keyWord !== '' ? '' : alarmKindId

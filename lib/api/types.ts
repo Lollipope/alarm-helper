@@ -94,13 +94,27 @@ export interface AlarmConfigMsgUser {
   voiceTemplate: string | null
   alarmLevel: string | null
 }
+// 系统参数类型
+export interface SysParam {
+  defaultValue?: string | undefined
+  paramCode: string
+  paramFieldName: string
+}
+
+// 告警小类类型权限
+export interface AlarmConfView {
+  alarmId: number
+  id: number
+  viewTag: number
+}
+
 // 告警用户配置(单个)
 export interface AlarmUserConf {
   handleUrl: string | null
   isSupportReport: number
   alarmConfigMsgUser: AlarmConfigMsgUser
-  alarmConfigViewList: any[] // 用于表示可以包含任意类型的数组，具体根据需要修改
-  paramList: any[] // 用于表示可以包含任意类型的数组，具体根据需要修改
+  alarmConfigViewList: AlarmConfView[] // 用于表示可以包含任意类型的数组，具体根据需要修改
+  paramList: SysParam[] // 用于表示可以包含任意类型的数组，具体根据需要修改
 }
 
 // 未读消息类型
@@ -122,4 +136,17 @@ export interface AlarmApiError {
 export interface SectionItem {
   id: string
   managementSectionName: string
+}
+
+// 流媒体参数
+export interface StreamPlayApiParams {
+  deviceId: string
+  needCompress: number // 参数开关 0-关，1-开，必填
+  pid?: string
+  rate?: 'master' | 'slaver' //获取主码流（master）或者副码流（slaver）
+  domain?: 'private' | 'pulbic'
+}
+export interface StreamStopApiParams {
+  deviceId?: string
+  videoUrl?: string
 }

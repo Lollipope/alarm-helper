@@ -15,10 +15,28 @@ export default defineConfigWithVueTs(
 
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
+    ignores: [
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+      'test/**',
+      'types/**',
+      'scripts/**',
+      'public/**',
+      'env.d.ts',
+    ],
   },
-
   pluginVue.configs['flat/essential'],
+
   vueTsConfigs.recommended,
   skipFormatting,
+  {
+    name: 'eslint-rule',
+    rules: {
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 )

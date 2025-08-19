@@ -17,13 +17,13 @@ const props = defineProps({
 })
 
 import imgUrl from '../../../../assets/images/fujian.png'
-const audioList = ref([])
+const audioList = ref<string[]>([])
 
 onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
-function initAlarmInfo(alarmSelect: any) {
+function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { audioUrl: Array<string> } }) {
   if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
     return
   }

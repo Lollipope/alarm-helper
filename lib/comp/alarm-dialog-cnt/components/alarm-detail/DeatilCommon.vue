@@ -61,6 +61,7 @@ function onReportCorr() {
         message: '操作成功!',
         type: 'success',
       })
+    // eslint-disable-next-line
     props.alarmSelect.handleStatus = '1'
   })
 }
@@ -75,6 +76,7 @@ function onReportMis() {
         message: '操作成功!',
         type: 'success',
       })
+    // eslint-disable-next-line
     props.alarmSelect.handleStatus = '2'
   })
 }
