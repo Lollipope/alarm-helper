@@ -57,7 +57,7 @@ export function readAllMsg({
 }
 // 已读消息
 export function readMsgById(msgId: string): Promise<ResponseResult<null | string>> {
-  return request.put_form(`alarm/alarmMg/readMsgById`, { msgId })
+  return request.put_form(`/alarm/alarmMg/readMsgById`, { msgId })
 }
 
 //  查询未读消息数量信息

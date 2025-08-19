@@ -1,3 +1,4 @@
+export declare const noop: () => void;
 export default class AlarmSocket {
     private url;
     private webSocket;
@@ -19,11 +20,10 @@ export default class AlarmSocket {
         isRetry?: boolean | undefined;
         onClose?: (() => void) | undefined;
         onOpen?: (() => void) | undefined;
-        onMessage?: ((data: any) => void) | undefined;
+        onMessage?: ((data: string) => void) | undefined;
     });
     private reconnect;
     private onOpen;
-    private onError;
     private notifyOpen;
     private notifyClose;
     private onClose;

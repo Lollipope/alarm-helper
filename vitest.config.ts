@@ -57,6 +57,7 @@ export default defineConfig({
         'lib/assets/**',
         'lib/comp/**/*.ts',
         'lib/views/**/*.ts',
+        'lib/**/request.ts',
       ],
     },
   },

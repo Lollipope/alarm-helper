@@ -33,8 +33,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
             from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
             of<T>(...items: T[]): T[];
-            fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-            fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
             readonly [Symbol.species]: ArrayConstructor;
         };
         default: () => never[];
@@ -77,8 +75,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
             from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
             of<T>(...items: T[]): T[];
-            fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-            fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
             readonly [Symbol.species]: ArrayConstructor;
         };
         default: () => never[];

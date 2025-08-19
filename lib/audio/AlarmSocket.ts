@@ -6,16 +6,16 @@
  * @FilePath: \leatop-cdp-alarm\packages\alarm-helper\lib\tool\AlarmSocket.ts
  * @Description: 告警Socket类
  */
-
+export const noop = () => {}
 export default class AlarmSocket {
   private url: string
   private webSocket: WebSocket | null
   private isRetry: boolean
   private retryCount: number
   private timerId: number
-  private onOpenCb: Function
-  private onCloseCb: Function
-  private onMessageCb: (data: any) => void
+  private onOpenCb: typeof noop
+  private onCloseCb: typeof noop
+  private onMessageCb: (data: string) => void
   /**
    * @param url - WebSocket 连接地址
    * @param options - 可选参数
@@ -28,9 +28,9 @@ export default class AlarmSocket {
     url: string,
     {
       isRetry = true,
-      onClose: onCloseCb = () => {},
-      onOpen: onOpenCb = () => {},
-      onMessage: onMessageCb = (data: any) => {},
+      onClose: onCloseCb = noop,
+      onOpen: onOpenCb = noop,
+      onMessage: onMessageCb = (data: string) => console.log(data),
     },
   ) {
     this.url = url
@@ -46,7 +46,7 @@ export default class AlarmSocket {
     this.reconnect = this.reconnect.bind(this)
     this.connect = this.connect.bind(this)
     this.onOpen = this.onOpen.bind(this)
-    this.onError = this.onError.bind(this)
+    // this.onError = this.onError.bind(this)
     this.onClose = this.onClose.bind(this)
     this.onMessage = this.onMessage.bind(this)
     this.send = this.send.bind(this)
@@ -65,7 +65,7 @@ export default class AlarmSocket {
     this.notifyOpen()
   }
   // 通道异常
-  private onError() {}
+  // private onError() {}
   // 通知连接成功
   private notifyOpen() {
     this.onOpenCb()
@@ -94,7 +94,7 @@ export default class AlarmSocket {
         // 监听socket连接
         this.webSocket.onopen = this.onOpen
         // 监听socket错误信息
-        this.webSocket.onerror = this.onError
+        // this.webSocket.onerror = this.onError
         // 监听socket关闭
         this.webSocket.onclose = this.onClose
         // 监听socket消息

@@ -126,19 +126,20 @@
 // })
 
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
-import AlarmSocket from '../../lib/audio/AlarmSocket'
+import AlarmSocket, { noop } from '../../lib/audio/AlarmSocket'
 // 创建 Mock 类型，继承 WebSocket 的静态常量
 describe('AlarmSocket', () => {
   let socket: AlarmSocket
   const url = 'ws://localhost:8080'
+
+  // 模拟 WebSocket 类
+  let WebSocketMock: any
   const mockOnOpen = vi.fn()
   const mockOnClose = vi.fn()
   const mockOnMessage = vi.fn()
-  // 模拟 WebSocket 类
-  let WebSocketMock: any
-
   beforeEach(() => {
     WebSocketMock = vi.fn(() => ({
+      readyState: 0, // 初始状态为 CONNECTING
       onopen: vi.fn(),
       onerror: vi.fn(),
       onclose: vi.fn(),
@@ -179,12 +180,15 @@ describe('AlarmSocket', () => {
     socket.connect()
     // https://cn.vitest.dev/api/mock.html#mock-instances
     const onOpenCallback = WebSocketMock.mock.results[0].value.onopen
+    WebSocketMock.mock.results[0].value.readyState = 1
     onOpenCallback() // 调用 onOpen 回调
     expect(mockOnOpen).toHaveBeenCalled()
+    expect(socket.isOpen()).toBe(true)
   })
 
   it('should handle onClose event and retry if isRetry is true', () => {
     socket.connect()
+    // disabled-eslint-next-line
     const onCloseCallback = WebSocketMock.mock.results[0].value.onclose
     onCloseCallback() // 调用 onClose 回调
     expect(mockOnClose).toHaveBeenCalled()
@@ -229,6 +233,39 @@ describe('AlarmSocket', () => {
     socket.connect()
     socket.closeSocket()
     expect(socket['isRetry']).toBe(false)
+    console.log(WebSocketMock.mock.results)
     expect(WebSocketMock.mock.results[0].value.close).toHaveBeenCalled()
+  })
+  it('should call onMessageCb with the received data', () => {
+    const testData = 'test message'
+    const mockEvent = { data: testData } as MessageEvent
+    socket.connect()
+    // 调用 onMessage 方法
+    WebSocketMock.mock.results[0].value.onmessage(mockEvent)
+    // 验证回调函数被调用
+    expect(mockOnMessage).toHaveBeenCalledTimes(1)
+    expect(mockOnMessage).toHaveBeenCalledWith(testData)
+  })
+  it('should be a function', () => {
+    expect(typeof noop).toBe('function')
+  })
+
+  it('should return undefined when called with no arguments', () => {
+    expect(noop()).toBeUndefined()
+  })
+
+  it('should not throw when called', () => {
+    expect(() => noop()).not.toThrow()
+  })
+
+  it('should have no side effects', () => {
+    const mockFn = vi.fn()
+    const originalConsoleLog = console.log
+
+    console.log = mockFn
+    noop()
+    console.log = originalConsoleLog
+
+    expect(mockFn).not.toHaveBeenCalled()
   })
 })
