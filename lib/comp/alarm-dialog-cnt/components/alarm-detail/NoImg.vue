@@ -26,7 +26,6 @@ const props = defineProps({
 })
 
 const imgList = ref(imgUrl)
-
 const src = ref(imgPic)
 watch(
   () => props.headType,
