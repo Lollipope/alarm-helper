@@ -1,6 +1,6 @@
 <template>
   <DetailSect title="附件" :imgUrl="imgUrl">
-    <div class="audio-sect">
+    <div class="audio-sect" v-if="audioList.length > 0">
       <AudioBox :url="au" v-for="(au, index) of audioList" :key="index" class="audio-item" />
     </div>
   </DetailSect>

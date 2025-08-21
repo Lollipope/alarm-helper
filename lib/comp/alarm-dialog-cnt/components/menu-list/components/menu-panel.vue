@@ -268,9 +268,10 @@ onBeforeUnmount(() => {
     position: relative;
     padding-top: 110px;
     .list-wrap {
+      width: 90px;
       height: 676px;
       padding-left: 20px;
-      padding-right: 17px;
+      padding-right: 14px;
       .list-item {
         width: 56px;
         height: 56px;
@@ -318,6 +319,17 @@ onBeforeUnmount(() => {
       .list-wrap {
         padding-left: 0;
         display: block;
+        height: 614px;
+        overflow-y: auto;
+        padding-right: 10px;
+        width: 100%;
+        &::-webkit-scrollbar {
+          background-color: transparent !important;
+        }
+        &::-webkit-scrollbar-track {
+          display: block;
+          background-color: transparent !important;
+        }
         .list-item {
           margin-left: 11px;
           display: inline-block;

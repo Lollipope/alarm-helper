@@ -12,6 +12,9 @@ import dts from 'vite-plugin-dts'
 import del from 'rollup-plugin-delete'
 // https://vite.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': {},
+  },
   plugins: [
     vue(),
     vueJsx(),

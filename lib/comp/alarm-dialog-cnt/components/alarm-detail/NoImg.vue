@@ -48,9 +48,10 @@ watch(
 <style scoped lang="scss">
 .capture-cnt {
   height: 124px;
-  padding: 3px;
   width: 48%;
   background: #f1f4ff;
+  margin-bottom: 8px;
+  margin-left: 3px;
 }
 
 .noImage {
