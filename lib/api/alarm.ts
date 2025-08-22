@@ -13,6 +13,7 @@ import qs from 'qs'
 import type {
   AlarmHistoryParams,
   ResponseResult,
+  AlarmMsg,
   PageList,
   AlarmSmallType,
   AlarmUserConf,
@@ -20,11 +21,14 @@ import type {
   AlarmBigType,
   SortAlarmBigType,
   AlarmConfigMsgUser,
+  StreamPlayApiParams,
+  StreamStopApiParams,
+  ConfigMsgKindListApiParams,
 } from './types'
 // 告警历史列表
 export function getAlarmMsgPage(
   params: AlarmHistoryParams,
-): Promise<ResponseResult<PageList<any>>> {
+): Promise<ResponseResult<PageList<AlarmMsg>>> {
   return request.get('/alarm/alarmMg/getAlarmMsgPage', params)
 }
 
@@ -43,8 +47,11 @@ export function getUserConfigByAlarmId(
 ): Promise<ResponseResult<AlarmUserConf>> {
   return request.get(`/alarm/alarmConfigMsgUser/getUserConfigByAlarmId?alarmId=${alarmId}`)
 }
-// 正报误报
-export function doHandle(params: any): Promise<ResponseResult<null | string>> {
+// 正报误报 1:正报 2:误报
+export function doHandle(params: {
+  msgId: string
+  status: '1' | '2'
+}): Promise<ResponseResult<null | string>> {
   return request.put_form(`/alarm/alarmMg/doHandle`, params)
 }
 // 一键已读所有消息
@@ -66,7 +73,9 @@ export function getUnReadAlarmMsgInfo(): Promise<ResponseResult<UnreadBean>> {
 }
 
 // 查看所有菜单项
-export function getConfigMsgKindList(params: any): Promise<ResponseResult<Array<AlarmBigType>>> {
+export function getConfigMsgKindList(
+  params: ConfigMsgKindListApiParams,
+): Promise<ResponseResult<Array<AlarmBigType>>> {
   return request.get(`/alarm/alarmConfigMsgKind/getConfigMsgKindList`, params)
 }
 
@@ -91,7 +100,7 @@ function withCustomHeader(): Record<string, string> {
   }
 }
 // 播放流
-export function getStreamUrl(params: any) {
+export function getStreamUrl(params: StreamPlayApiParams) {
   const BaseURL = window.globalConfig?.AlarmRobotApiContext || '/api/'
   const url = `${BaseURL}alarm/stream/getDeviceUrl`
   return fetch(url, {
@@ -104,7 +113,7 @@ export function getStreamUrl(params: any) {
 }
 
 // 停止流
-export function stopDevicePlay(params: any) {
+export function stopDevicePlay(params: StreamStopApiParams) {
   const BaseURL = window.globalConfig?.AlarmRobotApiContext || '/api/'
   const url = `${BaseURL}alarm/stream/stopDevicePlay?${qs.stringify(params)}`
   return fetch(url, {

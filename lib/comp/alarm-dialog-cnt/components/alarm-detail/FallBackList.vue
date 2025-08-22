@@ -24,9 +24,9 @@ onMounted(() => {
 function init() {
   const infoObj = props.alarmSelect.infoObj
   const headProps = infoObj.showdata.shift()
-  const list = infoObj.showdata
+  const list = infoObj.showdata as Array<{ row: string }>
   listHead.value = headProps.row.split(',')
-  listData.value = list.map((i: any) => {
+  listData.value = list.map((i) => {
     return i.row.split(',') as Array<string>
   })
 }

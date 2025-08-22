@@ -1,19 +1,4 @@
-export interface AlarmMsg {
-    msgId: string;
-    alarmTitle: string;
-    alarmDesc: string;
-    alarmTime: string;
-    createTime: string;
-    alarmLevel: string;
-    alarmKindId: string;
-    alarmId: string;
-    isNew: boolean;
-    isRead: boolean;
-    handleStatus: number | string;
-    iconUrl: string;
-    alarmMajor: string | number;
-    $type?: string;
-}
+import { AlarmMsg } from '../../../../api';
 declare function setScrollTop(): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     selectAlarmId: {

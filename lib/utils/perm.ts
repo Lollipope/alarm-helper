@@ -1,4 +1,4 @@
-import { AlarmRobotApi } from '../api'
+import { AlarmRobotApi, type SysParam } from '../api'
 import type { UserConfig } from './types'
 // 详情类型
 export const ViewTagType = {
@@ -46,9 +46,9 @@ export function syncUserPermConfig(alarmId: string | number) {
       [ViewTagType.RECORD]: false,
       [ViewTagType.FALLBACK]: false,
       [ViewTagType.AUDIO]: false,
-    } as any
+    } as Record<string | number, boolean>
     // 更新用户详情权限
-    data?.alarmConfigViewList.forEach((item: any) => {
+    data?.alarmConfigViewList.forEach((item) => {
       if (viewTag[item.viewTag] !== undefined) {
         viewTag[item.viewTag] = true
       }
@@ -87,7 +87,7 @@ export function syncUserPermConfig(alarmId: string | number) {
 }
 
 // 获取前往处理系统参数
-export function getGoSysParams(params: any[], infoObj: any, msgId: string) {
+export function getGoSysParams(params: SysParam[], infoObj: Record<string, string>, msgId: string) {
   let query = ''
   params.forEach((data, index) => {
     if (data.defaultValue && data.defaultValue !== '') {

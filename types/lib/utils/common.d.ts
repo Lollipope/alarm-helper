@@ -4,4 +4,4 @@
  * @param size
  * @returns
  */
-export declare function chunkArray(arr: Array<any>, size: number): any[][];
+export declare function chunkArray<R>(arr: Array<R>, size: number): R[][];

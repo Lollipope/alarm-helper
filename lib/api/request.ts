@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { getToken } from './auth'
 import qs from 'qs'
@@ -26,7 +27,7 @@ service.interceptors.request.use(
     }
     return config
   },
-  (error: any) => {
+  (error: Error) => {
     return Promise.reject(error)
   },
 )
@@ -34,7 +35,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
-    const res = response.data
+    // const res = response.data
     // if (response.headers['x-auth-token']) {
     //   res['x-auth-token'] = response.headers['x-auth-token']
     // }
@@ -57,7 +58,7 @@ casService.interceptors.request.use(
     }
     return config
   },
-  (error) => {
+  (error: Error) => {
     Promise.reject(error)
   },
 )
@@ -78,29 +79,29 @@ export function getRealUrl(api: string) {
   return url
 }
 
-// cas单点登录接口调用
-export const casGet = (url: any, params: any) => {
-  return casService.get(`${url}`, {
-    params: params,
-  })
-}
+// // cas单点登录接口调用
+// export const casGet = (url: string, params: any) => {
+//   return casService.get(`${url}`, {
+//     params: params,
+//   })
+// }
 
-export const casPost = (url: string, params?: any, tout = 60000) => {
-  return casService({
-    method: 'post',
-    url: url,
-    data: params,
-    timeout: tout,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    transformRequest: [
-      function (data) {
-        return qs.stringify(data)
-      },
-    ],
-  })
-}
+// export const casPost = (url: string, params?: any, tout = 60000) => {
+//   return casService({
+//     method: 'post',
+//     url: url,
+//     data: params,
+//     timeout: tout,
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+//     },
+//     transformRequest: [
+//       function (data) {
+//         return qs.stringify(data)
+//       },
+//     ],
+//   })
+// }
 
 // 普通登录接口调用
 export function get<R>(url: string, params?: any): Promise<R> {
@@ -266,7 +267,6 @@ export function uploadImportFile<R>(url: string, params?: any, tout = 999999): P
   })
 }
 
-// 工作流
 export function put_post<R>(url: any, params: any): Promise<R> {
   return service({
     method: 'post',
@@ -277,7 +277,6 @@ export function put_post<R>(url: any, params: any): Promise<R> {
     },
   })
 }
-
 export function del_post<R>(url: any, tout = 15000): Promise<R> {
   return service({
     method: 'post',

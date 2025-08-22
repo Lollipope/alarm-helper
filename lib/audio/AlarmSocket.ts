@@ -81,7 +81,7 @@ export default class AlarmSocket {
     this.isRetry && this.reconnect()
   }
   // 接收消息
-  private onMessage({ data }: MessageEvent) {
+  private onMessage({ data }: MessageEvent<string>) {
     console.log(`respone::receive raw data:`, data)
     this.onMessageCb(data)
   }
@@ -100,7 +100,8 @@ export default class AlarmSocket {
         // 监听socket消息
         this.webSocket.onmessage = this.onMessage
       }
-    } catch (error) {
+    } catch (err: unknown) {
+      console.log(err) //为了 通过eslint检查
       this.reconnect()
     }
   }

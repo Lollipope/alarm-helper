@@ -47,7 +47,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             size?: any;
             msgId?: undefined;
         }) => Promise<void>;
-        insertMsgList: (row: any) => void;
+        insertMsgList: (row: import('../..').AlarmMsg) => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
         "update:alarmSelect": (...args: any[]) => void;
         changeAlarmKindId: (...args: any[]) => void;
@@ -63,10 +63,10 @@ declare const _default: import('vue').DefineComponent<{}, {
             };
             list: {
                 type: {
-                    (arrayLength: number): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    (...items: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    new (arrayLength: number): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    new (...items: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                    (arrayLength: number): import('../..').AlarmMsg[];
+                    (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
+                    new (arrayLength: number): import('../..').AlarmMsg[];
+                    new (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
                     isArray(arg: any): arg is any[];
                     readonly prototype: any[];
                     from<T>(arrayLike: ArrayLike<T>): T[];
@@ -107,7 +107,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             }) => void;
         }, import('vue').PublicProps, {
             selectAlarmId: string;
-            list: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+            list: import('../..').AlarmMsg[];
             loadMore: Function;
         }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {
             scrollContentRef: HTMLDivElement;
@@ -125,10 +125,10 @@ declare const _default: import('vue').DefineComponent<{}, {
             };
             list: {
                 type: {
-                    (arrayLength: number): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    (...items: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    new (arrayLength: number): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                    new (...items: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                    (arrayLength: number): import('../..').AlarmMsg[];
+                    (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
+                    new (arrayLength: number): import('../..').AlarmMsg[];
+                    new (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
                     isArray(arg: any): arg is any[];
                     readonly prototype: any[];
                     from<T>(arrayLike: ArrayLike<T>): T[];
@@ -162,7 +162,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             setScrollTop: () => void;
         }, {}, {}, {}, {
             selectAlarmId: string;
-            list: import('./components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+            list: import('../..').AlarmMsg[];
             loadMore: Function;
         }> | null;
     }, HTMLDivElement, import('vue').ComponentProvideOptions, {
@@ -191,7 +191,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             size?: any;
             msgId?: undefined;
         }) => Promise<void>;
-        insertMsgList: (row: any) => void;
+        insertMsgList: (row: import('../..').AlarmMsg) => void;
     }, {}, {}, {}, {
         alarmTypeIdSelect: string;
     }> | null;

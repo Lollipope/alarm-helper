@@ -129,7 +129,7 @@ describe('Alarm API Functions', () => {
     const mockResponse = { data: null }
     ;(request.put_form as Mock).mockResolvedValue(mockResponse)
 
-    const params = { alarmId: 1, status: 'handled' }
+    const params = { status: '1', msgId: 'xxx' } as const
     const result = await doHandle(params)
 
     expect(result).toEqual(mockResponse)
@@ -142,7 +142,7 @@ describe('Alarm API Functions', () => {
       json: () => mockResponse,
     })
 
-    const params = { deviceId: 1 }
+    const params = { deviceId: '1', needCompress: 1 }
     const result = await getStreamUrl(params)
 
     expect(result).toEqual(mockResponse)
@@ -162,7 +162,7 @@ describe('Alarm API Functions', () => {
       json: () => mockResponse,
     })
 
-    const params = { deviceId: 1 }
+    const params = { deviceId: '1' }
     const result = await stopDevicePlay(params)
 
     expect(result).toEqual(mockResponse)

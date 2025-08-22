@@ -8,8 +8,10 @@
       <div class="other-box">
         <!-- 20250328 这一版不实现 -->
         <ControlStra v-if="false" />
+
         <!-- 附件 -->
         <Attachment :alarmSelect="alarmDetialInfo" v-if="PermConf.audio.perm" />
+
         <!-- 设备反馈结果 -->
         <FallBackList :alarmSelect="alarmDetialInfo" v-if="PermConf.fallback.perm" />
 
@@ -38,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { AlarmRobotApi } from '@ah/api'
+import { AlarmRobotApi, type AlarmMsg } from '@ah/api'
 import { defaultPerm, syncUserPermConfig } from '@ah/utils'
 import DetailCommon from './DeatilCommon.vue'
 import ControlStra from './ControlStra.vue'
@@ -57,7 +59,7 @@ import NoImg from './NoImg.vue'
 const emits = defineEmits(['onRead'])
 const props = defineProps({
   alarmSelect: {
-    type: Object,
+    type: Object as PropType<AlarmMsg>,
     default: () => ({}),
   },
 })
@@ -65,34 +67,34 @@ const dialogVisible = ref(false)
 const PermConf = ref(defaultPerm)
 const isNew = ref(true)
 
-function picShowFn(data: any) {
+function picShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
-  if (!infoObj.picUrl || infoObj.picUrl.length === 0) {
+  const infoObj = data?.infoObj as { picUrl: Array<string> }
+  if (!infoObj?.picUrl || infoObj.picUrl.length === 0) {
     return false
   }
   return true
 }
 
-function recordShowFn(data: any) {
+function recordShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
-  if (!infoObj.videoUrl || infoObj.videoUrl.length === 0) {
+  const infoObj = data?.infoObj as { videoUrl: Array<string> }
+  if (!infoObj?.videoUrl || infoObj.videoUrl.length === 0) {
     return false
   }
   return true
 }
 
-function liveShowFn(data: any) {
+function liveShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
     return false
   }
-  const infoObj = data?.infoObj
-  if (!infoObj.deviceId) {
+  const infoObj = data?.infoObj as { deviceId?: string }
+  if (!infoObj?.deviceId) {
     return false
   }
   return true
@@ -116,7 +118,7 @@ watch(
 )
 // 详情信息
 const alarmDetialInfo = ref(props.alarmSelect)
-function parseAlarmSelect(alarmSelect: any) {
+function parseAlarmSelect(alarmSelect: AlarmMsg) {
   try {
     alarmSelect.infoObj = JSON.parse(alarmSelect.info)
     alarmDetialInfo.value = alarmSelect
@@ -165,7 +167,7 @@ function onRead() {
   dialogVisible.value = true
 }
 function onConfirmed() {
-  AlarmRobotApi.readAllMsg({}).then((res: any) => {
+  AlarmRobotApi.readAllMsg({}).then((res) => {
     const isSuc = res.code === 200
     if (isSuc) {
       dialogVisible.value = false

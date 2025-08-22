@@ -1,3 +1,4 @@
+import { SysParam } from '../api';
 export interface MenuItem {
     id: string | number;
     name: string;
@@ -11,7 +12,7 @@ export interface UserConfig {
         perm: boolean;
         url: string;
         btn: boolean;
-        paramList: any[];
+        paramList: SysParam[];
     };
     live: {
         perm: boolean;

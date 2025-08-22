@@ -22,6 +22,46 @@ export interface ResponseResult<T> {
     data: T;
     msg?: string;
 }
+export interface AlarmMsg {
+    msgId: string;
+    msg: string;
+    msgVoice: string;
+    createTime: string;
+    updateTime: string;
+    handleStatus: number;
+    handleDetail?: string;
+    handleTime?: string;
+    handler?: string;
+    sourceId: string;
+    alarmId: number;
+    businessId: string;
+    alarmMajor: number;
+    alarmLevel: number;
+    isUp: number;
+    infoShow?: string;
+    alarmTime: string;
+    readTime?: string;
+    alarmSource?: string;
+    remark?: string;
+    alarmKindId: string;
+    alarmKindName: string;
+    isRead?: boolean | number | string;
+    info: string;
+    infoObj: unknown;
+    alarmName: string;
+    useVoice?: string | number;
+    isSupportReport: number;
+    intervalType?: string;
+    managementSectionId?: string;
+    managementSectionName?: string;
+    readStatus?: string;
+    handleUrl?: string;
+    $type: string;
+    isNew: boolean;
+    alarmTitle: string;
+    alarmDesc: string;
+    iconUrl: string;
+}
 export interface PageList<T> {
     result: Array<T>;
     pageSize: number;
@@ -85,12 +125,22 @@ export interface AlarmConfigMsgUser {
     voiceTemplate: string | null;
     alarmLevel: string | null;
 }
+export interface SysParam {
+    defaultValue?: string | undefined;
+    paramCode: string;
+    paramFieldName: string;
+}
+export interface AlarmConfView {
+    alarmId: number;
+    id: number;
+    viewTag: number;
+}
 export interface AlarmUserConf {
     handleUrl: string | null;
     isSupportReport: number;
     alarmConfigMsgUser: AlarmConfigMsgUser;
-    alarmConfigViewList: any[];
-    paramList: any[];
+    alarmConfigViewList: AlarmConfView[];
+    paramList: SysParam[];
 }
 export interface UnreadBean {
     isImportant: boolean;
@@ -104,4 +154,20 @@ export interface AlarmApiError {
 export interface SectionItem {
     id: string;
     managementSectionName: string;
+}
+export interface StreamPlayApiParams {
+    deviceId: string;
+    needCompress: number;
+    pid?: string;
+    rate?: 'master' | 'slaver';
+    domain?: 'private' | 'pulbic';
+}
+export interface StreamStopApiParams {
+    deviceId?: string;
+    videoUrl?: string;
+}
+export interface ConfigMsgKindListApiParams {
+    startTime: string;
+    endTime: string;
+    handleStatus: string;
 }

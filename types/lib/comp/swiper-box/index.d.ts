@@ -1,6 +1,6 @@
 export declare const AlarmHelperSwiperBox: import('../../utils').SFCWithInstall<{
     new (...args: any[]): import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('swiper/types').SwiperOptions & {
-        list: any[];
+        list: unknown[];
     }> & Readonly<{
         onSwiper?: ((value: import('swiper/types').Swiper) => any) | undefined;
         "onSlide-change"?: ((value: import('swiper/types').Swiper) => any) | undefined;
@@ -18,7 +18,7 @@ export declare const AlarmHelperSwiperBox: import('../../utils').SFCWithInstall<
         M: {};
         Defaults: {};
     }, Readonly<import('swiper/types').SwiperOptions & {
-        list: any[];
+        list: unknown[];
     }> & Readonly<{
         onSwiper?: ((value: import('swiper/types').Swiper) => any) | undefined;
         "onSlide-change"?: ((value: import('swiper/types').Swiper) => any) | undefined;
@@ -30,7 +30,7 @@ export declare const AlarmHelperSwiperBox: import('../../utils').SFCWithInstall<
     __isTeleport?: never;
     __isSuspense?: never;
 } & import('vue').ComponentOptionsBase<Readonly<import('swiper/types').SwiperOptions & {
-    list: any[];
+    list: unknown[];
 }> & Readonly<{
     onSwiper?: ((value: import('swiper/types').Swiper) => any) | undefined;
     "onSlide-change"?: ((value: import('swiper/types').Swiper) => any) | undefined;
@@ -44,7 +44,7 @@ export declare const AlarmHelperSwiperBox: import('../../utils').SFCWithInstall<
     $slots: {
         default?(_: {
             data: {
-                item: any;
+                item: unknown;
                 idx: number;
             };
         }): any;
