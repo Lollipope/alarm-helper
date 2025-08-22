@@ -82,7 +82,7 @@ describe('Alarm API Functions', () => {
   it('should fetch getConfigMsgKindList ', async () => {
     const mockResponse = { data: { userId: 123, alarmId: 456 } }
     ;(request.get as Mock).mockResolvedValue(mockResponse)
-    const params = { alarmKindId: 1, isShow: 1, sort: 2, alarmKindName: '' }
+    const params = { startTime: '1', endTime: '1', handleStatus: '2' }
     const result = await getConfigMsgKindList(params)
 
     expect(result).toEqual(mockResponse)
