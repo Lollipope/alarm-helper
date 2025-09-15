@@ -59,7 +59,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 size?: any;
                 msgId?: undefined;
             }) => Promise<void>;
-            insertMsgList: (row: any) => void;
+            insertMsgList: (row: import('../..').AlarmMsg) => void;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
             "update:alarmSelect": (...args: any[]) => void;
             changeAlarmKindId: (...args: any[]) => void;
@@ -75,10 +75,10 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 };
                 list: {
                     type: {
-                        (arrayLength: number): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        (...items: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        new (arrayLength: number): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        new (...items: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                        (arrayLength: number): import('../..').AlarmMsg[];
+                        (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
+                        new (arrayLength: number): import('../..').AlarmMsg[];
+                        new (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
                         isArray(arg: any): arg is any[];
                         readonly prototype: any[];
                         from<T>(arrayLike: ArrayLike<T>): T[];
@@ -86,8 +86,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                         from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
                         from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
                         of<T>(...items: T[]): T[];
-                        fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-                        fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
                         readonly [Symbol.species]: ArrayConstructor;
                     };
                     default: () => never[];
@@ -121,7 +119,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 }) => void;
             }, import('vue').PublicProps, {
                 selectAlarmId: string;
-                list: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                list: import('../..').AlarmMsg[];
                 loadMore: Function;
             }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {
                 scrollContentRef: HTMLDivElement;
@@ -139,10 +137,10 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 };
                 list: {
                     type: {
-                        (arrayLength: number): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        (...items: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        new (arrayLength: number): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
-                        new (...items: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[]): import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                        (arrayLength: number): import('../..').AlarmMsg[];
+                        (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
+                        new (arrayLength: number): import('../..').AlarmMsg[];
+                        new (...items: import('../..').AlarmMsg[]): import('../..').AlarmMsg[];
                         isArray(arg: any): arg is any[];
                         readonly prototype: any[];
                         from<T>(arrayLike: ArrayLike<T>): T[];
@@ -150,8 +148,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                         from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
                         from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
                         of<T>(...items: T[]): T[];
-                        fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-                        fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
                         readonly [Symbol.species]: ArrayConstructor;
                     };
                     default: () => never[];
@@ -178,7 +174,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 setScrollTop: () => void;
             }, {}, {}, {}, {
                 selectAlarmId: string;
-                list: import('../../comp/alarm-dialog-cnt/components/alarm-list/alarm-msg-list.vue').AlarmMsg[];
+                list: import('../..').AlarmMsg[];
                 loadMore: Function;
             }> | null;
         }, HTMLDivElement, import('vue').ComponentProvideOptions, {
@@ -207,7 +203,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
                 size?: any;
                 msgId?: undefined;
             }) => Promise<void>;
-            insertMsgList: (row: any) => void;
+            insertMsgList: (row: import('../..').AlarmMsg) => void;
         }, {}, {}, {}, {
             alarmTypeIdSelect: string;
         }> | null;

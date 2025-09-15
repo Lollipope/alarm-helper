@@ -1,11 +1,11 @@
 import { SwiperBoxProps } from './SwiperBox';
-type __VLS_Props = SwiperBoxProps;
+type __VLS_Props = SwiperBoxProps<unknown>;
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
         default?(_: {
             data: {
-                item: any;
+                item: unknown;
                 idx: number;
             };
         }): any;

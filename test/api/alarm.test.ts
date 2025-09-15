@@ -82,7 +82,7 @@ describe('Alarm API Functions', () => {
   it('should fetch getConfigMsgKindList ', async () => {
     const mockResponse = { data: { userId: 123, alarmId: 456 } }
     ;(request.get as Mock).mockResolvedValue(mockResponse)
-    const params = { alarmKindId: 1, isShow: 1, sort: 2, alarmKindName: '' }
+    const params = { startTime: '1', endTime: '1', handleStatus: '2' }
     const result = await getConfigMsgKindList(params)
 
     expect(result).toEqual(mockResponse)
@@ -129,7 +129,7 @@ describe('Alarm API Functions', () => {
     const mockResponse = { data: null }
     ;(request.put_form as Mock).mockResolvedValue(mockResponse)
 
-    const params = { alarmId: 1, status: 'handled' }
+    const params = { status: '1', msgId: 'xxx' } as const
     const result = await doHandle(params)
 
     expect(result).toEqual(mockResponse)
@@ -142,7 +142,7 @@ describe('Alarm API Functions', () => {
       json: () => mockResponse,
     })
 
-    const params = { deviceId: 1 }
+    const params = { deviceId: '1', needCompress: 1 }
     const result = await getStreamUrl(params)
 
     expect(result).toEqual(mockResponse)
@@ -162,7 +162,7 @@ describe('Alarm API Functions', () => {
       json: () => mockResponse,
     })
 
-    const params = { deviceId: 1 }
+    const params = { deviceId: '1' }
     const result = await stopDevicePlay(params)
 
     expect(result).toEqual(mockResponse)

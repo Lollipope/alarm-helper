@@ -1,8 +1,6 @@
 declare const service: import('axios').AxiosInstance;
 export declare function getBaseUrl(): string;
 export declare function getRealUrl(api: string): string;
-export declare const casGet: (url: any, params: any) => Promise<import('axios').AxiosResponse<any, any>>;
-export declare const casPost: (url: string, params?: any, tout?: number) => Promise<import('axios').AxiosResponse<any, any>>;
 export declare function get<R>(url: string, params?: any): Promise<R>;
 export declare function post<R>(url: string, params?: any, tout?: number): Promise<R>;
 export declare function postJson<R>(url: string, params?: any): Promise<R>;

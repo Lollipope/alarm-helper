@@ -29,12 +29,12 @@ onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
-function initAlarmInfo(alarmSelect: any) {
+function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { picUrl: Array<string> } }) {
   if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
     imgList.value = chunkArray([,], 2)
     return
   }
-  imgList.value = chunkArray(alarmSelect.infoObj.picUrl || [,], 2)
+  imgList.value = chunkArray(alarmSelect.infoObj?.picUrl || [,], 2)
 }
 </script>
 <style scoped lang="scss">

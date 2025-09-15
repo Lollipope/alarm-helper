@@ -1,3 +1,4 @@
+import { SysParam } from '../api';
 import { UserConfig } from './types';
 export declare const ViewTagType: {
     LIVE: number;
@@ -17,22 +18,22 @@ export declare function syncUserPermConfig(alarmId: string | number): Promise<{
         perm: boolean;
         url: string;
         btn: boolean;
-        paramList: any[];
+        paramList: SysParam[];
     };
     live: {
-        perm: any;
+        perm: boolean;
     };
     pic: {
-        perm: any;
+        perm: boolean;
     };
     record: {
-        perm: any;
+        perm: boolean;
     };
     fallback: {
-        perm: any;
+        perm: boolean;
     };
     audio: {
-        perm: any;
+        perm: boolean;
     };
 }>;
-export declare function getGoSysParams(params: any[], infoObj: any, msgId: string): string;
+export declare function getGoSysParams(params: SysParam[], infoObj: Record<string, string>, msgId: string): string;

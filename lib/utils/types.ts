@@ -1,3 +1,4 @@
+import type { SysParam } from '@ah/api'
 // 告警大类菜单类型
 export interface MenuItem {
   id: string | number
@@ -13,7 +14,7 @@ export interface UserConfig {
     perm: boolean
     url: string
     btn: boolean
-    paramList: any[]
+    paramList: SysParam[]
   }
   live: {
     perm: boolean

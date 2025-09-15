@@ -1,4 +1,4 @@
-import { isProd } from './env'
+// import { isProd } from './env'
 import { MenuItem } from './types'
 // console.log('isProd: ', isProd, 'BASE_URL:', import.meta.env.BASE_URL)
 // // 告警大类图片目录

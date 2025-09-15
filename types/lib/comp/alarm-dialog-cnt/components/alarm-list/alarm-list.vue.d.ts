@@ -1,9 +1,10 @@
+import { AlarmMsg } from '../../../../api';
 declare function initMsgList({ page, size, msgId }: {
     page?: number | undefined;
     size?: any;
     msgId?: undefined;
 }): Promise<void>;
-declare function insertMsgList(row: any): void;
+declare function insertMsgList(row: AlarmMsg): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     alarmTypeIdSelect: {
         type: StringConstructor;
@@ -43,10 +44,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         };
         list: {
             type: {
-                (arrayLength: number): import('./alarm-msg-list.vue').AlarmMsg[];
-                (...items: import('./alarm-msg-list.vue').AlarmMsg[]): import('./alarm-msg-list.vue').AlarmMsg[];
-                new (arrayLength: number): import('./alarm-msg-list.vue').AlarmMsg[];
-                new (...items: import('./alarm-msg-list.vue').AlarmMsg[]): import('./alarm-msg-list.vue').AlarmMsg[];
+                (arrayLength: number): AlarmMsg[];
+                (...items: AlarmMsg[]): AlarmMsg[];
+                new (arrayLength: number): AlarmMsg[];
+                new (...items: AlarmMsg[]): AlarmMsg[];
                 isArray(arg: any): arg is any[];
                 readonly prototype: any[];
                 from<T>(arrayLike: ArrayLike<T>): T[];
@@ -54,8 +55,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
                 from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
                 of<T>(...items: T[]): T[];
-                fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-                fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
                 readonly [Symbol.species]: ArrayConstructor;
             };
             default: () => never[];
@@ -89,7 +88,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }) => void;
     }, import('vue').PublicProps, {
         selectAlarmId: string;
-        list: import('./alarm-msg-list.vue').AlarmMsg[];
+        list: AlarmMsg[];
         loadMore: Function;
     }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {
         scrollContentRef: HTMLDivElement;
@@ -107,10 +106,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         };
         list: {
             type: {
-                (arrayLength: number): import('./alarm-msg-list.vue').AlarmMsg[];
-                (...items: import('./alarm-msg-list.vue').AlarmMsg[]): import('./alarm-msg-list.vue').AlarmMsg[];
-                new (arrayLength: number): import('./alarm-msg-list.vue').AlarmMsg[];
-                new (...items: import('./alarm-msg-list.vue').AlarmMsg[]): import('./alarm-msg-list.vue').AlarmMsg[];
+                (arrayLength: number): AlarmMsg[];
+                (...items: AlarmMsg[]): AlarmMsg[];
+                new (arrayLength: number): AlarmMsg[];
+                new (...items: AlarmMsg[]): AlarmMsg[];
                 isArray(arg: any): arg is any[];
                 readonly prototype: any[];
                 from<T>(arrayLike: ArrayLike<T>): T[];
@@ -118,8 +117,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
                 from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
                 of<T>(...items: T[]): T[];
-                fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>> | ArrayLike<T | PromiseLike<T>>): Promise<T[]>;
-                fromAsync<T, U>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T> | ArrayLike<T>, mapFn: (value: Awaited<T>, index: number) => U, thisArg?: any): Promise<Awaited<U>[]>;
                 readonly [Symbol.species]: ArrayConstructor;
             };
             default: () => never[];
@@ -146,7 +143,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         setScrollTop: () => void;
     }, {}, {}, {}, {
         selectAlarmId: string;
-        list: import('./alarm-msg-list.vue').AlarmMsg[];
+        list: AlarmMsg[];
         loadMore: Function;
     }> | null;
 }, HTMLDivElement>;

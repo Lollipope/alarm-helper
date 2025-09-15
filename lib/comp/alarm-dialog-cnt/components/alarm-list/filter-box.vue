@@ -132,8 +132,7 @@ const condition = defineModel('condition', {
 
 const isFocus = ref(false)
 const isOpen = ref(false)
-
-const typeOptions = ref<{ label: string; value: string }[]>([])
+const typeOptions = ref<SelectOption[]>([])
 const isChange = computed(() => {
   return (
     condition.value.importVal !== '' ||
@@ -146,14 +145,14 @@ const isChange = computed(() => {
 // 监听告警大类变化
 watch(() => props.alarmType, updateTypeOptions)
 
-function updateTypeOptions(val: any) {
+function updateTypeOptions(val: string) {
   if (val === AlarmTypeIds.ALL) {
     typeOptions.value = []
   } else {
     AlarmRobotApi.getAlarmConfigListByKindId(val).then((res) => {
-      typeOptions.value = (res.data || []).map((item: any) => ({
+      typeOptions.value = (res.data || []).map((item) => ({
         label: item.alarmName,
-        value: item.alarmId,
+        value: item.alarmId + '',
       }))
     })
   }
@@ -162,14 +161,14 @@ function updateTypeOptions(val: any) {
 function onFilter() {
   isOpen.value = !isOpen.value
 }
-function onChangeType(item: any) {
-  let typeVal = condition.value.typeVal
+function onChangeType(item: SelectOption) {
+  let typeVal = condition.value.typeVal as string[]
   if (item.value === '') {
     const isAll = typeVal.includes(item.value)
     typeVal = isAll ? [] : typeOptions.value.map((v) => v.value)
   } else {
     if (typeVal.includes(item.value)) {
-      typeVal = typeVal.filter((v: any) => v !== item.value)
+      typeVal = typeVal.filter((v) => v !== item.value)
     } else {
       typeVal.push(item.value)
     }

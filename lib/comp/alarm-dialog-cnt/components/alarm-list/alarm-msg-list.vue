@@ -64,22 +64,7 @@
 </template>
 
 <script setup lang="ts">
-export interface AlarmMsg {
-  msgId: string //信息id
-  alarmTitle: string //告警标题
-  alarmDesc: string //描述
-  alarmTime: string // 时间
-  createTime: string //创建时间
-  alarmLevel: string //等级
-  alarmKindId: string // 告警大类
-  alarmId: string //告警小类id
-  isNew: boolean // 是否新消息
-  isRead: boolean //是否已读
-  handleStatus: number | string
-  iconUrl: string //图标地址
-  alarmMajor: string | number //重要性
-  $type?: string // 分割线
-}
+import type { AlarmMsg } from '@ah/api'
 const props = defineProps({
   // 选中的消息id
   selectAlarmId: {

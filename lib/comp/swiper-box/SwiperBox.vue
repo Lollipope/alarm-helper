@@ -18,27 +18,27 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
-import type { SwiperBoxProps, SwiperBoxEmits } from './SwiperBox'
+import type { SwiperBoxProps, SwiperBoxEmits, SwiperInstance } from './SwiperBox'
 
 defineOptions({
   name: 'AlarmHelperSwiperBox',
 })
-const props = withDefaults(defineProps<SwiperBoxProps>(), {
+const props = withDefaults(defineProps<SwiperBoxProps<unknown>>(), {
   spaceBetween: 15,
   slidesPerView: 1,
 })
 
 // TODO: 此处有点问题
 // Remove props with value null (e.g., width: null) to satisfy Swiper's type requirements
-const filteredProps = computed(() => {
-  const result: Record<string, unknown> = {}
-  Object.entries(props).forEach(([key, value]) => {
-    if (value !== null) {
-      result[key] = value
-    }
-  })
-  return result
-})
+// const filteredProps = computed(() => {
+//   const result: Record<string, unknown> = {}
+//   Object.entries(props).forEach(([key, value]) => {
+//     if (value !== null) {
+//       result[key] = value
+//     }
+//   })
+//   return result
+// })
 
 const modules = [Pagination]
 const pagination = ref()
@@ -53,10 +53,10 @@ watch(
 )
 
 const emits = defineEmits<SwiperBoxEmits>()
-function onSwiper(swiper: any) {
+function onSwiper(swiper: SwiperInstance) {
   emits('swiper', swiper)
 }
-function onSlideChange(slides: any) {
+function onSlideChange(slides: SwiperInstance) {
   emits('slide-change', slides)
 }
 </script>

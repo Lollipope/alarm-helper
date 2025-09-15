@@ -23,7 +23,7 @@ const props = defineProps({
 })
 
 const mode = window?.globalConfig?.AlarmStreamMode
-const liveList = ref([[,]])
+const liveList = ref<Array<Array<string | undefined>>>([[,]])
 
 watch(() => props.alarmSelect, initAlarmInfo)
 
@@ -31,13 +31,13 @@ onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
-function initAlarmInfo(alarmSelect: any) {
+function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { deviceId: string } }) {
   if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
     liveList.value = chunkArray([,], 2)
     return
   }
   const infoObj = alarmSelect.infoObj
-  const pids = (infoObj.deviceId || '').split(',')
+  const pids = (infoObj?.deviceId || '').split(',')
   liveList.value = chunkArray(pids, 2)
 }
 </script>

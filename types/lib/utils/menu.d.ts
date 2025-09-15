@@ -1,3 +1,4 @@
+import { MenuItem } from '.';
 export interface ObjectWithId {
     id: string | number;
 }
@@ -7,5 +8,5 @@ export interface ObjectWithId {
  * @param {Array} idArray - 按照此顺序进行排序的 ID 数组
  * @returns {Array} 排序后的数组
  */
-export declare function sortArrayByIds<T extends ObjectWithId>(array: Array<T>, idArray: Array<string | number>): any;
-export declare function mergeWithImage(arr1: ObjectWithId[], arr2: ObjectWithId[]): any[];
+export declare function sortArrayByIds<T extends ObjectWithId>(array: Array<T>, idArray: Array<string | number>): T[];
+export declare function mergeWithImage(arr1: ObjectWithId[], arr2: ObjectWithId[]): MenuItem[];

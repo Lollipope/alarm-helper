@@ -106,8 +106,8 @@ function onHide() {
     isOpen.value = false
   }
 }
-function onSelect(item: any) {
-  idSelect.value = item.id
+function onSelect(item: MenuItem) {
+  idSelect.value = item.id as string
 }
 
 const isEdit = ref(true)
@@ -192,8 +192,8 @@ function updateCEList() {
   const rightList = newList.filter((it) => newIds2.includes(String(it.id)))
 
   // 根据排序后的id,排序左边和右边的菜单项
-  itemListLeftEdit.value = sortArrayByIds(leftList, newIds1)
-  itemListRightEdit.value = sortArrayByIds(rightList, newIds2)
+  itemListLeftEdit.value = sortArrayByIds<MenuItem>(leftList, newIds1)
+  itemListRightEdit.value = sortArrayByIds<MenuItem>(rightList, newIds2)
 }
 onBeforeUnmount(() => {
   leftSort.value?.destroy()

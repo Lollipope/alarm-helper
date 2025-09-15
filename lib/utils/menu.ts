@@ -1,3 +1,4 @@
+import type { MenuItem } from '@ah/utils'
 export interface ObjectWithId {
   id: string | number
 }
@@ -16,7 +17,7 @@ export function sortArrayByIds<T extends ObjectWithId>(
   //   const indexB = idArray.indexOf(b.id); // 获取 b.id 在 idArray 中的索引
   //   return indexA - indexB; // 根据索引排序
   // });
-  const result: any = []
+  const result: T[] = []
   idArray.forEach((id) => {
     const item = array.find((item) => String(item.id) === String(id))
     if (item) {
@@ -28,7 +29,7 @@ export function sortArrayByIds<T extends ObjectWithId>(
 
 export function mergeWithImage(arr1: ObjectWithId[], arr2: ObjectWithId[]) {
   // 创建一个新的数组，用于存放合并后的结果
-  const result = [] as any[]
+  const result = [] as MenuItem[]
 
   // 创建一个用于存储id对应合并对象的Map
   const mergedMap = new Map()

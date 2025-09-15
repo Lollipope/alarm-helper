@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { emitter } from '@ah/utils'
 import { AlarmSocket } from '@ah/audio/index'
-import { type AlarmConfigMsgUser, type AlarmApiError, AlarmRobotApi } from '@ah/api'
+import { type AlarmConfigMsgUser, type AlarmApiError, AlarmRobotApi, type AlarmMsg } from '@ah/api'
 import { useApiError } from '@ah/views/useCustomHook'
 import { useAlarmConf } from './useHook'
 import type { AlarmWSProps, AlarmWSEmits, AlarmWSMessageConf } from './AlarmWS'
@@ -49,7 +49,7 @@ function initSocket() {
     onClose: () => {
       console.log('socket:close')
     },
-    onMessage: (data: any) => {
+    onMessage: (data: string) => {
       console.log('socket:onmessage', data)
       handleMessage(data)
     },
@@ -80,12 +80,12 @@ async function handleMessage(cnt: string) {
     console.log('解析socket 包异常', error)
   }
 }
-function getAlarmConf(data: any) {
+function getAlarmConf(data: { alarmId: string | number }) {
   return AlarmRobotApi.getUserConfigByAlarmId(data.alarmId).then(
     (res) => res.data.alarmConfigMsgUser,
   )
 }
-function dealWithWsData(alarmIdConf: AlarmConfigMsgUser, data: any): AlarmWSMessageConf {
+function dealWithWsData(alarmIdConf: AlarmConfigMsgUser, data: AlarmMsg): AlarmWSMessageConf {
   if (!alarmIdConf) {
     console.warn('找不到该告警类型配置')
     return {

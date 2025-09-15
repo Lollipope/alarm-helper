@@ -4,7 +4,7 @@
  * @param size
  * @returns
  */
-export function chunkArray(arr: Array<any>, size: number) {
+export function chunkArray<R>(arr: Array<R>, size: number) {
   const result = []
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size))

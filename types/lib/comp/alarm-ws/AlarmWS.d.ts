@@ -13,8 +13,20 @@ export interface AlarmWSMessageConf {
     voiceType: number;
     isReceive: boolean;
 }
+export interface AlarmWSData {
+    alarmId: string;
+    alarmKindId: string;
+    alarmName: string;
+    msg: string;
+    msgVoice: string;
+    alarmTitle: string;
+    alarmDesc: string;
+    isNew: boolean;
+    isRead: boolean;
+    iconUrl: string;
+}
 export interface AlarmWSMessage {
-    cnt: any;
+    cnt: AlarmWSData;
     conf: AlarmWSMessageConf;
 }
 export type AlarmWSEmits = {
