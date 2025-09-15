@@ -102,3 +102,9 @@ pnpm i @lollipope/alarm-helper
 | 事件名     | 说明         |   回调参数    |      备注       |
 | :--------- | :----------- | :-----------: | :-------------: |
 | onApiError | 接口异常触发 | AlarmApiError | `v0.2.12+ 新增` |
+
+#### 4.集成效果:
+<div>
+<img src='./docs/dev/image-3.png'/>
+<img src='./docs/dev/image-4.png'/>
+</div>

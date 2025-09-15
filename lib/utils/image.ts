@@ -45,6 +45,7 @@ export const AlarmTypeIds = {
   DLWD: 22, //"电缆温度告警",
   ZXCZ: 23, //"主线称重告警",
   JGWGJ: 24, //"结构物监测告警",
+  KLJC: 25, //"客流监测",
 }
 
 export const AlarmTypeList: Array<MenuItem> = [
@@ -199,5 +200,11 @@ export const AlarmTypeList: Array<MenuItem> = [
     name: '结构物监测告警',
     imgUrl: getAlarmTypeImgUrl('24'),
     imgUrlS: getAlarmTypeImgUrl('24s'),
+  },
+  {
+    id: AlarmTypeIds.KLJC,
+    name: '客流监测',
+    imgUrl: getAlarmTypeImgUrl('25'),
+    imgUrlS: getAlarmTypeImgUrl('25s'),
   },
 ]
