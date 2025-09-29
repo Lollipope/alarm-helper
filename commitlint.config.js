@@ -22,11 +22,5 @@ export default {
     ],
     'subject-case': [0], // 允许任意大小写
   },
-  ignores: [
-    (commit) => {
-      console.log('忽略的提交信息:', commit)
-      return commit.startsWith('wip:') // 忽略以 wip: 开头的提交
-    },
-  ],
   defaultIgnores: false,
 }
