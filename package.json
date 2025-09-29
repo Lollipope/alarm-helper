@@ -1,6 +1,6 @@
 {
   "name": "@lollipope/alarm-helper",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -36,7 +36,6 @@
     "@vueuse/core": "^10.7.1",
     "axios": "^1.6.5",
     "commitizen": "^4.3.1",
-    "conventional-changelog-cli": "^5.0.0",
     "cz-customizable": "^7.5.0",
     "dayjs": "^1.11.11",
     "element-plus": "2.8.0",
