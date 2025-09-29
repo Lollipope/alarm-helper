@@ -28,5 +28,5 @@ export default {
       return commit.startsWith('wip:') // 忽略以 wip: 开头的提交
     },
   ],
-  defaultIgnores: true,
+  defaultIgnores: false,
 }
