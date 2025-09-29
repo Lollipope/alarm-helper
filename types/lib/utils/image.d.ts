@@ -32,5 +32,6 @@ export declare const AlarmTypeIds: {
     DLWD: number;
     ZXCZ: number;
     JGWGJ: number;
+    KLJC: number;
 };
 export declare const AlarmTypeList: Array<MenuItem>;
