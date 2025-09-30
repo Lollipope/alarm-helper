@@ -16,7 +16,9 @@
     "coverage": "vitest run --coverage",
     "commit": "node ./node_modules/cz-customizable/standalone.js",
     "prepare": "husky install",
-    "changelog": "conventional-changelog --config .changelog.config.js -i CHANGELOG.md -s -r 0  && git commit -m \"chore(release): update changelog\" --no-verify"
+    "changelog:gen": "conventional-changelog --config .changelog.config.js -i CHANGELOG.md -s -r 0 ",
+    "changelog:commit": "git add . && git commit -m \"chore(release): update changelog\" --no-verify",
+    "changelog": "pnpm run changelog:gen && pnpm run changelog:commit"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
