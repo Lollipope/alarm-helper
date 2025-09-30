@@ -15,7 +15,8 @@
     "test:unit": "vitest",
     "coverage": "vitest run --coverage",
     "commit": "node ./node_modules/cz-customizable/standalone.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "changelog": "conventional-changelog --config .changelog.config.js -i CHANGELOG.md -s -r 0  && git commit -m \"chore(release): update changelog\" --no-verify"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -36,7 +37,7 @@
     "@vueuse/core": "^10.7.1",
     "axios": "^1.6.5",
     "commitizen": "^4.3.1",
-    "conventional-changelog-angular": "^8.0.0",
+    "conventional-changelog": "^7.1.1",
     "cz-customizable": "^7.5.0",
     "dayjs": "^1.11.11",
     "element-plus": "2.8.0",
