@@ -1,5 +1,6 @@
 ## <small>0.2.22 (2025-09-30)</small>
 
+* fix: cicd commit ([218773e0a465d60ecec071004dd41546b55c2f1a](https://github.com/Lollipope/alarm-helper/commit/218773e0a465d60ecec071004dd41546b55c2f1a))
 * refactor: 添加提交流程约束 ([c4a58ae062d4bdbc543cec38f595d357a7bbfb9a](https://github.com/Lollipope/alarm-helper/commit/c4a58ae062d4bdbc543cec38f595d357a7bbfb9a))
 * refactor: 添加eslint校验 ([714604d2db211a8a17b28c81e73ab6b76260bafc](https://github.com/Lollipope/alarm-helper/commit/714604d2db211a8a17b28c81e73ab6b76260bafc))
 * refactor: 重命名noImg组件 ([3995e442de4134b162c5fbf5e0a46eec72d48742](https://github.com/Lollipope/alarm-helper/commit/3995e442de4134b162c5fbf5e0a46eec72d48742))

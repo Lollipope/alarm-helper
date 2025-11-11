@@ -16,3 +16,4 @@ export declare function updateAlarmConfigMsgKindSort(params: SortAlarmBigType): 
 export declare function getUserConfigList(): Promise<ResponseResult<Array<AlarmConfigMsgUser>>>;
 export declare function getStreamUrl(params: StreamPlayApiParams): Promise<any>;
 export declare function stopDevicePlay(params: StreamStopApiParams): Promise<any>;
+export declare const alarmTypeButtonConfig: (alarmId: string | number) => Promise<unknown>;

@@ -15,7 +15,15 @@ export function getAlarmTypeImgUrl(name: string) {
   return new URL(`../assets/images/alarm-type/alarm-type${name}.png`, import.meta.url).href
 }
 export function getAlarmSmallTypeImgUrl(name: string) {
-  return new URL(`../assets/images/alarm-msg/icon${name}.png`, import.meta.url).href
+  const alarmId = parseToNumber(name)
+  const iconNum = alarmId ? (alarmId < 157 ? name : 'default') : 'default' // 157以上的没有图片数据,使用默认图片
+  return new URL(`../assets/images/alarm-msg/icon${iconNum}.png`, import.meta.url).href
+}
+function parseToNumber(str: string) {
+  // 尝试将字符串转换为数字
+  const num = Number(str)
+  // 如果转换后的值是 NaN，则表示字符串不是有效数字
+  return isNaN(num) ? null : num
 }
 
 // 告警大类ID
@@ -46,6 +54,8 @@ export const AlarmTypeIds = {
   ZXCZ: 23, //"主线称重告警",
   JGWGJ: 24, //"结构物监测告警",
   KLJC: 25, //"客流监测",
+  HJSSJC: 26, //"环境设施检测",
+  HJJC: 27, //"环境监测",
 }
 
 export const AlarmTypeList: Array<MenuItem> = [
@@ -206,5 +216,18 @@ export const AlarmTypeList: Array<MenuItem> = [
     name: '客流监测',
     imgUrl: getAlarmTypeImgUrl('25'),
     imgUrlS: getAlarmTypeImgUrl('25s'),
+  },
+
+  {
+    id: AlarmTypeIds.HJSSJC,
+    name: '环境设施检测',
+    imgUrl: getAlarmTypeImgUrl('26'),
+    imgUrlS: getAlarmTypeImgUrl('26s'),
+  },
+  {
+    id: AlarmTypeIds.HJJC,
+    name: '环境监测',
+    imgUrl: getAlarmTypeImgUrl('27'),
+    imgUrlS: getAlarmTypeImgUrl('27s'),
   },
 ]

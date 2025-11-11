@@ -10,3 +10,5 @@ export * from './alarm-confirm';
 export * from './alarm-ws';
 export * from './stream-box';
 export * from './flv-box';
+export * from './msg-dialog';
+export * from './linked-control';

@@ -12,6 +12,7 @@ import AlarmHelperConfirm from './comp/alarm-confirm'
 import AlarmHelperWS from './comp/alarm-ws'
 import AlarmHelperFlvBox from './comp/flv-box'
 import AlarmHelperStreamBox from './comp/stream-box'
+import AlarmHelperMsgDialog from './comp/msg-dialog'
 export default [
   AlarmHelper,
   AlarmHelperClose,
@@ -27,6 +28,7 @@ export default [
   AlarmHelperSwiperBox,
   AlarmHelperFlvBox,
   AlarmHelperStreamBox,
+  AlarmHelperMsgDialog,
 ] as Plugin[]
 
 // 建议组件统一以 AlarmHelperXXX命名

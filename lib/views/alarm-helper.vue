@@ -150,7 +150,6 @@ async function onReceiveMessage(message: AlarmWSMessage) {
         isRead: false,
         iconUrl: getAlarmSmallTypeImgUrl(String(data.alarmId).padStart(3, '0')),
       })
-      console.log('newOne1122233', newOne)
       alarmRobotRef?.alarmListRef?.insertMsgList(newOne)
     }
   }

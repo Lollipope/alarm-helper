@@ -123,3 +123,9 @@ export function stopDevicePlay(params: StreamStopApiParams) {
     },
   }).then((response) => response.json())
 }
+
+export const alarmTypeButtonConfig = (alarmId: string | number) => {
+  return request.get("/alarm/alarmTypeButtonConfig/getByAlarmId", {
+    alarmId
+  })
+}

@@ -7,7 +7,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: ObjectConstructor;
         default: () => {};
     };
-}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+    sendMsg: (...args: any[]) => void;
+    linkedControlFn: (...args: any[]) => void;
+}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     alarmSelect: {
         type: ObjectConstructor;
         default: () => {};
@@ -16,7 +19,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: ObjectConstructor;
         default: () => {};
     };
-}>> & Readonly<{}>, {
+}>> & Readonly<{
+    onSendMsg?: ((...args: any[]) => any) | undefined;
+    onLinkedControlFn?: ((...args: any[]) => any) | undefined;
+}>, {
     alarmSelect: Record<string, any>;
     systemConf: Record<string, any>;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;

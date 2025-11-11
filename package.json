@@ -1,6 +1,6 @@
 {
   "name": "@lollipope/alarm-helper",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,6 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write lib/",
-    "prepublishOnly": "node build/pre.mjs",
-    "postpublish": "node build/post.mjs",
     "test:unit": "vitest",
     "coverage": "vitest run --coverage",
     "commit": "node ./node_modules/cz-customizable/standalone.js",

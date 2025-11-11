@@ -7,7 +7,7 @@
  * @Description: 通用相关API
  */
 import * as request from './request'
-import type { DictOptions, ResponseResult, SectionItem } from './types'
+import type { DictOptions, ResponseResult, SectionItem, sendParams, HistoryPageParams } from './types'
 // 根据key（parentId）查询字典
 export function getDictionaryListByKey(key: string): Promise<DictOptions> {
   return request.get('/alarm/alarmDictionary/getDictionaryListByKey', { key })
@@ -42,4 +42,20 @@ export function updateRemark(
 // 查询管理区间
 export function getSectionList(): Promise<ResponseResult<SectionItem[]>> {
   return request.get(`/alarm/alarmMg/getSectionList`)
+}
+
+// export const getAllUserInfoList = () => {
+//   return request.get(`/alarm/smsUserInfo/getAllUserInfoList`)
+// }
+
+export function getAllUserInfoList() {
+  return request.get(`/alarm/smsUserInfo/getAllUserInfoList`)
+}
+
+export function sendSms(params : sendParams[]) {
+  return request.postJson(`/alarm/smsSend/sendSms`,params)
+}
+
+export function getSmsSendHistoryPage(params : HistoryPageParams) {
+  return request.postJson(`/alarm/smsSend/getSmsSendHistoryPage`,params)
 }

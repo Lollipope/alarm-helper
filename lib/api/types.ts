@@ -199,3 +199,18 @@ export interface ConfigMsgKindListApiParams {
   endTime: string
   handleStatus: string
 }
+
+
+export interface sendParams {
+  receiveName: string,
+  receivePhone: string,
+  content: string,
+  linkInfo: string,
+  linkSys: string
+}
+
+export interface HistoryPageParams {
+  page: number,
+  size: number,
+  msgId: string
+}
