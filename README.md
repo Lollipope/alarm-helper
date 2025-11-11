@@ -68,7 +68,7 @@ pnpm i @lollipope/alarm-helper
 | AlarmStreamDomain | 流媒体取流来源 | String | 否 | private |
 | AlarmStreamRate | 流媒体码流 | String | 否 | slaver |
 | AlarmStreamMode`(v0.2.13+)` | 流媒体码流取流方式, `1:视频一体机 0:流媒体` | String | 否 | - |
-| LinkedControlUrl | 联动管控地址配置 | String | 否 | - |
+| LinkedControlUrl`(v0.2.23+)` | 联动管控地址配置 | String | 否 | - |
 
 #### 3.组件引入:
 
