@@ -18,6 +18,7 @@
     "changelog:gen": "conventional-changelog --config changelog.config.js -i CHANGELOG.md -s -r 0 ",
     "changelog:commit": "git add . && git commit -m \"chore(release): update changelog\" --no-verify",
     "changelog": "pnpm run changelog:gen && pnpm run changelog:commit",
+    "prepublishOnly": "node build/pre.mjs",
     "postpublish": "node build/post.mjs"
   },
   "devDependencies": {
