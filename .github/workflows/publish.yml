@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'v*' # 以v开头的tag触发，如v1.0.0
-  # workflow_dispatch:
+  workflow_dispatch:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
