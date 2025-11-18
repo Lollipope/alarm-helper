@@ -1,7 +1,8 @@
 {
   "name": "@lollipope/alarm-helper",
-  "version": "0.2.23",
+  "version": "0.2.30",
   "type": "module",
+  "private": false,
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -16,7 +17,8 @@
     "prepare": "husky install",
     "changelog:gen": "conventional-changelog --config changelog.config.js -i CHANGELOG.md -s -r 0 ",
     "changelog:commit": "git add . && git commit -m \"chore(release): update changelog\" --no-verify",
-    "changelog": "pnpm run changelog:gen && pnpm run changelog:commit"
+    "changelog": "pnpm run changelog:gen && pnpm run changelog:commit",
+    "postpublish": "node build/post.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -73,14 +75,14 @@
     "vue": "^3.5.13",
     "vue-router": "^4.2.5"
   },
-  "main": "lib/index.ts",
-  "module": "lib/index.ts",
+  "main": "dist/alarm-helper.umd.cjs",
+  "module": "dist/alarm-helper.js",
   "types": "types/lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./types/lib/index.d.ts",
-      "import": "./lib/index.ts",
-      "require": "./lib/index.ts"
+      "types": "./types/alarm-helper.d.ts",
+      "import": "./dist/alarm-helper.js",
+      "require": "./dist/alarm-helper.umd.cjs"
     },
     "./*": "./*"
   },
