@@ -35,7 +35,7 @@
                 </div>
                 <div class="detailsList-item">
                     <div class="detailsList-item-label">告警内容：</div>
-                    <div class="detailsList-item-cnt">
+                    <div class="detailsList-item-cnt" :title="props.alarmSelect.msg">
                         {{ props.alarmSelect.msg }}</div>
                 </div>
             </div>

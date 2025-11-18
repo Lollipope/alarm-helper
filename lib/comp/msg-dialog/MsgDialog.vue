@@ -117,6 +117,8 @@ function switchFn(val: number) {
     .content {
         width: 100%;
         height: 430px;
+        overflow-y: auto;
+        background: #EFF4FF;
     }
 
 }

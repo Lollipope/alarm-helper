@@ -44,7 +44,7 @@ const browseShow = ref(false)
 function init() {
     const params = {
         page: 1,
-        size: 100,
+        size: 1000,
         msgId: props.alarmSelect.msgId
     }
 

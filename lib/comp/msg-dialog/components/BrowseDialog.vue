@@ -33,7 +33,7 @@
                 </div>
                 <div class="detailsList-item">
                     <div class="detailsList-item-label">告警内容：</div>
-                    <div class="detailsList-item-cnt">
+                    <div class="detailsList-item-cnt" :title="alarmSelect.msg">
                         {{ alarmSelect.msg }}</div>
                 </div>
             </div>
@@ -87,6 +87,8 @@ function directionNameFilter(val: string) {
 .browse-body {
     .text {
         padding: 10px 30px;
+        max-height: 200px;
+        overflow-y: auto;
     }
 
     .detailsTitle {
