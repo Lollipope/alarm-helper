@@ -76,14 +76,14 @@
     "vue": "^3.5.13",
     "vue-router": "^4.2.5"
   },
-  "main": "dist/alarm-helper.umd.cjs",
-  "module": "dist/alarm-helper.js",
+  "main": "lib/index.ts",
+  "module": "lib/index.ts",
   "types": "types/lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./types/alarm-helper.d.ts",
-      "import": "./dist/alarm-helper.js",
-      "require": "./dist/alarm-helper.umd.cjs"
+      "types": "./types/lib/index.d.ts",
+      "import": "./lib/index.ts",
+      "require": "./lib/index.ts"
     },
     "./*": "./*"
   },
