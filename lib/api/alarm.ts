@@ -41,6 +41,16 @@ export function getAlarmConfigListByKindId(
   })
 }
 
+// 根据大类查询小类信息
+export function getAlarmConfigListByKindIdWithEnable(
+  alarmKindId: number | string,
+): Promise<ResponseResult<Array<AlarmSmallType>>> {
+  return request.get('/alarm/alarmConfigMsg/getAlarmConfigListByKindId', {
+    alarmKindId,
+    enable: 1,
+  })
+}
+
 // 查询系统地址
 export function getUserConfigByAlarmId(
   alarmId: number | string,
@@ -125,7 +135,7 @@ export function stopDevicePlay(params: StreamStopApiParams) {
 }
 
 export const alarmTypeButtonConfig = (alarmId: string | number) => {
-  return request.get("/alarm/alarmTypeButtonConfig/getByAlarmId", {
-    alarmId
+  return request.get('/alarm/alarmTypeButtonConfig/getByAlarmId', {
+    alarmId,
   })
 }

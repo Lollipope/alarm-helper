@@ -42,8 +42,9 @@ export function mergeWithImage(arr1: ObjectWithId[], arr2: ObjectWithId[]) {
   // 将arr2中的元素合并到Map中
   arr2.forEach((item) => {
     if (mergedMap.has(item.id)) {
+      const cacheItem = mergedMap.get(item.id)
       // 如果id已经存在于Map中，合并对象
-      mergedMap.set(item.id, { ...mergedMap.get(item.id), ...item })
+      mergedMap.set(item.id, { ...cacheItem, ...item, name: cacheItem.name })
     } else {
       // 如果id不存在，直接添加
       mergedMap.set(item.id, { ...item })

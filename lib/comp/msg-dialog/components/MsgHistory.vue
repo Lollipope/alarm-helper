@@ -1,6 +1,6 @@
 <template>
     <div class="msgHistoryCon">
-        <el-table :data="tableData" style="width: 100%;height: 100%;">
+        <el-table :data="tableData" style="width: 100%;height: 100%;" empty-text="暂无历史记录">
             <el-table-column align="center" prop="sendTime" label="发送时间" />
             <el-table-column align="center" prop="sendName" label="发送人" />
             <el-table-column align="center" prop="test" label="发送内容">

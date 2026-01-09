@@ -78,11 +78,11 @@ defineExpose({
     &::before {
       content: '';
       position: absolute;
-      top: -104px;
-      right: 62px;
-      width: 239px;
-      height: 232px;
       pointer-events: none;
+      right: 62px;
+      top: -78px;
+      width: 200px;
+      height: 170px;
       background: url('../../assets/images/alarm-robot2.png') 0 0 / 100% 100% no-repeat;
     }
 
