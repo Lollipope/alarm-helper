@@ -139,3 +139,7 @@ export const alarmTypeButtonConfig = (alarmId: string | number) => {
     alarmId,
   })
 }
+//  查询参数列表
+export const getAlarmConfigMsgUserPage = () => {
+  return request.get('/alarm/alarmParameter/getAlarmParameterList')
+}

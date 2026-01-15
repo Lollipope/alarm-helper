@@ -37,8 +37,12 @@ function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { deviceId: strin
     return
   }
   const infoObj = alarmSelect.infoObj
-  const pids = (infoObj?.deviceId || '').split(',')
-  liveList.value = chunkArray(pids, 2)
+  try {
+    const pids = (infoObj?.deviceId || '').split(',')
+    liveList.value = chunkArray(pids, 2)
+  } catch (e) {
+    console.error('解析deviceId字段异常', e)
+  }
 }
 </script>
 

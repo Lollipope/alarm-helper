@@ -161,7 +161,8 @@ export interface AlarmUserConf {
 
 // 未读消息类型
 export interface UnreadBean {
-  isImportant: boolean
+  isMajor: boolean //是否重要
+  isLevelTop: boolean //是否一级
   num: number | null
 }
 
@@ -200,17 +201,16 @@ export interface ConfigMsgKindListApiParams {
   handleStatus: string
 }
 
-
 export interface sendParams {
-  receiveName: string,
-  receivePhone: string,
-  content: string,
-  linkInfo: string,
+  receiveName: string
+  receivePhone: string
+  content: string
+  linkInfo: string
   linkSys: string
 }
 
 export interface HistoryPageParams {
-  page: number,
-  size: number,
+  page: number
+  size: number
   msgId: string
 }

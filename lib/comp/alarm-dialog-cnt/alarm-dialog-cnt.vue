@@ -81,8 +81,8 @@ defineExpose({
       pointer-events: none;
       right: 62px;
       top: -78px;
-      width: 200px;
-      height: 170px;
+      width: 175px;
+      height: 175px;
       background: url('../../assets/images/alarm-robot2.png') 0 0 / 100% 100% no-repeat;
     }
 

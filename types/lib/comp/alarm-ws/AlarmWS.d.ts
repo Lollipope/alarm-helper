@@ -24,6 +24,8 @@ export interface AlarmWSData {
     isNew: boolean;
     isRead: boolean;
     iconUrl: string;
+    alarmMajor: number;
+    alarmLevel: number;
 }
 export interface AlarmWSMessage {
     cnt: AlarmWSData;

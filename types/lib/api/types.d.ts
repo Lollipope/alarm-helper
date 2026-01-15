@@ -143,7 +143,8 @@ export interface AlarmUserConf {
     paramList: SysParam[];
 }
 export interface UnreadBean {
-    isImportant: boolean;
+    isMajor: boolean;
+    isLevelTop: boolean;
     num: number | null;
 }
 export type SortAlarmBigType = Omit<AlarmBigType, 'attachId' | 'isRead'>;

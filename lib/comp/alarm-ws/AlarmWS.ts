@@ -26,6 +26,8 @@ export interface AlarmWSData {
   isNew: boolean // 是否是新消息
   isRead: boolean // 是否已读
   iconUrl: string // 图标URL
+  alarmMajor: number
+  alarmLevel: number
 }
 export interface AlarmWSMessage {
   cnt: AlarmWSData //收到的消息

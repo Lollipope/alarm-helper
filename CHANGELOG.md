@@ -1,3 +1,9 @@
+## <small>0.2.31-beta (2026-01-15)</small>
+
+* style: 调整弹窗机器人样式 ([49c1250abcf6bc188c77d9700c84594af8dd4570](https://github.com/Lollipope/alarm-helper/commit/49c1250abcf6bc188c77d9700c84594af8dd4570))
+
+
+
 ## <small>0.2.30 (2025-11-18)</small>
 
 * fix: 脚本修改X2 ([8b7ca6cc74e5f2e58dcfb0cfa04bbac5ae883524](https://github.com/Lollipope/alarm-helper/commit/8b7ca6cc74e5f2e58dcfb0cfa04bbac5ae883524))

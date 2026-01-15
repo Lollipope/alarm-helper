@@ -1,15 +1,14 @@
 <template>
-  <div v-if="isNew" class="alarm" @click="onClick" :class="{ isHide: isAlarmDialogVisible }">
+  <div v-if="isNew" class="alarm">
     <!-- 告警弹窗 -->
     <AlarmDialog v-model:visible="isAlarmDialogVisible" ref="alarmDialogRef" />
-    <!-- 告警数 -->
-    <AlarmCount :unRead="unRead" :isAlarmDialogVisible="isAlarmDialogVisible" />
     <!-- 告警socket -->
     <AlarmHelperWS
       :tokenId="props.tokenId"
       :userInfo="props.userInfo"
       @onMessage="onReceiveMessage"
     />
+    <AlarmHelperAnimator :unRead="unRead" :isHide="isAlarmDialogVisible" @click="onClick" />
   </div>
 </template>
 
@@ -17,8 +16,8 @@
 import { AlarmTypeIds, getAlarmSmallTypeImgUrl } from '@ah/utils'
 import { AlarmSpeech as speech } from '@ah/audio'
 import { type UnreadBean, type AlarmApiError, AlarmRobotApi } from '@ah/api'
-import { AlarmCount, AlarmDialog } from './components/index'
-import { AlarmHelperWS } from '@ah/comp'
+import { AlarmDialog } from './components/index'
+import { AlarmHelperWS, AlarmHelperAnimator } from '@ah/comp'
 import { useApiError, useRefresh } from './useCustomHook'
 import type { AlarmHelperProps, AlarmHelperEmits } from './alarm-helper'
 import type { AlarmWSMessage } from '@ah/comp/alarm-ws/AlarmWS'
@@ -51,7 +50,7 @@ const emits = defineEmits<AlarmHelperEmits>()
 
 const isAlarmDialogVisible = ref<boolean>(false)
 
-const onClick = ({}) => {
+const onClick = () => {
   isAlarmDialogVisible.value = true
 }
 watch(isAlarmDialogVisible, (val) => {
@@ -61,8 +60,9 @@ watch(isAlarmDialogVisible, (val) => {
 })
 
 const unRead = ref<UnreadBean>({
-  isImportant: false,
-  num: 0,
+  isMajor: false, // 重要告警
+  isLevelTop: false, //一级告警
+  num: -1,
 })
 
 const alarmDialogRef = shallowRef<HTMLElement & { alarmRobotRef: AlarmDialogCntInstance }>()
@@ -72,7 +72,8 @@ onBeforeUnmount(() => {})
 
 function initCount() {
   AlarmRobotApi.getUnReadAlarmMsgInfo().then((res) => {
-    unRead.value = res.data
+    const resData = res.data
+    unRead.value.num = resData.num
   })
 }
 
@@ -100,7 +101,9 @@ async function onReceiveMessage(message: AlarmWSMessage) {
     console.warn('未订阅该告警类型', data.alarmId)
     return
   }
-
+  // 重要或一级告警消息
+  unRead.value.isLevelTop = data.alarmLevel == 1
+  unRead.value.isMajor = data.alarmMajor == 1
   const isDialogShow = isAlarmDialogVisible.value
   // 此处需要弹窗
   if (isPop) {
@@ -161,19 +164,4 @@ useApiError((data: unknown) => {
 })
 </script>
 
-<style scoped lang="scss">
-.alarm {
-  cursor: pointer;
-  user-select: none;
-  position: fixed;
-  right: 6px;
-  bottom: 2px;
-  width: 68px;
-  height: 98px;
-  background: url(../assets/images/alarm-robot.png) 0 0 / 100% 100% no-repeat;
-  z-index: 2000;
-  &.isHide {
-    background: none;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
