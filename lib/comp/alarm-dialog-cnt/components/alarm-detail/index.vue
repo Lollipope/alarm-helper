@@ -2,7 +2,12 @@
   <div class="alarm-detail">
     <ActionBar @on-his="onHis" @on-set="onSet" @on-read="onRead" />
     <div class="detail" v-if="alarmSelect && alarmSelect.msgId && isNew">
-      <DetailCommon @sendMsg="sendMsgFn" @linkedControlFn="linkedControlFn" :alarmSelect="props.alarmSelect" :systemConf="PermConf.system" />
+      <DetailCommon
+        @sendMsg="sendMsgFn"
+        @linkedControlFn="linkedControlFn"
+        :alarmSelect="props.alarmSelect"
+        :systemConf="PermConf.system"
+      />
       <!-- 备注 -->
       <Remark :alarmSelect="props.alarmSelect" />
       <div class="other-box">
@@ -36,8 +41,16 @@
     </div>
     <!-- 告警弹窗 -->
     <AlarmConfirm v-model="dialogVisible" @onYes="onConfirmed" @onNo="dialogVisible = false" />
-    <AlarmHelperMsgDialog :alarmSelect="alarmDetialInfo" v-model:visible="msgDialogShow" v-if="msgDialogShow"></AlarmHelperMsgDialog>
-    <AlarmHelperLinkedControl :alarmSelect="alarmDetialInfo" v-model:visible="linkedControlShow" v-if="linkedControlShow"></AlarmHelperLinkedControl>
+    <AlarmHelperMsgDialog
+      :alarmSelect="alarmDetialInfo"
+      v-model:visible="msgDialogShow"
+      v-if="msgDialogShow"
+    ></AlarmHelperMsgDialog>
+    <AlarmHelperLinkedControl
+      :alarmSelect="alarmDetialInfo"
+      v-model:visible="linkedControlShow"
+      v-if="linkedControlShow"
+    ></AlarmHelperLinkedControl>
   </div>
 </template>
 
@@ -58,7 +71,7 @@ import { ElMessage } from 'element-plus'
 // import { getLocalStorageToken } from '@ah/api/auth'
 import { getTokenId } from '@ah/utils/tokenId'
 import NoImg from './NoImg.vue'
-import { AlarmHelperMsgDialog, AlarmHelperLinkedControl} from "@lollipope/alarm-helper"
+import { AlarmHelperMsgDialog, AlarmHelperLinkedControl } from '@ah/comp'
 const emits = defineEmits(['onRead'])
 const props = defineProps({
   alarmSelect: {
@@ -191,7 +204,7 @@ function sendMsgFn() {
 }
 
 const linkedControlShow = ref(false)
-function linkedControlFn()  {
+function linkedControlFn() {
   nextTick(() => {
     linkedControlShow.value = true
   })

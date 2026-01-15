@@ -1,8 +1,8 @@
 {
   "name": "@lollipope/alarm-helper",
-  "version": "0.2.31-beta",
+  "version": "0.2.32",
   "type": "module",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",

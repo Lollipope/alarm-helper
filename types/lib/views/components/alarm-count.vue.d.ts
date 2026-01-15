@@ -23,7 +23,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         };
     };
 }>> & Readonly<{}>, {
-    isAlarmDialogVisible: boolean;
     unRead: Record<string, any>;
+    isAlarmDialogVisible: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;
