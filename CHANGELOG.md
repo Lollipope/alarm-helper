@@ -1,5 +1,12 @@
-## <small>0.2.31-beta (2026-01-15)</small>
+## <small>0.2.33 (2026-01-21)</small>
 
+* feat: 惠河需求(无人机对接/过滤组件调整) ([9b59b024dc16a142a5d1eafc9bedf49a27298312](https://github.com/Lollipope/alarm-helper/commit/9b59b024dc16a142a5d1eafc9bedf49a27298312))
+
+
+
+## <small>0.2.32 (2026-01-15)</small>
+
+* build: update pnpm-lock.yaml ([ed59d4192a3ececfd46f9efbc0d3d84375d6a36c](https://github.com/Lollipope/alarm-helper/commit/ed59d4192a3ececfd46f9efbc0d3d84375d6a36c))
 * style: 调整弹窗机器人样式 ([49c1250abcf6bc188c77d9700c84594af8dd4570](https://github.com/Lollipope/alarm-helper/commit/49c1250abcf6bc188c77d9700c84594af8dd4570))
 
 
