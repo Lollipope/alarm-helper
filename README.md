@@ -87,33 +87,34 @@ pnpm i @lollipope/alarm-helper
 | AlarmStreamRate | 流媒体码流 | String | 否 | slaver |
 | AlarmStreamMode`(v0.2.13+)` | 流媒体码流取流方式, `1:视频一体机 0:流媒体` | String | 否 | - |
 | LinkedControlUrl`(v0.2.23+)` | 联动管控地址配置 | String | 否 | - |
-| AlarmUAV`(v0.2.33+)` | 无人机配置 | UAVConf | 否 | - |
+| AlarmUAV`(v0.2.33+)` | 无人机配置 | [UAVConf](#uavconf) | 否 | - |
 
 
 相关参数说明
-##### UAVConf
+<h4 id='uavconf'></h4>
+
 | UAVConf | 说明 | 类型 | <div style='width:100px'>是否必要</div> | <div style='width:80px'>默认值</div> |
 | :----|:----| :----: |:----: |:----: |
 | sectionId | 收费路段Id | string | 是 | - |
-| nationalRoadNo | 国家高速 | {[key: string]: NationalRoad} | 是 | - |
+| nationalRoadNo | 国家高速 | {[key: string]: [NationalRoad](#nation)} | 是 | - |
 | direction | 方向 | number | 是 | 1|
-nationalRoadNo示例:
-```
-{
-  // 长深高速 G25
-  G25:{
-    start:'K3514+432',
-    end:'K3595+506'
-  },
-}
-```
 
-##### NationalRoad
+
+<h4 id='nation'></h4>
+
 | NationalRoad | 说明 | 类型 | <div style='width:100px'>是否必要</div> | <div style='width:80px'>默认值</div> |
 | :----|:----| :----: |:----: |:----: |
 |start | 开始桩号 | string | 是 | - |
 | end| 结束桩号 | string | 是 | - |
 
+示例:
+```js
+//  NationalRoad 示例
+{
+  start:'K3514+432',
+  end:'K3595+506'
+}
+```
 
 #### 3.组件引入:
 
