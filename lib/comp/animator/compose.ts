@@ -1,7 +1,6 @@
 import { ref, onBeforeUnmount } from 'vue'
-import type { Ref } from 'vue'
-import { AlarmRobotApi } from '@ah/api'
-import type { AnimatorProps } from './Animator'
+import type { Ref, ModelRef } from 'vue'
+import { AlarmRobotApi, type UnreadBean } from '@ah/api'
 export type MoveCallback = (
   e: PointerEvent,
   dx: number,
@@ -85,10 +84,10 @@ export function createDrag(
   }
 }
 export const animateDuration = 10000
-export function useMsgNew(props: AnimatorProps, isNew: Ref<boolean>) {
+export function useMsgNew(unReadModel: ModelRef<UnreadBean>, isNew: Ref<boolean>) {
   let isNewTimerId: any
   watch(
-    () => Number(props.unRead.num),
+    () => Number(unReadModel.value.num),
     (newVal, oldVal) => oldVal != -1 && showMsgNew(newVal),
   )
   function showMsgNew(count: number) {
@@ -137,14 +136,14 @@ export function useMsgIpmt(isIpmt: Ref<boolean>, isImportant: ComputedRef<boolea
     clearIpmt,
   }
 }
-export function useMsg(props: AnimatorProps) {
+export function useMsg(unReadModel: ModelRef<UnreadBean>) {
   const isNew = ref(false)
   const isIpmt = ref(false)
   const isImportant = computed(() => {
-    return props.unRead.isLevelTop || props.unRead.isMajor
+    return unReadModel.value.isLevelTop || unReadModel.value.isMajor
   })
 
-  const { clearNew } = useMsgNew(props, isNew)
+  const { clearNew } = useMsgNew(unReadModel, isNew)
   const { clearIpmt } = useMsgIpmt(isIpmt, isImportant)
   watch(
     () => isIpmt.value,
@@ -186,7 +185,7 @@ export function useMessageThreshold() {
   }
 }
 
-export function useForceMessage(props: AnimatorProps) {
+export function useForceMessage(unReadModel: ModelRef<UnreadBean>) {
   const isForce = ref(false)
   const { threshold } = useMessageThreshold()
   let forceTimeout: NodeJS.Timeout
@@ -202,7 +201,7 @@ export function useForceMessage(props: AnimatorProps) {
     forceTimeout && clearInterval(forceTimeout)
   }
   watch(
-    () => Number(props.unRead?.num) >= threshold.value,
+    () => Number(unReadModel.value?.num) >= threshold.value,
     (val) => {
       if (!val) {
         stopForce()

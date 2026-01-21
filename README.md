@@ -54,6 +54,24 @@ pnpm i @lollipope/alarm-helper
     AlarmStreamRate: `slaver`, //获取主码流（master）或者副码流（slaver）
     AlarmStreamMode: '1', //  1:视频一体机 0:流媒体
     LinkedControlUrl: 'http:128.xxx/device-chain', //联动管控地址配置
+    AlarmUAV:{  // 无人机临时配置
+      // 收费路段Id
+      sectionId:'G0004440040' , //惠河路段 G0025440060
+       // 国家高速
+      nationalRoadNo:{
+        // 长深高速 G25
+        G25:{
+          start:'K3514+432',
+          end:'K3595+506'
+        },
+        // 济广高速 G35
+        G35:{
+          start:'K3480+100',
+          end:'K3594+077'
+        }
+      },
+      direction:1 // 上行
+    }
   }
 })(window)
 ```
@@ -69,6 +87,33 @@ pnpm i @lollipope/alarm-helper
 | AlarmStreamRate | 流媒体码流 | String | 否 | slaver |
 | AlarmStreamMode`(v0.2.13+)` | 流媒体码流取流方式, `1:视频一体机 0:流媒体` | String | 否 | - |
 | LinkedControlUrl`(v0.2.23+)` | 联动管控地址配置 | String | 否 | - |
+| AlarmUAV`(v0.2.33+)` | 无人机配置 | UAVConf | 否 | - |
+
+
+相关参数说明
+##### UAVConf
+| UAVConf | 说明 | 类型 | <div style='width:100px'>是否必要</div> | <div style='width:80px'>默认值</div> |
+| :----|:----| :----: |:----: |:----: |
+| sectionId | 收费路段Id | string | 是 | - |
+| nationalRoadNo | 国家高速 | {[key: string]: NationalRoad} | 是 | - |
+| direction | 方向 | number | 是 | 1|
+nationalRoadNo示例:
+```
+{
+  // 长深高速 G25
+  G25:{
+    start:'K3514+432',
+    end:'K3595+506'
+  },
+}
+```
+
+##### NationalRoad
+| NationalRoad | 说明 | 类型 | <div style='width:100px'>是否必要</div> | <div style='width:80px'>默认值</div> |
+| :----|:----| :----: |:----: |:----: |
+|start | 开始桩号 | string | 是 | - |
+| end| 结束桩号 | string | 是 | - |
+
 
 #### 3.组件引入:
 

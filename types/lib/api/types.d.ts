@@ -22,6 +22,11 @@ export interface ResponseResult<T> {
     data: T;
     msg?: string;
 }
+export interface ResponseResultBaidu<T> {
+    status: number;
+    result: T;
+    message?: string;
+}
 export interface AlarmMsg {
     msgId: string;
     msg: string;
@@ -183,4 +188,7 @@ export interface HistoryPageParams {
     page: number;
     size: number;
     msgId: string;
+}
+export interface MileToLatlngApiResTypes {
+    [key: string]: any;
 }

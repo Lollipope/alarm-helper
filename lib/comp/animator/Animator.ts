@@ -1,9 +1,9 @@
-import { type UnreadBean, type AlarmApiError, AlarmRobotApi } from '@ah/api'
+// import { type UnreadBean, type AlarmApiError, AlarmRobotApi } from '@ah/api'
 import Animator from './Animator.vue'
 
 export interface AnimatorProps {
   isHide: boolean
-  unRead: UnreadBean
+  // unRead: UnreadBean
 }
 export type AnimatorEmits = {}
 

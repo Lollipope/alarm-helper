@@ -7,7 +7,15 @@
  * @Description: 通用相关API
  */
 import * as request from './request'
-import type { DictOptions, ResponseResult, SectionItem, sendParams, HistoryPageParams } from './types'
+import type {
+  DictOptions,
+  ResponseResult,
+  SectionItem,
+  sendParams,
+  HistoryPageParams,
+  MileToLatlngApiResTypes,
+  ResponseResultBaidu,
+} from './types'
 // 根据key（parentId）查询字典
 export function getDictionaryListByKey(key: string): Promise<DictOptions> {
   return request.get('/alarm/alarmDictionary/getDictionaryListByKey', { key })
@@ -52,10 +60,26 @@ export function getAllUserInfoList() {
   return request.get(`/alarm/smsUserInfo/getAllUserInfoList`)
 }
 
-export function sendSms(params : sendParams[]) {
-  return request.postJson(`/alarm/smsSend/sendSms`,params)
+export function sendSms(params: sendParams[]) {
+  return request.postJson(`/alarm/smsSend/sendSms`, params)
 }
 
-export function getSmsSendHistoryPage(params : HistoryPageParams) {
-  return request.postJson(`/alarm/smsSend/getSmsSendHistoryPage`,params)
+export function getSmsSendHistoryPage(params: HistoryPageParams) {
+  return request.postJson(`/alarm/smsSend/getSmsSendHistoryPage`, params)
+}
+
+// 查看可用机巢
+export function viewUavNest(params: any): Promise<ResponseResult<MileToLatlngApiResTypes>> {
+  return request.post(`/alarm/uav/viewUavNest`, params)
+}
+// 无人机嵌入页面和token
+export function getUavUrlByParams(params: any): Promise<ResponseResult<MileToLatlngApiResTypes>> {
+  return request.post(`/alarm/uav/getUavUrlByParams`, params)
+}
+
+// 根据桩号获取经纬度-百度
+export function transformLnglat(
+  params: any,
+): Promise<ResponseResultBaidu<MileToLatlngApiResTypes>> {
+  return request.get(`/alarm/baidu/mpToLnglat`, params)
 }

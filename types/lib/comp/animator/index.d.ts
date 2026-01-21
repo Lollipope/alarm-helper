@@ -1,9 +1,15 @@
-export declare const AlarmHelperAnimator: import('../../utils').SFCWithInstall<import('vue').DefineComponent<import('./Animator').AnimatorProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+export declare const AlarmHelperAnimator: import('../../utils').SFCWithInstall<import('vue').DefineComponent<{
+    unRead?: import('../..').UnreadBean;
+} & import('./Animator').AnimatorProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     click: (...args: any[]) => void;
     dragend: (...args: any[]) => void;
-}, string, import('vue').PublicProps, Readonly<import('./Animator').AnimatorProps> & Readonly<{
+    "update:unRead": (value: import('../..').UnreadBean) => void;
+}, string, import('vue').PublicProps, Readonly<{
+    unRead?: import('../..').UnreadBean;
+} & import('./Animator').AnimatorProps> & Readonly<{
     onClick?: ((...args: any[]) => any) | undefined;
     onDragend?: ((...args: any[]) => any) | undefined;
+    "onUpdate:unRead"?: ((value: import('../..').UnreadBean) => any) | undefined;
 }>, {
     isHide: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {

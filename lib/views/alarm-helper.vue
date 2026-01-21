@@ -8,7 +8,7 @@
       :userInfo="props.userInfo"
       @onMessage="onReceiveMessage"
     />
-    <AlarmHelperAnimator :unRead="unRead" :isHide="isAlarmDialogVisible" @click="onClick" />
+    <AlarmHelperAnimator v-model:unRead="unRead" :isHide="isAlarmDialogVisible" @click="onClick" />
   </div>
 </template>
 
@@ -102,8 +102,18 @@ async function onReceiveMessage(message: AlarmWSMessage) {
     return
   }
   // 重要或一级告警消息
-  unRead.value.isLevelTop = data.alarmLevel == 1
-  unRead.value.isMajor = data.alarmMajor == 1
+  // 重置
+  if (unRead.value.isLevelTop) {
+    unRead.value.isLevelTop = false
+  }
+  if (unRead.value.isMajor) {
+    unRead.value.isMajor = false
+  }
+  nextTick(() => {
+    unRead.value.isLevelTop = data.alarmLevel == 1
+    unRead.value.isMajor = data.alarmMajor == 1
+  })
+
   const isDialogShow = isAlarmDialogVisible.value
   // 此处需要弹窗
   if (isPop) {

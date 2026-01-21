@@ -29,8 +29,19 @@
           @click="linkedControlFn"
           >联动管控</span
         >
+        <span
+          v-if="uvaControlCheck.start == 1 && uvaControlCheck.pull == 0"
+          class="btn blue"
+          @click="dispatchUva"
+          >指派无人机</span
+        >
         <el-dropdown
-          v-if="leaveForCheck.pull == 1 || sendMsgCheck.pull == 1 || gangControlCheck.pull == 1"
+          v-if="
+            leaveForCheck.pull == 1 ||
+            sendMsgCheck.pull == 1 ||
+            gangControlCheck.pull == 1 ||
+            uvaControlCheck.pull == 1
+          "
         >
           <span class="el-dropdown-link">
             更多
@@ -49,6 +60,9 @@
               <el-dropdown-item v-if="gangControlCheck.pull == 1" @click="linkedControlFn"
                 >联动管控</el-dropdown-item
               >
+              <el-dropdown-item v-if="uvaControlCheck.pull == 1" @click="dispatchUva"
+                >指派无人机</el-dropdown-item
+              >
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -62,12 +76,15 @@
       <div class="source">报警来源: {{ alarmSelect.alarmSource || '暂无信息' }}</div>
     </div>
   </div>
+  <Uav :alarmSelect="alarmSelect" ref="uavRef" />
 </template>
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
 import { AlarmRobotApi } from '@ah/api'
 import { getGoSysParams } from '@ah/utils'
+import Uav from '../../../uav/uav.vue'
+
 const props = defineProps({
   alarmSelect: {
     type: Object,
@@ -136,6 +153,11 @@ const gangControlCheck = ref({
   start: 0,
   pull: 0,
 })
+//无人机按钮
+const uvaControlCheck = ref({
+  start: 0,
+  pull: 0,
+})
 
 onMounted(() => {
   buttonInit()
@@ -159,7 +181,10 @@ function linkedControlFn() {
   }
   emits('linkedControlFn')
 }
-
+const uavRef = shallowRef()
+function dispatchUva() {
+  uavRef.value?.init()
+}
 type dataRes = {
   code: number
   data: []
@@ -186,6 +211,9 @@ function buttonInit() {
         } else if (item.buttonType == 3) {
           gangControlCheck.value.start = item.isEnable
           gangControlCheck.value.pull = item.isDropdown
+        } else if (item.buttonType == 4) {
+          uvaControlCheck.value.start = item.isEnable
+          uvaControlCheck.value.pull = item.isDropdown
         }
       })
     }

@@ -9,7 +9,7 @@
       @click="onRootClick"
       @pointerdown.prevent="onPointerDown"
     >
-      <div class="num" v-if="isShowCount">{{ formatNumber(unRead.num) }}</div>
+      <div class="num" v-if="isShowCount">{{ formatNumber(unReadModel.num) }}</div>
       <div class="icon"></div>
     </div>
     <div
@@ -25,7 +25,7 @@
       }"
     >
       <div class="num" v-if="isShowCount && !isNew && !isIpmt && !isForce">
-        {{ formatNumber(unRead.num) }}
+        {{ formatNumber(unReadModel.num) }}
       </div>
       <template v-if="isForce">
         <div class="msg-new">告警消息过多，请快点处理！</div>
@@ -33,7 +33,7 @@
       <template v-else>
         <div class="msg-new" v-if="!isIpmt && isNew">普通告警消息，请注意处理！</div>
         <div class="msg-impt" v-if="isIpmt">
-          {{ props.unRead.isMajor ? '重要' : '一级' }}告警消息，请及时处理！
+          {{ unReadModel.isMajor ? '重要' : '一级' }}告警消息，请及时处理！
         </div>
       </template>
     </div>
@@ -42,11 +42,19 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { type UnreadBean } from '@ah/api'
 import type { AnimatorProps } from './Animator'
 import { createDrag, useMsg, useForceMessage } from './compose'
 //
 const props = withDefaults(defineProps<AnimatorProps>(), {
   isHide: false,
+})
+const unReadModel = defineModel<UnreadBean>('unRead', {
+  default: {
+    isMajor: false,
+    isLevelTop: false,
+    num: -1,
+  },
 })
 
 const emit = defineEmits(['click', 'dragend'])
@@ -71,10 +79,10 @@ const rootStyle = computed(() => ({
   cursor: dragging.value ? 'grabbing' : 'grab',
 }))
 
-const isShowCount = computed(() => Number(props.unRead.num) > 0)
+const isShowCount = computed(() => Number(unReadModel.value.num) > 0)
 
-const { isNew, isIpmt } = useMsg(props)
-const { isForce } = useForceMessage(props)
+const { isNew, isIpmt } = useMsg(unReadModel)
+const { isForce } = useForceMessage(unReadModel)
 //
 let needResume = false
 let aniToutNew: 0 | NodeJS.Timeout
@@ -88,29 +96,49 @@ watch(
       const isTypeImpt = isIpmt.value
       const isTypeForce = isForce.value
 
+      // 新消息
       if (isTypeNew) {
         clearFullAnimate()
         aniToutNew = animateFull(() => {
           isNew.value = false
         })
       }
+      // 重要消息
       if (isTypeImpt) {
         clearFullAnimate()
         aniToutImpt = animateFull(() => {
           isIpmt.value = false
+          // unReadModel.value.isLevelTop = false
+          // unReadModel.value.isMajor = false
         })
       }
+      // 定时轮巡消息
       if (isTypeForce) {
         clearFullAnimate()
         aniToutForce = animateFull(() => {
           isForce.value = false
+          // unReadModel.value.isLevelTop = false
+          // unReadModel.value.isMajor = false
         })
       }
+    } else {
+      clearFullAnimate()
     }
   },
   {
     immediate: true,
     flush: 'post',
+  },
+)
+watch(
+  () => isQuickShow.value,
+  (val) => {
+    if (val) {
+      clearFullAnimate()
+      isNew.value = false
+      isIpmt.value = false
+      isForce.value = false
+    }
   },
 )
 
@@ -146,14 +174,24 @@ function updateElementSize() {
   const r = root.value.getBoundingClientRect()
   elW = Math.max(1, r.width)
   elH = Math.max(1, r.height)
+  console.log('updateElementSize: ', elW, elH)
+  // initial stick to right bottom as original layout
+}
+function updatePos() {
+  x.value = window.innerWidth - elW
+  y.value = window.innerHeight - elH - 51
+}
+function onResize() {
+  updateElementSize()
+  updatePos()
 }
 
 onMounted(() => {
-  updateElementSize()
-  // initial stick to right bottom as original layout
-  x.value = window.innerWidth - elW
-  y.value = window.innerHeight - elH - 51
-  window.addEventListener('resize', updateElementSize)
+  onResize()
+  window.addEventListener('resize', onResize)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', onResize)
 })
 
 // root (quick) drag
