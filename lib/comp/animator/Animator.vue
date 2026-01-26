@@ -308,6 +308,7 @@ function formatNumber(num: number | null) {
       color: #ffffff;
       text-align: center;
       z-index: 2001;
+      min-width: 32px;
     }
     @mixin msgCommonStyle {
       white-space: nowrap;
@@ -364,6 +365,7 @@ function formatNumber(num: number | null) {
       color: #ffffff;
       text-align: center;
       z-index: 2001;
+      min-width: 32px;
     }
     .icon {
       position: absolute;

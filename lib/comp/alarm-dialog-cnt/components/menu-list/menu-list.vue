@@ -20,7 +20,14 @@
 
 <script setup lang="ts">
 import { SortAlarmBigType } from '@ah/api/types'
-import { type MenuItem, AlarmTypeList, mergeWithImage, getLatestInterval } from '@ah/utils'
+import {
+  type MenuItem,
+  AlarmTypeList,
+  mergeWithImage,
+  getLatestInterval,
+  imgUrlDefault,
+  imgUrlDefaultS,
+} from '@ah/utils'
 import { AlarmRobotApi } from '@ah/api'
 import ExpandButton from './components/expand-btn.vue'
 import MenuPanel from './components/menu-panel.vue'
@@ -64,7 +71,14 @@ function initMenu() {
     AlarmTypeList[0].badge = menuList.some((i) => i.badge)
     AlarmTypeList[0].isShow = 1
     // 给大类设置图片
-    menuTypeList.value = mergeWithImage([AlarmTypeList[0], ...menuList], AlarmTypeList)
+    menuTypeList.value = mergeWithImage(
+      [AlarmTypeList[0], ...menuList].map((it) => ({
+        ...it,
+        imgUrl: imgUrlDefault,
+        imgUrlS: imgUrlDefaultS,
+      })),
+      AlarmTypeList,
+    )
 
     // 常显列表
     // console.log('常显列表: ', menuTypeList.value)

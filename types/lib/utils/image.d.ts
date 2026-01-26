@@ -37,3 +37,5 @@ export declare const AlarmTypeIds: {
     HJJC: number;
 };
 export declare const AlarmTypeList: Array<MenuItem>;
+export declare const imgUrlDefault: string;
+export declare const imgUrlDefaultS: string;

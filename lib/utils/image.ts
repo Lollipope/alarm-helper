@@ -231,3 +231,5 @@ export const AlarmTypeList: Array<MenuItem> = [
     imgUrlS: getAlarmTypeImgUrl('27s'),
   },
 ]
+export const imgUrlDefault = getAlarmTypeImgUrl('default')
+export const imgUrlDefaultS = getAlarmTypeImgUrl('defaults')
