@@ -53,6 +53,7 @@ watch(
   background: #f1f4ff;
   margin-bottom: 8px;
   margin-left: 3px;
+  border-radius: 6px;
 }
 
 .noImage {

@@ -20,11 +20,6 @@
 ### 写在前面的话
 
 :warning: **`此库只适用于Vue3项目集成`**:exclamation::exclamation::exclamation:
-
-> 如果是Vue2项目(cdp版) ,请使用 [**@lollipope/alarm-helper-compat**](https://www.npmjs.com/package/@lollipope/alarm-helper-compat)
-
-> 如果是vue2项目(msdp版),请使用 [**@lollipope/alarm-robot**](https://www.npmjs.com/package/alarm-robot)
-
 ### 集成文档
 
 ##### 1.安装依赖(建议使用 pnpm 下载)

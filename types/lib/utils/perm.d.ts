@@ -35,5 +35,8 @@ export declare function syncUserPermConfig(alarmId: string | number): Promise<{
     audio: {
         perm: boolean;
     };
+    mute: {
+        perm: boolean;
+    };
 }>;
 export declare function getGoSysParams(params: SysParam[], infoObj: Record<string, string>, msgId: string): string;

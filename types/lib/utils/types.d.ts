@@ -29,4 +29,7 @@ export interface UserConfig {
     audio: {
         perm: boolean;
     };
+    mute: {
+        perm: boolean;
+    };
 }

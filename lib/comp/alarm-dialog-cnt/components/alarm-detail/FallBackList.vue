@@ -23,6 +23,7 @@ onMounted(() => {
 
 function init() {
   const infoObj = props.alarmSelect.infoObj
+  if (!infoObj.showdata || infoObj.showdata?.length == 0) return
   const headProps = infoObj.showdata.shift()
   const list = infoObj.showdata as Array<{ row: string }>
   listHead.value = headProps.row.split(',')

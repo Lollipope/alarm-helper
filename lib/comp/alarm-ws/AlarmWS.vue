@@ -98,7 +98,7 @@ function dealWithWsData(alarmIdConf: AlarmConfigMsgUser, data: AlarmMsg): AlarmW
   console.log('告警配置提醒配置: ', alarmIdConf)
 
   // 是否需要弹窗
-  const isPop = alarmIdConf.popLevel.includes(String(data.alarmLevel))
+  const isPop = !!(alarmIdConf.popLevel && alarmIdConf.popLevel.includes(String(data.alarmLevel)))
   // 是否开启提醒
   const isAlarm = alarmIdConf.useVoice == 1
   // 提醒类型 1-系统铃声，2-语音模板

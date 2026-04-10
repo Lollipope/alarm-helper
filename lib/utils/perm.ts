@@ -9,6 +9,8 @@ export const ViewTagType = {
   FALLBACK: 5,
   // 录音
   AUDIO: 7,
+  POSITION: 4, //位置
+  QBB: 6, //情报板
 }
 export const defaultPerm: UserConfig = {
   // 前往处理配置
@@ -27,6 +29,15 @@ export const defaultPerm: UserConfig = {
   audio: {
     perm: false,
   },
+  mute: {
+    perm: false,
+  },
+  position: {
+    perm: false,
+  },
+  qbb: {
+    perm: false,
+  },
 }
 /**
  * 同步用户配置
@@ -36,6 +47,7 @@ export const defaultPerm: UserConfig = {
 export function syncUserPermConfig(alarmId: string | number) {
   return AlarmRobotApi.getUserConfigByAlarmId(alarmId).then(({ data }) => {
     const handleUrl = data.handleUrl
+    const isShowSilenceConfig = data.isShowSilenceConfig
     const isBtnPerm = data.isSupportReport
     const paramList = data.paramList || []
 
@@ -46,6 +58,8 @@ export function syncUserPermConfig(alarmId: string | number) {
       [ViewTagType.RECORD]: false,
       [ViewTagType.FALLBACK]: false,
       [ViewTagType.AUDIO]: false,
+      [ViewTagType.POSITION]: false,
+      [ViewTagType.QBB]: false,
     } as Record<string | number, boolean>
     // 更新用户详情权限
     data?.alarmConfigViewList.forEach((item) => {
@@ -81,6 +95,15 @@ export function syncUserPermConfig(alarmId: string | number) {
       // 录音权限
       audio: {
         perm: viewTag[ViewTagType.AUDIO],
+      },
+      mute: {
+        perm: !!isShowSilenceConfig,
+      },
+      position: {
+        perm: viewTag[ViewTagType.POSITION],
+      },
+      qbb: {
+        perm: viewTag[ViewTagType.QBB],
       },
     }
   })

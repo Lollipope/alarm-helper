@@ -141,6 +141,7 @@ export interface AlarmConfView {
     viewTag: number;
 }
 export interface AlarmUserConf {
+    isShowSilenceConfig: number;
     handleUrl: string | null;
     isSupportReport: number;
     alarmConfigMsgUser: AlarmConfigMsgUser;
@@ -191,4 +192,80 @@ export interface HistoryPageParams {
 }
 export interface MileToLatlngApiResTypes {
     [key: string]: any;
+}
+export interface BaseSilent {
+    /**
+     * 配置的静默时间（单位：分钟）
+     */
+    silenceDuration?: number;
+    /**
+     * 当前静默状态：0-静默中，1-已结束
+     */
+    silentStatus?: number;
+}
+/**
+ * AlarmSilence
+ */
+export interface AlarmSilence extends BaseSilent {
+    /**
+     * 摄像枪ID
+     */
+    cameraId?: string;
+    /**
+     * 摄像枪桩号
+     */
+    cameraMilePost?: string;
+    /**
+     * 摄像枪名称
+     */
+    cameraName?: string;
+    /**
+     * 创建时间
+     */
+    createTime?: string;
+    /**
+     * 提前结束操作人ID（手动结束时填充）
+     */
+    endOperatorId?: string;
+    /**
+     * 提前结束操作人名称
+     */
+    endOperatorName?: string;
+    /**
+     * 告警消息ID（主键，关联告警消息表）
+     */
+    msgId?: string;
+    /**
+     * 静默操作人ID（关联门户用户表）
+     */
+    operatorId?: string;
+    /**
+     * 静默操作人名称
+     */
+    operatorName?: string;
+    /**
+     * 静默操作时间
+     */
+    operatorTime?: string;
+    /**
+     * 关联告警消息内容
+     */
+    relatedMsgContent?: string;
+    /**
+     * 所属路段
+     */
+    roadNo?: string;
+    /**
+     * 静默告警类型
+     */
+    silenceAlarmId?: string;
+    /**
+     * 静默预计结束时间（start + duration）
+     */
+    silentEndTime?: string;
+    /**
+     * 静默开始时间
+     */
+    silentStartTime?: string;
+    [property: string]: any;
 }

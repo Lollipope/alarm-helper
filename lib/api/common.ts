@@ -15,6 +15,7 @@ import type {
   HistoryPageParams,
   MileToLatlngApiResTypes,
   ResponseResultBaidu,
+  AlarmSilence,
 } from './types'
 // 根据key（parentId）查询字典
 export function getDictionaryListByKey(key: string): Promise<DictOptions> {
@@ -82,4 +83,22 @@ export function transformLnglat(
   params: any,
 ): Promise<ResponseResultBaidu<MileToLatlngApiResTypes>> {
   return request.get(`/alarm/baidu/mpToLnglat`, params)
+}
+
+// 根据msgId获取静默告警
+export const getByMsgId = (msgId: string): Promise<ResponseResult<AlarmSilence>> => {
+  return request.get('/alarm/alarmSilence/getByMsgId', { msgId })
+}
+// 新增告警静默
+export const addAlarmSilentMsg = (params: AlarmSilence): Promise<ResponseResult<null | string>> => {
+  return request.postJson('/alarm/alarmSilence/add', params)
+}
+
+interface Device {
+  deviceId: string
+  deviceName: string
+}
+// 查询摄像枪详情
+export const getCameraInfo = (deviceId: string): Promise<ResponseResult<Device>> => {
+  return request.get(`/basedata/camera/${deviceId}`)
 }

@@ -10,6 +10,7 @@
       />
       <!-- 备注 -->
       <Remark :alarmSelect="props.alarmSelect" />
+      <Mute :alarmSelect="alarmDetialInfo" v-if="PermConf.mute.perm" v-model:mute="muteConf" />
       <div class="other-box">
         <!-- 20250328 这一版不实现 -->
         <ControlStra v-if="false" />
@@ -55,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { AlarmRobotApi, type AlarmMsg } from '@ah/api'
+import { AlarmRobotApi, CommonApi, type AlarmMsg, type BaseSilent } from '@ah/api'
 import { defaultPerm, syncUserPermConfig } from '@ah/utils'
 import DetailCommon from './DeatilCommon.vue'
 import ControlStra from './ControlStra.vue'
@@ -67,6 +68,8 @@ import AlarmConfirm from '../../../alarm-confirm/AlarmConfirm.vue'
 import FallBackList from './FallBackList.vue'
 import Remark from './Remark.vue'
 import Attachment from './Attachment.vue'
+import Mute from './Mute.vue'
+
 import { ElMessage } from 'element-plus'
 // import { getLocalStorageToken } from '@ah/api/auth'
 import { getTokenId } from '@ah/utils/tokenId'
@@ -82,6 +85,7 @@ const props = defineProps({
 const dialogVisible = ref(false)
 const PermConf = ref(defaultPerm)
 const isNew = ref(true)
+const muteConf = ref<BaseSilent>()
 
 function picShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
@@ -129,6 +133,21 @@ watch(
     syncUserPermConfig(newVal.alarmId).then((val) => {
       PermConf.value = val
       isNew.value = true
+    })
+
+    CommonApi.getByMsgId(newVal.msgId).then((res) => {
+      const ret = res.data
+      if (!ret) {
+        muteConf.value = {
+          silenceDuration: 0,
+          silentStatus: -1,
+        }
+        return
+      }
+      muteConf.value = {
+        silenceDuration: ret.silenceDuration,
+        silentStatus: ret.silentStatus,
+      }
     })
   },
 )
@@ -240,6 +259,9 @@ function linkedControlFn() {
         background-color: #dee5ec !important;
       }
     }
+  }
+  .mute + .ohter-box {
+    height: calc(100% - 166px - 138px);
   }
 }
 </style>

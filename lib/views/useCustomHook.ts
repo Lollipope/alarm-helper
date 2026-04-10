@@ -14,7 +14,7 @@ import { emitter, EmitEventApi } from '../utils'
 // 初始化缩放比例
 function initScale() {
   const scale = window.screen.width / 1920
-  return scale === 1 ? scale : 0.8 // 只有1920的屏幕才原尺寸展示,其余都是0.8倍缩放
+  return scale >= 1 ? 1 : 0.8 // 只有1920的屏幕才原尺寸展示,其余都是0.8倍缩放
 }
 /**
  * 弹窗状态 hook
