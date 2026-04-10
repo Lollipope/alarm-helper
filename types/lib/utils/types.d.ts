@@ -32,4 +32,10 @@ export interface UserConfig {
     mute: {
         perm: boolean;
     };
+    position: {
+        perm: boolean;
+    };
+    qbb: {
+        perm: boolean;
+    };
 }

@@ -6,6 +6,8 @@ export declare const ViewTagType: {
     RECORD: number;
     FALLBACK: number;
     AUDIO: number;
+    POSITION: number;
+    QBB: number;
 };
 export declare const defaultPerm: UserConfig;
 /**
@@ -36,6 +38,12 @@ export declare function syncUserPermConfig(alarmId: string | number): Promise<{
         perm: boolean;
     };
     mute: {
+        perm: boolean;
+    };
+    position: {
+        perm: boolean;
+    };
+    qbb: {
         perm: boolean;
     };
 }>;

@@ -1,3 +1,10 @@
+## <small>0.2.34 (2026-04-10)</small>
+
+* feat: 添加广乐静默功能 ([b586cbdbd379b6e08754ca9d014a6d569eb5710f](https://github.com/Lollipope/alarm-helper/commit/b586cbdbd379b6e08754ca9d014a6d569eb5710f))
+* feat: 添加默认大类图标 ([4be95a2f93c688fed03313ee12ebc8b21f2f2338](https://github.com/Lollipope/alarm-helper/commit/4be95a2f93c688fed03313ee12ebc8b21f2f2338))
+
+
+
 ## <small>0.2.33 (2026-01-21)</small>
 
 * feat: 惠河需求(无人机对接/过滤组件调整) ([9b59b024dc16a142a5d1eafc9bedf49a27298312](https://github.com/Lollipope/alarm-helper/commit/9b59b024dc16a142a5d1eafc9bedf49a27298312))
