@@ -139,6 +139,7 @@ export interface AlarmConfView {
     alarmId: number;
     id: number;
     viewTag: number;
+    liveType: number;
 }
 export interface AlarmUserConf {
     isShowSilenceConfig: number;
@@ -268,4 +269,13 @@ export interface AlarmSilence extends BaseSilent {
      */
     silentStartTime?: string;
     [property: string]: any;
+}
+export interface NearCameraAPIParams {
+    directionNo?: number;
+    limitNum?: number;
+    milePost: string;
+}
+export interface Device {
+    deviceId: string;
+    deviceName: string;
 }

@@ -15,10 +15,20 @@ import StreamBox from '@ah/comp/stream-box/StreamBox.vue'
 import SwiperBox from '@ah/comp/swiper-box/SwiperBox.vue'
 import { chunkArray } from '@ah/utils'
 import imgUrl from '../../../../assets/images/shikuang.png'
+import { PropType } from 'vue'
+import { type Device } from '@ah/api/types'
 const props = defineProps({
   alarmSelect: {
     type: Object,
     default: () => ({}),
+  },
+  streamList: {
+    type: Array as PropType<Array<Device>>,
+    default: () => [],
+  },
+  liveType: {
+    type: Number,
+    default: 0,
   },
 })
 
@@ -32,17 +42,23 @@ onMounted(() => {
 })
 
 function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { deviceId: string } }) {
-  if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
-    liveList.value = chunkArray([,], 2)
+  if (Number(props.liveType) === 0) {
+    if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
+      liveList.value = chunkArray([,], 2)
+      return
+    }
+    const infoObj = alarmSelect.infoObj
+    try {
+      const pids = (infoObj?.deviceId || '').split(',')
+      liveList.value = chunkArray(pids, 2)
+    } catch (e) {
+      console.error('解析deviceId字段异常', e)
+    }
     return
   }
-  const infoObj = alarmSelect.infoObj
-  try {
-    const pids = (infoObj?.deviceId || '').split(',')
-    liveList.value = chunkArray(pids, 2)
-  } catch (e) {
-    console.error('解析deviceId字段异常', e)
-  }
+  // 附近摄像枪模式
+  const pids = props.streamList.map((it) => it.deviceId)
+  liveList.value = chunkArray(pids, 2)
 }
 </script>
 

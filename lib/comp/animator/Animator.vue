@@ -340,6 +340,7 @@ function formatNumber(num: number | null) {
     bottom: 26px;
     width: 56px;
     height: 56px;
+    z-index: 100;
     border-radius: 50% 50% 2px 50%;
     background: linear-gradient(to right, #23eaff, #5988ff);
     transition:

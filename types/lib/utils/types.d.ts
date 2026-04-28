@@ -16,6 +16,7 @@ export interface UserConfig {
     };
     live: {
         perm: boolean;
+        liveType: number;
     };
     pic: {
         perm: boolean;

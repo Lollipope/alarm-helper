@@ -35,7 +35,8 @@ watch(() => props.alarmSelect, (n) => {
     if(!n) return
     if(!configUrl) return
     const info = JSON.parse(n.info)
-    url.value = `${configUrl}?type=${n.alarmId}&roadNo=${info.roadNo}&directionNo=${info.directionNo}&milePost=${encodeURIComponent(info.milePost)}&source=4&sourceId=${n.msgId}&edit=1`
+    const stationNo = info.stationNo || ''
+    url.value = `${configUrl}?type=${n.alarmId}&roadNo=${info.roadNo}&directionNo=${info.directionNo}&milePost=${encodeURIComponent(info.milePost)}&source=4&sourceId=${n.msgId}&edit=1&stationNo=${stationNo}`
     // url.value = `${configUrl}?type=31&roadNo=273&directionNo=176&milePost=K100%2B100&source=5&sourceId=NS12323123&edit=1`
     console.log('url.value',url.value)
 

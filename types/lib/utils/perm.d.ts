@@ -24,6 +24,7 @@ export declare function syncUserPermConfig(alarmId: string | number): Promise<{
     };
     live: {
         perm: boolean;
+        liveType: number;
     };
     pic: {
         perm: boolean;

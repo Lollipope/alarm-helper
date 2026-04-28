@@ -16,6 +16,8 @@ import type {
   MileToLatlngApiResTypes,
   ResponseResultBaidu,
   AlarmSilence,
+  NearCameraAPIParams,
+  Device,
 } from './types'
 // 根据key（parentId）查询字典
 export function getDictionaryListByKey(key: string): Promise<DictOptions> {
@@ -94,11 +96,14 @@ export const addAlarmSilentMsg = (params: AlarmSilence): Promise<ResponseResult<
   return request.postJson('/alarm/alarmSilence/add', params)
 }
 
-interface Device {
-  deviceId: string
-  deviceName: string
-}
 // 查询摄像枪详情
 export const getCameraInfo = (deviceId: string): Promise<ResponseResult<Device>> => {
   return request.get(`/basedata/camera/${deviceId}`)
+}
+
+// 查询桩号附近的摄像枪
+export const getNearCameraByMilePost = (
+  params: NearCameraAPIParams,
+): Promise<ResponseResult<Array<Device>>> => {
+  return request.postJson(`/alarm/alarmSilence/getNearCameraByMilePost`, params)
 }

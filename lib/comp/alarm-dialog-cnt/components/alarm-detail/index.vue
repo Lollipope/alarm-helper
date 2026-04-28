@@ -35,7 +35,12 @@
 
         <!-- 视频实况 -->
         <template v-if="PermConf.live.perm">
-          <LivePlay :alarmSelect="alarmDetialInfo" v-if="liveShowFn(alarmDetialInfo)" />
+          <LivePlay
+            :liveType="PermConf.live.liveType"
+            :streamList="liveStreamList"
+            :alarmSelect="alarmDetialInfo"
+            v-if="hasLiveStream"
+          />
           <NoImg v-else :head-type="'视频实况'"></NoImg>
         </template>
       </div>
@@ -108,16 +113,39 @@ function recordShowFn(data: AlarmMsg) {
   }
   return true
 }
-
+const hasLiveStream = ref(false)
+const liveStreamList = ref()
 function liveShowFn(data: AlarmMsg) {
   if (!data || !data.info || data.info === '') {
-    return false
+    hasLiveStream.value = false
+    return
   }
-  const infoObj = data?.infoObj as { deviceId?: string }
-  if (!infoObj?.deviceId) {
-    return false
+  const infoObj = data?.infoObj as { milePost?: string; deviceId: string; directionNo: number }
+  const liveType = PermConf.value.live.liveType
+  if (liveType === 0) {
+    if (!infoObj.deviceId) {
+      hasLiveStream.value = false
+      return
+    }
+    hasLiveStream.value = true
+    return
   }
-  return true
+  if (!infoObj.milePost) {
+    ElMessage.warning('实况缺少必传参数 milePost')
+    hasLiveStream.value = false
+    liveStreamList.value = []
+    return
+  }
+
+  const params = {
+    milePost: infoObj.milePost, // infoObj.milePost,
+    directionNo: infoObj.directionNo,
+    limitNum: liveType == 1 ? 2 : 4,
+  }
+  CommonApi.getNearCameraByMilePost(params).then((res) => {
+    liveStreamList.value = res.data || []
+    hasLiveStream.value = liveStreamList.value?.length > 0
+  })
 }
 
 watch(
@@ -133,6 +161,7 @@ watch(
     syncUserPermConfig(newVal.alarmId).then((val) => {
       PermConf.value = val
       isNew.value = true
+      liveShowFn(newVal)
     })
 
     CommonApi.getByMsgId(newVal.msgId).then((res) => {

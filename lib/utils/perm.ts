@@ -16,7 +16,7 @@ export const defaultPerm: UserConfig = {
   // 前往处理配置
   system: { perm: false, url: '', btn: false, paramList: [] },
   // 实况配置
-  live: { perm: false },
+  live: { perm: false, liveType: 0 },
   // 图片配置
   pic: { perm: false },
   // 录像配置
@@ -61,10 +61,14 @@ export function syncUserPermConfig(alarmId: string | number) {
       [ViewTagType.POSITION]: false,
       [ViewTagType.QBB]: false,
     } as Record<string | number, boolean>
+    let liveType = 0
     // 更新用户详情权限
     data?.alarmConfigViewList.forEach((item) => {
       if (viewTag[item.viewTag] !== undefined) {
         viewTag[item.viewTag] = true
+      }
+      if (item.viewTag == ViewTagType.LIVE) {
+        liveType = item.liveType ?? 0
       }
     })
     // 用户权限赋值
@@ -79,6 +83,7 @@ export function syncUserPermConfig(alarmId: string | number) {
       // 用户查看实况权限
       live: {
         perm: viewTag[ViewTagType.LIVE],
+        liveType,
       },
       // 用户查看图片权限
       pic: {
