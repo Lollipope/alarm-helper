@@ -208,6 +208,11 @@ export interface ConfigMsgKindListApiParams {
   handleStatus: string
 }
 
+// 查询桩号附近的摄像枪 请求参数
+export interface NearCameraByMilePostParams {
+  milePost: string
+}
+
 export interface sendParams {
   receiveName: string
   receivePhone: string

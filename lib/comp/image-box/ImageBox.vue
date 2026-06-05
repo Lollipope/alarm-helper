@@ -38,6 +38,7 @@ function onPreview(li: string) {
   width: 100%;
   height: 100%;
   border-radius: 6px;
+  vertical-align: top;
 }
 .empty {
   height: 100%;

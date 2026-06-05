@@ -48,7 +48,7 @@ pnpm i @lollipope/alarm-helper
     AlarmStreamDomain: `private`, //外网（public）还是内网（private）
     AlarmStreamRate: `slaver`, //获取主码流（master）或者副码流（slaver）
     AlarmStreamMode: '1', //  1:视频一体机 0:流媒体
-    LinkedControlUrl: 'http:128.xxx/device-chain', //联动管控地址配置
+    LinkedControlUrl: 'http:128.xxx/device-chain', //联动管控地址配置 注:是/#/前面的地址
     AlarmUAV:{  // 无人机临时配置
       // 收费路段Id
       sectionId:'G0004440040' , //惠河路段 G0025440060
