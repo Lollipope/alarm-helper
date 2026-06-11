@@ -237,6 +237,7 @@ function buttonInit() {
   flex-direction: column;
   justify-content: space-around;
   height: 127px;
+  flex-shrink: 0;
   background: url(../../../../assets/images/alarm-detail-common.png) 0 0 / 100% 100% no-repeat;
   .head {
     display: flex;

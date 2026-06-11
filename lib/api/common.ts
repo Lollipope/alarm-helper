@@ -107,3 +107,4 @@ export const getNearCameraByMilePost = (
 ): Promise<ResponseResult<Array<Device>>> => {
   return request.postJson(`/alarm/alarmSilence/getNearCameraByMilePost`, params)
 }
+

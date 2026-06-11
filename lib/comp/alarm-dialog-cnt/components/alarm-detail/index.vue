@@ -142,6 +142,7 @@ function liveShowFn(data: AlarmMsg) {
     directionNo: infoObj.directionNo,
     limitNum: liveType == 1 ? 2 : 4,
   }
+  hasLiveStream.value = false
   CommonApi.getNearCameraByMilePost(params).then((res) => {
     liveStreamList.value = res.data || []
     hasLiveStream.value = liveStreamList.value?.length > 0
@@ -264,6 +265,8 @@ function linkedControlFn() {
   margin-left: 7px;
   margin-top: 65px;
   width: 535px;
+  display: flex;
+  flex-direction: column;
   .detail {
     height: 654px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 20%, #e9f5ff 25%, #e9f5ff 30%);

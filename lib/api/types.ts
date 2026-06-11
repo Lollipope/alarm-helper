@@ -319,4 +319,6 @@ export interface NearCameraAPIParams {
 export interface Device {
   deviceId: string
   deviceName: string
+  milePost?: string
+  distance?: number
 }

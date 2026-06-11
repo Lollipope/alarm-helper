@@ -23,18 +23,38 @@
           :key="item.value"
         />
       </el-select>
+      <el-input-number
+        :disabled="muteConf.silentStatus != -1"
+        v-if="mute === -1"
+        :controls="false"
+        :precision="0"
+        :min="0"
+        :step="0"
+        v-model="inputDay"
+        style="width: 70px; margin-left: 4px"
+      >
+        <template #suffix>
+          <div>天</div>
+        </template>
+      </el-input-number>
       <span class="confirm" @click="onConfirm" v-if="muteConf.silentStatus == -1">确定</span>
       <span class="history" @click="goMute">告警静默记录</span>
     </div>
     <div class="explan">
       注意，静默告警后，将一定时间内不会收到该摄像枪产生的相同类型告警，如需提前解除静默，请点击---告警静默记录
     </div>
+    <DevicePop
+      v-if="devicePopShow"
+      v-model:visible="devicePopShow"
+      @submit="deviceSubmit"
+      v-model:deviceData="deviceData"
+    ></DevicePop>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { type BaseSilent } from '@ah/api'
+import { type BaseSilent, type Device } from '@ah/api'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { CommonApi } from '@ah/api'
 
@@ -50,7 +70,21 @@ const muteConf = defineModel<BaseSilent>('mute', {
     silenceDuration: 0,
   },
 })
-const mute = ref(muteConf.value.silenceDuration)
+const mute = ref(Number(muteConf.value.silenceDuration) > 60 ? -1 : muteConf.value.silenceDuration)
+
+const inputDay = ref(
+  Number(muteConf.value.silenceDuration) > 60
+    ? minutesToDays(Number(muteConf.value.silenceDuration))
+    : 0,
+)
+function daysToMinutes(days: number) {
+  // 1天 = 24小时，1小时 = 60分钟
+  return days * 24 * 60
+}
+function minutesToDays(minutes: string | number) {
+  const num = Number(minutes) || 0
+  return Math.floor(num / 1440)
+}
 watch(
   () => muteConf.value,
   (val) => {
@@ -75,6 +109,10 @@ const muteOptions = ref([
     label: '60分钟',
     value: 60,
   },
+  {
+    label: '自定义',
+    value: -1,
+  },
 ])
 const getLabels = (deviceId: string | undefined) => {
   if (!deviceId || deviceId == '') return Promise.resolve(undefined)
@@ -84,14 +122,41 @@ const getLabels = (deviceId: string | undefined) => {
 
   return Promise.all(pList)
 }
-
+const devicePopShow = ref(false)
+const deviceData = ref<Array<Device>>([])
+function isPopType() {
+  // 行人 非机动车闯入 弹出摄像枪弹窗
+  return props.alarmSelect.alarmId === 72 || props.alarmSelect.alarmId === 73
+}
 async function onConfirm() {
   if (!mute.value || mute.value == 0) return
+
+  if (isPopType()) {
+    // 行人 非机动车闯入 弹出摄像枪弹窗
+    devicePopShow.value = true
+    const milePost = props.alarmSelect.info && JSON.parse(props.alarmSelect.info)?.milePost
+    CommonApi.getNearCameraByMilePost({ milePost: milePost }).then((res) => {
+      if (res.code == 200) {
+        deviceData.value = res.data || []
+      }
+    })
+    return
+  }
+  let mins
+  if (mute.value === -1) {
+    mins = daysToMinutes(inputDay.value)
+  }
   const row = props.alarmSelect
   const infoObj = row.infoObj
   const labels = await getLabels(infoObj.deviceId)
+  const Name = labels ? labels.join(',') : '该摄像枪'
+  const Duration = mins ? inputDay.value + '天' : mute.value + '分钟'
+  const alarmName = props.alarmSelect.alarmName
   const isPass = await ElMessageBox.confirm(
-    `开启静默后，<span style='font-weight:bold;padding:0 2px;'>${labels ? labels.join(',') : '该摄像枪'}</span>将<span style='color:red;font-weight:bold;;padding:0 2px;'>${mute.value}分钟</span>内无法接收<span style='color:red;font-weight:bold;padding:0 2px;'>${props.alarmSelect.alarmName}类型告警</span>，请确认正在监控摄像枪画面后再开启静默功能，否则会有漏报风险。`,
+    `开启静默后，<span style='font-weight:bold;padding:0 2px;'>${Name}</span>
+    将<span style='color:red;font-weight:bold;;padding:0 2px;'>${Duration}</span>
+    内无法接收<span style='color:red;font-weight:bold;padding:0 2px;'>${alarmName}类型告警</span>，
+    请确认正在监控摄像枪画面后再开启静默功能，否则会有漏报风险。`,
     '提示',
     {
       confirmButtonText: '确定',
@@ -129,6 +194,40 @@ async function onConfirm() {
       message: isSuc ? '操作成功' : res.msg || '操作失败',
     })
   })
+}
+function deviceSubmit(id: string) {
+  const row = props.alarmSelect
+  const infoObj = row.infoObj
+  let mins = 0
+  if (mute.value === -1) {
+    mins = daysToMinutes(inputDay.value)
+  }
+
+  CommonApi.addAlarmSilentMsg({
+    msgId: row.msgId,
+    roadNo: infoObj?.roadNo,
+    roadName: infoObj?.roadName,
+    cameraId: id,
+    cameraMilePost: infoObj?.milePost,
+    silenceAlarmId: row.alarmId,
+    silenceDuration: mins ? mins : mute.value,
+    silentStatus: 0, // 0-静默中，1-已结束
+    relatedMsgContent: row.msg,
+  })
+    .then((res) => {
+      const isSuc = res.code == 200
+      if (isSuc) {
+        muteConf.value.silentStatus = 0
+        muteConf.value.silenceDuration = mins ? mins : mute.value
+      }
+      ElMessage({
+        type: isSuc ? 'success' : 'error',
+        message: res.msg || '操作完成',
+      })
+    })
+    .finally(() => {
+      devicePopShow.value = false
+    })
 }
 function goMute() {
   router.push('/stat-analysis/history-mute')
@@ -189,7 +288,7 @@ function goMute() {
     }
     .confirm {
       cursor: pointer;
-      margin-left: 9px;
+      margin-left: 4px;
       display: block;
       width: 66px;
       height: 30px;

@@ -29,7 +29,7 @@
 npm install pnpm -g
 
 # 安装依赖
-pnpm i @lollipope/alarm-helper
+pnpm i @leatop/alarm-helper
 ```
 
 #### 2.添加配置文件
@@ -118,8 +118,8 @@ pnpm i @lollipope/alarm-helper
 ```html
 <script setup lang="ts">
   // 引入组件
-  import '@lollipope/alarm-helper/dist/index.css'
-  import AlarmHelper from '@lollipope/alarm-helper'
+  import '@leatop/alarm-helper/dist/index.css'
+  import AlarmHelper from '@leatop/alarm-helper'
 
   const userInfo = ref({ userId: '用户id' })
   const tokenId = ref('登录的token') //v0.2.17+ 新增

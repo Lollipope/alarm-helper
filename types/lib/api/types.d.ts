@@ -179,6 +179,9 @@ export interface ConfigMsgKindListApiParams {
     endTime: string;
     handleStatus: string;
 }
+export interface NearCameraByMilePostParams {
+    milePost: string;
+}
 export interface sendParams {
     receiveName: string;
     receivePhone: string;
@@ -278,4 +281,6 @@ export interface NearCameraAPIParams {
 export interface Device {
     deviceId: string;
     deviceName: string;
+    milePost?: string;
+    distance?: number;
 }
