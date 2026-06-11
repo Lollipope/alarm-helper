@@ -1,5 +1,8 @@
-## <small>0.2.34 (2026-04-10)</small>
+## <small>0.2.34 (2026-06-11)</small>
 
+* refactor: 包名调整为@leatop/alarm-helper ([d6889e2d6a128287bbc67006efe1465d75e3ac60](https://github.com/Lollipope/alarm-helper/commit/d6889e2d6a128287bbc67006efe1465d75e3ac60))
+* feat: 乐广+深中需求 ([42b2c8ac97abe1e1de0fbadee986ce80378d9beb](https://github.com/Lollipope/alarm-helper/commit/42b2c8ac97abe1e1de0fbadee986ce80378d9beb))
+* feat: 设备联动管控添加 跨域支持 ([cbfb59d6dae070ba3d01dd9af4a8590601065649](https://github.com/Lollipope/alarm-helper/commit/cbfb59d6dae070ba3d01dd9af4a8590601065649))
 * feat: 添加广乐静默功能 ([b586cbdbd379b6e08754ca9d014a6d569eb5710f](https://github.com/Lollipope/alarm-helper/commit/b586cbdbd379b6e08754ca9d014a6d569eb5710f))
 * feat: 添加默认大类图标 ([4be95a2f93c688fed03313ee12ebc8b21f2f2338](https://github.com/Lollipope/alarm-helper/commit/4be95a2f93c688fed03313ee12ebc8b21f2f2338))
 
