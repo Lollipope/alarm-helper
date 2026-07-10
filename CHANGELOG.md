@@ -1,4 +1,4 @@
-## <small>0.2.34 (2026-07-10)</small>
+## <small>0.2.35 (2026-07-10)</small>
 
 * style: 替换相关大文件资源文件 ([1d47778270ae0ec759ba50663bd59492f50e502b](https://github.com/Lollipope/alarm-helper/commit/1d47778270ae0ec759ba50663bd59492f50e502b))
 * refactor: 包名调整为@leatop/alarm-helper ([d6889e2d6a128287bbc67006efe1465d75e3ac60](https://github.com/Lollipope/alarm-helper/commit/d6889e2d6a128287bbc67006efe1465d75e3ac60))
