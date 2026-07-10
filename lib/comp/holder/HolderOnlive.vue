@@ -21,7 +21,7 @@ const emits = defineEmits(['trigger'])
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../../assets/images/live-hoder.png') 0 0 /100% 100% no-repeat;
+  background: url('../../assets/images/live-hoder.webp') 0 0 /100% 100% no-repeat;
   .btn {
     width: 36px;
     height: 36px;

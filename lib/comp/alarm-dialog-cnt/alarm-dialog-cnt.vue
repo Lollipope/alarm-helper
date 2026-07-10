@@ -68,7 +68,7 @@ defineExpose({
   margin-top: 40px;
   width: 986px;
   height: 789px;
-  background: url('../../assets/images/alarm-robot-pop.png') 0 0 / 100% 100% no-repeat;
+  background: url('../../assets/images/alarm-robot-pop.webp') 0 0 / 100% 100% no-repeat;
 
   .alarm-robot-cnt {
     margin-left: 15px;
@@ -83,7 +83,7 @@ defineExpose({
       top: -78px;
       width: 175px;
       height: 175px;
-      background: url('../../assets/images/alarm-robot2.png') 0 0 / 100% 100% no-repeat;
+      background: url('../../assets/images/alarm-robot2.webp') 0 0 / 100% 100% no-repeat;
     }
 
     .empty-holder {

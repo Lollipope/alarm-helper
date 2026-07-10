@@ -131,7 +131,8 @@ function liveShowFn(data: AlarmMsg) {
     return
   }
   if (!infoObj.milePost) {
-    ElMessage.warning('实况缺少必传参数 milePost')
+    // ElMessage.warning('实况缺少必传参数 milePost')
+    console.error('实况缺少必传参数 milePost')
     hasLiveStream.value = false
     liveStreamList.value = []
     return

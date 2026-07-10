@@ -284,16 +284,16 @@ function formatNumber(num: number | null) {
     bottom: 2px;
     width: calc(170px * 0.75);
     height: 150px;
-    background: url(../../assets/images/alarm-robot30.png) 0 0 / 100% 100% no-repeat;
+    background: url(../../assets/images/alarm-robot30.webp) 0 0 / 100% 100% no-repeat;
     z-index: 2000;
     &.isNew {
-      background: url(../../assets/images/alarm-robot3.png) 0 0 / 100% 100% no-repeat;
+      background: url(../../assets/images/alarm-robot3.webp) 0 0 / 100% 100% no-repeat;
     }
     &.isIpmt {
-      background: url(../../assets/images/alarm-robot4.png) 0 0 / 100% 100% no-repeat !important;
+      background: url(../../assets/images/alarm-robot4.webp) 0 0 / 100% 100% no-repeat !important;
     }
     &.isForce {
-      background: url(../../assets/images/alarm-robot3.png) 0 0 / 100% 100% no-repeat !important;
+      background: url(../../assets/images/alarm-robot3.webp) 0 0 / 100% 100% no-repeat !important;
     }
     .num {
       position: absolute;
@@ -374,7 +374,7 @@ function formatNumber(num: number | null) {
       left: calc(50% - 25px);
       width: 50px;
       height: 50px;
-      background: url(../../assets/images/alarm-robot5.png) 0 0 / 100% 100% no-repeat;
+      background: url(../../assets/images/alarm-robot5.webp) 0 0 / 100% 100% no-repeat;
       z-index: 2000;
     }
   }
