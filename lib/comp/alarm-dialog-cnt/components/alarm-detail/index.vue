@@ -9,40 +9,58 @@
         :systemConf="PermConf.system"
       />
       <!-- 备注 -->
-      <Remark :alarmSelect="props.alarmSelect" />
-      <Mute :alarmSelect="alarmDetialInfo" v-if="PermConf.mute.perm" v-model:mute="muteConf" />
-      <div class="other-box">
-        <!-- 20250328 这一版不实现 -->
-        <ControlStra v-if="false" />
+      <div class="detail-box">
+        <Remark :alarmSelect="props.alarmSelect" />
+        <Mute :alarmSelect="alarmDetialInfo" v-if="PermConf.mute.perm" v-model:mute="muteConf" />
+        <div class="other-box">
+          <!-- 20250328 这一版不实现 -->
+          <ControlStra v-if="false" />
 
-        <!-- 附件 -->
-        <Attachment :alarmSelect="alarmDetialInfo" v-if="PermConf.audio.perm" />
+          <!-- 附件 -->
+          <Attachment :alarmSelect="alarmDetialInfo" v-if="PermConf.audio.perm" />
 
-        <!-- 设备反馈结果 -->
-        <FallBackList :alarmSelect="alarmDetialInfo" v-if="PermConf.fallback.perm" />
+          <!-- 设备反馈结果 -->
+          <FallBackList :alarmSelect="alarmDetialInfo" v-if="PermConf.fallback.perm" />
 
-        <!-- 视频抓拍 -->
-        <template v-if="PermConf.pic.perm">
-          <PicCapture :alarmSelect="alarmDetialInfo" v-if="picShowFn(alarmDetialInfo)" />
-          <NoImg v-else :head-type="'视频抓拍'"></NoImg>
-        </template>
+          <!-- 视频抓拍 -->
+          <template v-if="PermConf.pic.perm">
+            <template v-if="isAsyncLoading"> <AsyncLoading /></template>
+            <template v-else>
+              <PicCapture
+                :alarmSelect="alarmDetialInfo"
+                :liveType="PermConf.relate.liveType"
+                :picList="picList"
+                v-if="hasPic"
+              />
+              <NoImg v-else :head-type="'视频抓拍'"></NoImg>
+            </template>
+          </template>
 
-        <!-- 录像回放 -->
-        <template v-if="PermConf.record.perm">
-          <RecordPlay :alarmSelect="alarmDetialInfo" v-if="recordShowFn(alarmDetialInfo)" />
-          <NoImg v-else :head-type="'录像回放'"></NoImg>
-        </template>
+          <!-- 录像回放 -->
+          <template v-if="PermConf.record.perm">
+            <template v-if="isAsyncLoading"> <AsyncLoading /></template>
+            <template v-else>
+              <RecordPlay
+                :alarmSelect="alarmDetialInfo"
+                v-if="hasVideo"
+                :liveType="PermConf.relate.liveType"
+                :recordList="videoList"
+              />
+              <NoImg v-else :head-type="'录像回放'"></NoImg>
+            </template>
+          </template>
 
-        <!-- 视频实况 -->
-        <template v-if="PermConf.live.perm">
-          <LivePlay
-            :liveType="PermConf.live.liveType"
-            :streamList="liveStreamList"
-            :alarmSelect="alarmDetialInfo"
-            v-if="hasLiveStream"
-          />
-          <NoImg v-else :head-type="'视频实况'"></NoImg>
-        </template>
+          <!-- 视频实况 -->
+          <template v-if="PermConf.live.perm">
+            <LivePlay
+              :liveType="PermConf.relate.liveType"
+              :streamList="liveStreamList"
+              :alarmSelect="alarmDetialInfo"
+              v-if="hasLiveStream"
+            />
+            <NoImg v-else :head-type="'视频实况'"></NoImg>
+          </template>
+        </div>
       </div>
     </div>
     <!-- 告警弹窗 -->
@@ -79,6 +97,7 @@ import { ElMessage } from 'element-plus'
 // import { getLocalStorageToken } from '@ah/api/auth'
 import { getTokenId } from '@ah/utils/tokenId'
 import NoImg from './NoImg.vue'
+import AsyncLoading from './Loading.vue'
 import { AlarmHelperMsgDialog, AlarmHelperLinkedControl } from '@ah/comp'
 const emits = defineEmits(['onRead'])
 const props = defineProps({
@@ -92,26 +111,69 @@ const PermConf = ref(defaultPerm)
 const isNew = ref(true)
 const muteConf = ref<BaseSilent>()
 
-function picShowFn(data: AlarmMsg) {
-  if (!data || !data.info || data.info === '') {
-    return false
-  }
+const hasPic = ref(false)
+const picList = ref()
+const isAsyncLoading = ref(false)
+function picShowFn(data: AlarmMsg, imgs: Array<string>) {
   const infoObj = data?.infoObj as { picUrl: Array<string> }
-  if (!infoObj?.picUrl || infoObj.picUrl.length === 0) {
-    return false
+  const liveType = PermConf.value.relate.liveType
+  if (liveType === 0) {
+    isAsyncLoading.value = false
+    if (!data || !data.info || data.info === '') {
+      hasPic.value = false
+      return
+    }
+
+    if (!infoObj?.picUrl || infoObj.picUrl.length === 0) {
+      hasPic.value = false
+      return
+    }
+    hasPic.value = true
+    return
   }
-  return true
+
+  isAsyncLoading.value = true
+  setTimeout(() => {
+    picList.value = imgs //['https://172.17.1.33:8443/pic/95.jpg', 'https://172.17.1.33:8443/pic/96.png']
+    isAsyncLoading.value = false
+    hasPic.value = picList.value.length > 0
+  }, 0)
 }
 
-function recordShowFn(data: AlarmMsg) {
-  if (!data || !data.info || data.info === '') {
-    return false
-  }
+const hasVideo = ref(false)
+const videoList = ref()
+function recordShowFn(data: AlarmMsg, videos: Array<string>) {
   const infoObj = data?.infoObj as { videoUrl: Array<string> }
-  if (!infoObj?.videoUrl || infoObj.videoUrl.length === 0) {
-    return false
+  const liveType = PermConf.value.relate.liveType
+  if (liveType === 0) {
+    isAsyncLoading.value = false
+    if (!data || !data.info || data.info === '') {
+      hasVideo.value = false
+      return
+    }
+    if (!infoObj?.videoUrl || infoObj.videoUrl.length === 0) {
+      hasVideo.value = false
+      return
+    }
+
+    hasVideo.value = true
+    return
   }
-  return true
+  isAsyncLoading.value = true
+  setTimeout(() => {
+    videoList.value = videos.map((it, index) => {
+      return {
+        url: it,
+        canplay: true,
+        type: 'video',
+        index,
+      }
+    }) //['https://172.17.1.33:8443/pic/95.jpg', 'https://172.17.1.33:8443/pic/96.png']
+    isAsyncLoading.value = false
+    hasVideo.value = videoList.value.length > 0
+
+    console.log('videoList: ', videoList.value)
+  }, 0)
 }
 const hasLiveStream = ref(false)
 const liveStreamList = ref()
@@ -121,7 +183,7 @@ function liveShowFn(data: AlarmMsg) {
     return
   }
   const infoObj = data?.infoObj as { milePost?: string; deviceId: string; directionNo: number }
-  const liveType = PermConf.value.live.liveType
+  const liveType = PermConf.value.relate.liveType
   if (liveType === 0) {
     if (!infoObj.deviceId) {
       hasLiveStream.value = false
@@ -164,6 +226,7 @@ watch(
       PermConf.value = val
       isNew.value = true
       liveShowFn(newVal)
+      initSnapAndVideo(newVal)
     })
 
     CommonApi.getByMsgId(newVal.msgId).then((res) => {
@@ -182,6 +245,25 @@ watch(
     })
   },
 )
+function initSnapAndVideo(alarmSelect: AlarmMsg) {
+  CommonApi.getSnapAndVideo(alarmSelect.msgId).then((res) => {
+    const ret = res.data
+    if (typeof ret === 'number') {
+      setTimeout(() => {
+        initSnapAndVideo(alarmSelect)
+      }, ret * 1000)
+      return
+    }
+    const imgs: string[] = []
+    const videos: string[] = []
+    ret?.forEach((it) => {
+      imgs.push(it.picUrl)
+      videos.push(it.videoUrl)
+    })
+    picShowFn(alarmSelect, imgs)
+    recordShowFn(alarmSelect, videos)
+  })
+}
 // 详情信息
 const alarmDetialInfo = ref(props.alarmSelect)
 function parseAlarmSelect(alarmSelect: AlarmMsg) {
@@ -274,10 +356,12 @@ function linkedControlFn() {
     border-radius: 15px;
     border: 2px solid #ffffff;
   }
-  .other-box {
-    height: calc(100% - 166px);
-    padding: 0 16px;
+  .detail-box {
+    height: calc(100% - 130px);
     overflow-y: auto;
+  }
+  .other-box {
+    padding: 0 16px;
     margin-top: 8px;
     margin-bottom: 18px;
     &::-webkit-scrollbar-track {

@@ -7,6 +7,7 @@ export interface RecordVideo {
 
 export interface RecordBoxProps {
   v: RecordVideo
+  showText: boolean
 }
 
 export type RecordBoxEmits = {}

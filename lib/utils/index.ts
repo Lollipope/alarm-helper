@@ -17,3 +17,4 @@ export * from './perm' //权限相关
 export * from './types' // 业务类型
 export * from './flv' // 流相关
 export * from './tokenId' // 存放token
+export * from './mediaValidator' // 媒体资源（图片/视频）校验

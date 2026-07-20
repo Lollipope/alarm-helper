@@ -1,7 +1,7 @@
 <template>
   <template v-if="hasUrl">
     <video :src="v.url" class="video" controls v-if="v.canplay" @error="onPlayError(v)"></video>
-    <ErrorVideo v-else />
+    <ErrorVideo v-else :showText="showText" />
   </template>
   <EmptyVideo v-else />
 </template>
@@ -15,7 +15,7 @@ defineOptions({
 })
 const props = defineProps<RecordBoxProps>()
 const hasUrl = computed(() => {
-  return props.v.url?.length > 0
+  return props.v?.url?.length > 0
 })
 function onPlayError(video: RecordVideo) {
   video.canplay = false

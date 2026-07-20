@@ -14,7 +14,7 @@
         clearable
         size="mini"
         class="select"
-        :disabled="muteConf.silentStatus != -1"
+        :disabled="isMuteDisabled"
       >
         <el-option
           :value="item.value"
@@ -24,7 +24,7 @@
         />
       </el-select>
       <el-input-number
-        :disabled="muteConf.silentStatus != -1"
+        :disabled="isMuteDisabled"
         v-if="mute === -1"
         :controls="false"
         :precision="0"
@@ -37,7 +37,12 @@
           <div>天</div>
         </template>
       </el-input-number>
-      <span class="confirm" @click="onConfirm" v-if="muteConf.silentStatus == -1">确定</span>
+      <span
+        class="confirm"
+        @click="onConfirm"
+        v-if="muteConf.silentStatus == -1 || muteConf.silentStatus == 2"
+        >确定</span
+      >
       <span class="history" @click="goMute">告警静默记录</span>
     </div>
     <div class="explan">
@@ -71,7 +76,9 @@ const muteConf = defineModel<BaseSilent>('mute', {
   },
 })
 const mute = ref(Number(muteConf.value.silenceDuration) > 60 ? -1 : muteConf.value.silenceDuration)
-
+const isMuteDisabled = computed(() => {
+  return muteConf.value.silentStatus != -1 && muteConf.value.silentStatus != 2
+})
 const inputDay = ref(
   Number(muteConf.value.silenceDuration) > 60
     ? minutesToDays(Number(muteConf.value.silenceDuration))

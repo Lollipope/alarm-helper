@@ -8,6 +8,7 @@ export declare const ViewTagType: {
     AUDIO: number;
     POSITION: number;
     QBB: number;
+    RELATE: number;
 };
 export declare const defaultPerm: UserConfig;
 /**
@@ -46,6 +47,10 @@ export declare function syncUserPermConfig(alarmId: string | number): Promise<{
     };
     qbb: {
         perm: boolean;
+    };
+    relate: {
+        perm: boolean;
+        liveType: number;
     };
 }>;
 export declare function getGoSysParams(params: SysParam[], infoObj: Record<string, string>, msgId: string): string;

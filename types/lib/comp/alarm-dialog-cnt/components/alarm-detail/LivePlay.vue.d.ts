@@ -28,7 +28,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>> & Readonly<{}>, {
     alarmSelect: Record<string, any>;
-    streamList: Device[];
     liveType: number;
+    streamList: Device[];
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;

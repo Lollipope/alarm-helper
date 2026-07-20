@@ -3,7 +3,7 @@
     <SwiperBox :list="videoList">
       <template #default="{ data }">
         <div class="pic" v-for="(v, index) of data.item" :key="index">
-          <RecordBox :v="v" />
+          <RecordBox :v="v" :showText="false" />
         </div>
       </template>
     </SwiperBox>
@@ -19,27 +19,59 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  recordList: {
+    type: Array,
+    default: () => [],
+  },
+  liveType: {
+    type: Number,
+    default: 0,
+  },
 })
 
 import imgUrl from '../../../../assets/images/luxiang.png'
 const videoList = ref()
 watch(() => props.alarmSelect, initAlarmInfo)
+watch(
+  () => props.recordList,
+  (recordList) => {
+    if ([1, 2].includes(Number(props.liveType))) {
+      const ret = () => {
+        if (!recordList || recordList.length === 0) {
+          return [,]
+        }
+        return recordList
+      }
+      videoList.value = chunkArray(ret(), 2)
+    }
+  },
+)
 onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
 function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { videoUrl: Array<string> } }) {
-  if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
-    videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
+  if (Number(props.liveType) === 0) {
+    if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
+      videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
+      return
+    }
+    const infoObj = alarmSelect.infoObj
+    if (!infoObj?.videoUrl || infoObj?.videoUrl.length === 0) {
+      videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
+      return
+    }
+    const list = (infoObj.videoUrl || [,]).map((url) => ({ url, canplay: true }))
+    videoList.value = chunkArray(list, 2)
     return
   }
-  const infoObj = alarmSelect.infoObj
-  if (!infoObj?.videoUrl || infoObj?.videoUrl.length === 0) {
-    videoList.value = chunkArray([{ canplay: false }, { canplay: false }], 2)
-    return
+  const ret = () => {
+    if (!props.recordList || props.recordList.length === 0) {
+      return [{ canplay: false }, { canplay: false }]
+    }
+    return props.recordList
   }
-  const list = (infoObj.videoUrl || [,]).map((url) => ({ url, canplay: true }))
-  videoList.value = chunkArray(list, 2)
+  videoList.value = chunkArray(ret(), 2)
 }
 </script>
 <style scoped lang="scss">

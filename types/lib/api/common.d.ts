@@ -1,4 +1,4 @@
-import { DictOptions, ResponseResult, SectionItem, sendParams, HistoryPageParams, MileToLatlngApiResTypes, ResponseResultBaidu, AlarmSilence, NearCameraAPIParams, Device } from './types';
+import { DictOptions, ResponseResult, SectionItem, sendParams, HistoryPageParams, MileToLatlngApiResTypes, ResponseResultBaidu, AlarmSilence, NearCameraAPIParams, Device, SnapAndVideo } from './types';
 export declare function getDictionaryListByKey(key: string): Promise<DictOptions>;
 export declare function updateRemark(msgId: string, remark: string): Promise<ResponseResult<null | string>>;
 export declare function getSectionList(): Promise<ResponseResult<SectionItem[]>>;
@@ -12,3 +12,4 @@ export declare const getByMsgId: (msgId: string) => Promise<ResponseResult<Alarm
 export declare const addAlarmSilentMsg: (params: AlarmSilence) => Promise<ResponseResult<null | string>>;
 export declare const getCameraInfo: (deviceId: string) => Promise<ResponseResult<Device>>;
 export declare const getNearCameraByMilePost: (params: NearCameraAPIParams) => Promise<ResponseResult<Array<Device>>>;
+export declare const getSnapAndVideo: (msgId: string) => Promise<ResponseResult<number | Array<SnapAndVideo>>>;

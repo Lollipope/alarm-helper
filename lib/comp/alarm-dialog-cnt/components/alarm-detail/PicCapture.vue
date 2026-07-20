@@ -3,7 +3,7 @@
     <SwiperBox :list="imgList">
       <template #default="{ data }">
         <div class="pic" v-for="(li, index) of data.item" :key="index">
-          <ImageBox :li="li" />
+          <ImageBox :li="li" :showText="false" />
         </div>
       </template>
     </SwiperBox>
@@ -19,22 +19,40 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  picList: {
+    type: Array,
+    default: () => [],
+  },
+  liveType: {
+    type: Number,
+    default: 0,
+  },
 })
 import imgUrl from '../../../../assets/images/zhuapai.png'
 const imgList = ref()
 
 watch(() => props.alarmSelect, initAlarmInfo)
+watch(
+  () => props.picList,
+  (picList) => {
+    imgList.value = chunkArray(picList || [,], 2)
+  },
+)
 
 onMounted(() => {
   initAlarmInfo(props.alarmSelect)
 })
 
 function initAlarmInfo(alarmSelect: { info?: string; infoObj?: { picUrl: Array<string> } }) {
-  if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
-    imgList.value = chunkArray([,], 2)
+  if (Number(props.liveType) === 0) {
+    if (!alarmSelect || !alarmSelect.info || alarmSelect.info === '') {
+      imgList.value = chunkArray([,], 2)
+      return
+    }
+    imgList.value = chunkArray(alarmSelect.infoObj?.picUrl || [,], 2)
     return
   }
-  imgList.value = chunkArray(alarmSelect.infoObj?.picUrl || [,], 2)
+  imgList.value = chunkArray(props.picList || [,], 2)
 }
 </script>
 <style scoped lang="scss">

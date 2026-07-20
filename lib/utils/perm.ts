@@ -11,12 +11,13 @@ export const ViewTagType = {
   AUDIO: 7,
   POSITION: 4, //位置
   QBB: 6, //情报板
+  RELATE: 0,
 }
 export const defaultPerm: UserConfig = {
   // 前往处理配置
   system: { perm: false, url: '', btn: false, paramList: [] },
   // 实况配置
-  live: { perm: false, liveType: 0 },
+  live: { perm: false },
   // 图片配置
   pic: { perm: false },
   // 录像配置
@@ -37,6 +38,10 @@ export const defaultPerm: UserConfig = {
   },
   qbb: {
     perm: false,
+  },
+  relate: {
+    perm: true,
+    liveType: 0,
   },
 }
 /**
@@ -60,6 +65,7 @@ export function syncUserPermConfig(alarmId: string | number) {
       [ViewTagType.AUDIO]: false,
       [ViewTagType.POSITION]: false,
       [ViewTagType.QBB]: false,
+      [ViewTagType.RELATE]: true,
     } as Record<string | number, boolean>
     let liveType = 0
     // 更新用户详情权限
@@ -68,6 +74,10 @@ export function syncUserPermConfig(alarmId: string | number) {
         viewTag[item.viewTag] = true
       }
       if (item.viewTag == ViewTagType.LIVE) {
+        liveType = item.liveType ?? 0
+      }
+
+      if (item.viewTag == ViewTagType.RELATE) {
         liveType = item.liveType ?? 0
       }
     })
@@ -109,6 +119,10 @@ export function syncUserPermConfig(alarmId: string | number) {
       },
       qbb: {
         perm: viewTag[ViewTagType.QBB],
+      },
+      relate: {
+        perm: viewTag[ViewTagType.RELATE],
+        liveType,
       },
     }
   })

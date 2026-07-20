@@ -5,6 +5,7 @@ export interface RecordVideo {
 }
 export interface RecordBoxProps {
     v: RecordVideo;
+    showText: boolean;
 }
 export type RecordBoxEmits = {};
 export type RecordBoxInstance = InstanceType<typeof RecordBox>;

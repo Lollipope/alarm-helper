@@ -16,7 +16,6 @@ export interface UserConfig {
     };
     live: {
         perm: boolean;
-        liveType: number;
     };
     pic: {
         perm: boolean;
@@ -38,5 +37,9 @@ export interface UserConfig {
     };
     qbb: {
         perm: boolean;
+    };
+    relate: {
+        perm: boolean;
+        liveType: number;
     };
 }

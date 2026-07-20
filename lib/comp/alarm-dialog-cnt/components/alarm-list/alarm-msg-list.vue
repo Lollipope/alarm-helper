@@ -65,6 +65,7 @@
 
 <script setup lang="ts">
 import type { AlarmMsg } from '@ah/api'
+import { Loading } from '@element-plus/icons-vue'
 const props = defineProps({
   // 选中的消息id
   selectAlarmId: {

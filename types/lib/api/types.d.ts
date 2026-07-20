@@ -284,3 +284,19 @@ export interface Device {
     milePost?: string;
     distance?: number;
 }
+export interface SnapAndVideo {
+    /** 告警记录ID */
+    id: string;
+    /** 消息ID */
+    msgId: string;
+    /** 设备ID */
+    deviceId: string;
+    /** 图片URL */
+    picUrl: string;
+    /** 视频URL */
+    videoUrl: string;
+    /** 创建时间 */
+    createTime: string;
+    /** 更新时间 */
+    updateTime: string;
+}

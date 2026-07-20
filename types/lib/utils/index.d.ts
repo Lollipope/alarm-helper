@@ -9,3 +9,4 @@ export * from './perm';
 export * from './types';
 export * from './flv';
 export * from './tokenId';
+export * from './mediaValidator';

@@ -18,6 +18,7 @@ import type {
   AlarmSilence,
   NearCameraAPIParams,
   Device,
+  SnapAndVideo,
 } from './types'
 // 根据key（parentId）查询字典
 export function getDictionaryListByKey(key: string): Promise<DictOptions> {
@@ -108,3 +109,9 @@ export const getNearCameraByMilePost = (
   return request.postJson(`/alarm/alarmSilence/getNearCameraByMilePost`, params)
 }
 
+// 查询截图和录像数据
+export const getSnapAndVideo = (
+  msgId: string,
+): Promise<ResponseResult<number | Array<SnapAndVideo>>> => {
+  return request.get(`alarm/attach/${msgId}`)
+}
